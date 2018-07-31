@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Deck renders properly 1`] = `
+<withTheme(Card)>
+  <CardContent
+    style={
+      Object {
+        "marginHorizontal": 8,
+      }
+    }
+  >
+    <Title />
+    <Paragraph />
+  </CardContent>
+  <CardActions>
+    <withTheme(Button)
+      onPress={[Function]}
+      primary={true}
+    >
+      View
+    </withTheme(Button)>
+    <withTheme(Button)
+      color="#e91e63"
+      onPress={[Function]}
+    >
+      Delete
+    </withTheme(Button)>
+  </CardActions>
+</withTheme(Card)>
+`;
