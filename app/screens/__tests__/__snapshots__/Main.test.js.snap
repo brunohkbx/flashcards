@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Main renders properly 1`] = `
+<Component>
+  <Deck
+    flashcardsCount={1}
+    key="React - 0"
+    title="React"
+  />
+</Component>
+`;

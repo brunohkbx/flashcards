@@ -8,7 +8,8 @@
     "enzyme-to-json": "^3.3.4",
     "jest-expo": "~27.0.0",
     "react-native-scripts": "1.14.0",
-    "react-test-renderer": "16.3.1"
+    "react-test-renderer": "16.3.1",
+    "remote-redux-devtools": "^0.5.12"
   },
   "main": "./node_modules/react-native-scripts/build/bin/crna-entry.js",
   "scripts": {
@@ -21,7 +22,9 @@
   "jest": {
     "preset": "jest-expo",
     "setupTestFrameworkScriptFile": "<rootDir>/app/config/setupTest.js",
-    "snapshotSerializers": ["enzyme-to-json/serializer"]
+    "snapshotSerializers": [
+      "enzyme-to-json/serializer"
+    ]
   },
   "dependencies": {
     "expo": "^27.0.1",
@@ -30,6 +33,8 @@
     "react": "16.3.1",
     "react-dom": "^16.4.1",
     "react-native": "~0.55.2",
-    "react-native-paper": "^1.11.1"
+    "react-native-paper": "^1.11.1",
+    "react-redux": "^5.0.7",
+    "redux": "^4.0.0"
   }
 }

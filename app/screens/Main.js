@@ -1,14 +1,24 @@
 import React from 'react';
+import { connect } from 'react-redux'
 import { View } from 'react-native';
 import Deck from '../components/Deck';
 
-const Main = () => {
+export const Main = props => {
+  const { decks } = props;
+
   return (
     <View>
-      <Deck title='udacicards' flashcardsCount={9}/>
-      <Deck title='udacicards' flashcardsCount={0}/>
+      { decks.map((deck, index) => (
+        <Deck
+          key={`${deck['title']} - ${index}`}
+          title={deck['title']}
+          flashcardsCount={deck['questions'].length}
+        />
+      ))}
     </View>
   );
 }
 
-export default Main;
+const mapStateToProps = ({ decks }) => ({ decks });
+
+export default connect(mapStateToProps)(Main);
