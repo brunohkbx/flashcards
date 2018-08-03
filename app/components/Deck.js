@@ -11,18 +11,21 @@ import {
 } from 'react-native-paper';
 import { capitalize } from '../lib/stringUtil';
 import pluralize from 'pluralize';
+import { TouchableOpacity } from 'react-native';
 
 const Deck = ({ title, flashcardsCount }) => {
   return (
     <Card>
-      <CardContent style={{marginHorizontal: 8}}>
-        <Title>{capitalize(title)}</Title>
-        <Paragraph>{pluralize('card', flashcardsCount, true)}</Paragraph>
-      </CardContent>
-      <CardActions>
-        <Button primary onPress={() => {}}>View</Button>
-        <Button color={Colors.pink500} onPress={() => {}}>Delete</Button>
-      </CardActions>
+      <TouchableOpacity>
+        <CardContent style={{marginHorizontal: 8}}>
+          <Title>{capitalize(title)}</Title>
+          <Paragraph>{pluralize('card', flashcardsCount, true)}</Paragraph>
+        </CardContent>
+        <CardActions>
+          <Button primary onPress={() => {}}>Edit</Button>
+          <Button color={Colors.pink500} onPress={() => {}}>Delete</Button>
+        </CardActions>
+      </TouchableOpacity>
     </Card>
   );
 }

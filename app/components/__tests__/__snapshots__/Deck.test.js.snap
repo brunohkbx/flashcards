@@ -2,29 +2,33 @@
 
 exports[`Deck renders properly 1`] = `
 <withTheme(Card)>
-  <CardContent
-    style={
-      Object {
-        "marginHorizontal": 8,
-      }
-    }
+  <TouchableOpacity
+    activeOpacity={0.2}
   >
-    <Title />
-    <Paragraph />
-  </CardContent>
-  <CardActions>
-    <withTheme(Button)
-      onPress={[Function]}
-      primary={true}
+    <CardContent
+      style={
+        Object {
+          "marginHorizontal": 8,
+        }
+      }
     >
-      View
-    </withTheme(Button)>
-    <withTheme(Button)
-      color="#e91e63"
-      onPress={[Function]}
-    >
-      Delete
-    </withTheme(Button)>
-  </CardActions>
+      <Title />
+      <Paragraph />
+    </CardContent>
+    <CardActions>
+      <withTheme(Button)
+        onPress={[Function]}
+        primary={true}
+      >
+        Edit
+      </withTheme(Button)>
+      <withTheme(Button)
+        color="#e91e63"
+        onPress={[Function]}
+      >
+        Delete
+      </withTheme(Button)>
+    </CardActions>
+  </TouchableOpacity>
 </withTheme(Card)>
 `;
