@@ -2,10 +2,31 @@
 
 exports[`Main renders properly 1`] = `
 <Component>
-  <Deck
-    flashcardsCount={1}
-    key="React - 0"
-    title="React"
+  <FlatList
+    data={
+      Array [
+        Object {
+          "questions": Array [
+            Object {
+              "answer": "A library for managing user interfaces",
+              "question": "What is React?",
+            },
+          ],
+          "title": "React",
+        },
+      ]
+    }
+    disableVirtualization={false}
+    horizontal={false}
+    initialNumToRender={10}
+    keyExtractor={[Function]}
+    maxToRenderPerBatch={10}
+    numColumns={1}
+    onEndReachedThreshold={2}
+    renderItem={[Function]}
+    scrollEventThrottle={50}
+    updateCellsBatchingPeriod={50}
+    windowSize={21}
   />
 </Component>
 `;
