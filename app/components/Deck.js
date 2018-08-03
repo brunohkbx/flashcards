@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { StyleSheet } from 'react-native';
 import {
   Button,
   Card,
   CardContent,
   CardActions,
-  Colors,
   Title,
-  Paragraph
+  Subheading,
 } from 'react-native-paper';
 import { capitalize } from '../lib/stringUtil';
 import pluralize from 'pluralize';
@@ -15,20 +15,28 @@ import { TouchableOpacity } from 'react-native';
 
 const Deck = ({ title, flashcardsCount }) => {
   return (
-    <Card>
+    <Card style={styles.card}>
       <TouchableOpacity>
         <CardContent style={{marginHorizontal: 8}}>
           <Title>{capitalize(title)}</Title>
-          <Paragraph>{pluralize('card', flashcardsCount, true)}</Paragraph>
+          <Subheading>{pluralize('card', flashcardsCount, true)}</Subheading>
         </CardContent>
         <CardActions>
           <Button primary onPress={() => {}}>Edit</Button>
-          <Button color={Colors.pink500} onPress={() => {}}>Delete</Button>
+          <Button primary onPress={() => {}}>Delete</Button>
         </CardActions>
       </TouchableOpacity>
     </Card>
   );
 }
+
+const styles = StyleSheet.create({
+  card: {
+    elevation: 0,
+    borderWidth: StyleSheet.hairlineWidth,
+    borderColor: 'rgba(0, 0, 0, .32)'
+  }
+});
 
 Deck.propTypes = {
   title: PropTypes.string.isRequired,
