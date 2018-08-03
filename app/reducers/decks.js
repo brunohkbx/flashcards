@@ -1,5 +1,13 @@
+import {
+  CREATE_DECK
+} from '../constants';
+
 const decks = (state = initialState, action) => {
   switch(action.type) {
+    case CREATE_DECK:
+      let { deck } = action;
+
+      return state.concat(deck);
     default:
       return state;
   }
