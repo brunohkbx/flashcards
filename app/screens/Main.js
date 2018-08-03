@@ -1,22 +1,31 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import { View } from 'react-native';
+import { View, FlatList } from 'react-native';
 import Deck from '../components/Deck';
 
-export const Main = props => {
-  const { decks } = props;
+export class Main extends Component {
+  renderItem = ({ item }) => {
+    return (
+      <Deck
+        title={item['title']}
+        flashcardsCount={item['questions'].length}
+      />
+    );
+  }
 
-  return (
-    <View>
-      { decks.map((deck, index) => (
-        <Deck
-          key={`${deck['title']} - ${index}`}
-          title={deck['title']}
-          flashcardsCount={deck['questions'].length}
+  render() {
+    const { decks } = this.props;
+
+    return (
+      <View>
+        <FlatList
+          data={decks}
+          renderItem={this.renderItem}
+          keyExtractor={item => item['title']}
         />
-      ))}
-    </View>
-  );
+      </View>
+    );
+  }
 }
 
 const mapStateToProps = ({ decks }) => ({ decks });
