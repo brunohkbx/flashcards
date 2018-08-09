@@ -1,7 +1,15 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Deck renders properly 1`] = `
-<withTheme(Card)>
+<withTheme(Card)
+  style={
+    Object {
+      "borderColor": "rgba(0, 0, 0, .32)",
+      "borderWidth": 0.5,
+      "elevation": 0,
+    }
+  }
+>
   <TouchableOpacity
     activeOpacity={0.2}
   >
@@ -13,7 +21,7 @@ exports[`Deck renders properly 1`] = `
       }
     >
       <Title />
-      <Paragraph />
+      <Subheading />
     </CardContent>
     <CardActions>
       <withTheme(Button)
@@ -23,8 +31,8 @@ exports[`Deck renders properly 1`] = `
         Edit
       </withTheme(Button)>
       <withTheme(Button)
-        color="#e91e63"
         onPress={[Function]}
+        primary={true}
       >
         Delete
       </withTheme(Button)>

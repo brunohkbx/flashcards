@@ -1,0 +1,69 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Dumb DeckFormDialog Create button displays an error message if input is invalid 1`] = `
+<withTheme(Dialog)
+  onDismiss={[MockFunction]}
+  visible={true}
+>
+  <withTheme(DialogTitle)>
+    Create New Deck
+  </withTheme(DialogTitle)>
+  <DialogContent>
+    <TextInput
+      errorMessage="Required"
+      handleBlur={[Function]}
+      handleChangeText={[Function]}
+      label="Title"
+      value=""
+    />
+  </DialogContent>
+  <DialogActions>
+    <withTheme(Button)
+      onPress={[MockFunction]}
+      primary={true}
+    >
+      Cancel
+    </withTheme(Button)>
+    <withTheme(Button)
+      onPress={[MockFunction]}
+      primary={true}
+    >
+      Create
+    </withTheme(Button)>
+  </DialogActions>
+</withTheme(Dialog)>
+`;
+
+exports[`Dumb DeckFormDialog renders properly 1`] = `
+<withTheme(Dialog)
+  onDismiss={[MockFunction]}
+  visible={true}
+>
+  <withTheme(DialogTitle)>
+    Create New Deck
+  </withTheme(DialogTitle)>
+  <DialogContent>
+    <TextInput
+      errorMessage={null}
+      handleBlur={[Function]}
+      handleChangeText={[Function]}
+      label="Title"
+      value=""
+    />
+  </DialogContent>
+  <DialogActions>
+    <withTheme(Button)
+      onPress={[MockFunction]}
+      primary={true}
+    >
+      Cancel
+    </withTheme(Button)>
+    <withTheme(Button)
+      onPress={[MockFunction]}
+      primary={true}
+    >
+      Create
+    </withTheme(Button)>
+  </DialogActions>
+</withTheme(Dialog)>
+`;

@@ -3,28 +3,41 @@ import { shallow } from 'enzyme';
 import Deck from '../Deck';
 import pluralize from 'pluralize';
 import { capitalize } from '../../lib/stringUtil';
+import configureMockStore from "redux-mock-store";
 
 jest.mock('pluralize');
 jest.mock('../../lib/stringUtil');
 
-const defaultProps = ({ title: 'foo', flashcardsCount: 5 });
-
 describe('Deck', () => {
-  it('renders properly', () => {
+  const setup = propOverrides => {
+    const defaultProps = Object.assign({
+      title: 'foo',
+      flashcardsCount: 5
+    }, propOverrides)
+
     const wrapper = shallow(<Deck {...defaultProps} />);
 
+    return {
+      defaultProps,
+      wrapper
+    }
+  }
+
+  it('renders properly', () => {
+    const { wrapper } =  setup();
+
     expect(wrapper).toMatchSnapshot();
-  })
+  });
 
   it('capitalizes the title', () => {
-    shallow(<Deck {...defaultProps} />);
+    const { defaultProps, wrapper } =  setup();
 
     expect(capitalize).toHaveBeenCalledWith(defaultProps.title);
-  })
+  });
 
   it('pluralizes the deck description based on flashcardsCount', () => {
-    shallow(<Deck {...defaultProps} />);
+    const { defaultProps, wrapper } =  setup();
 
     expect(pluralize).toHaveBeenCalledWith('card', defaultProps.flashcardsCount, true);
-  })
+  });
 });

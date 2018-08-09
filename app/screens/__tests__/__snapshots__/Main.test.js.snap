@@ -1,7 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Main renders properly 1`] = `
-<Component>
+<Component
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+>
   <FlatList
     data={
       Array [
@@ -27,6 +33,16 @@ exports[`Main renders properly 1`] = `
     scrollEventThrottle={50}
     updateCellsBatchingPeriod={50}
     windowSize={21}
+  />
+  <Styled(Component)>
+    <FAB
+      handlePress={[Function]}
+      primary={false}
+    />
+  </Styled(Component)>
+  <Connect(Form)
+    handleDismiss={[Function]}
+    visible={false}
   />
 </Component>
 `;

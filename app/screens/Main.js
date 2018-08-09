@@ -2,8 +2,15 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { View, FlatList } from 'react-native';
 import Deck from '../components/Deck';
+import FABContainer from '../components/FABContainer';
+import FAB from '../components/FAB';
+import DeckFormDialog from '../components/DeckFormDialog';
 
 export class Main extends Component {
+  state = {
+    formVisible: false
+  }
+
   renderItem = ({ item }) => {
     return (
       <Deck
@@ -13,15 +20,28 @@ export class Main extends Component {
     );
   }
 
+  openForm = () => this.setState({ formVisible: true });
+  closeForm = () => this.setState({ formVisible: false });
+
   render() {
-    const { decks } = this.props;
+    const {
+      decks,
+      createDeck
+    } = this.props;
 
     return (
-      <View>
+      <View style={{flex: 1}}>
         <FlatList
           data={decks}
           renderItem={this.renderItem}
           keyExtractor={item => item['title']}
+        />
+        <FABContainer>
+          <FAB handlePress={() => this.openForm()} />
+        </FABContainer>
+        <DeckFormDialog
+          visible={this.state.formVisible}
+          handleDismiss={() => this.closeForm()}
         />
       </View>
     );
