@@ -69,7 +69,7 @@ export const DeckFormDialog = props => {
         <TextInput
           label="Title"
           value={values.title}
-          errorMessage={touched.title && errors.title ? errors.title : null}
+          errorMessage={touched.title && errors.title ? errors.title : ""}
           handleChangeText={handleChange('title')}
           handleBlur={handleBlur('title')}
         />
