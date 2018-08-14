@@ -3,7 +3,6 @@ import { shallow } from 'enzyme';
 import Deck from '../Deck';
 import pluralize from 'pluralize';
 import { capitalize } from '../../lib/stringUtil';
-import configureMockStore from "redux-mock-store";
 
 jest.mock('pluralize');
 jest.mock('../../lib/stringUtil');

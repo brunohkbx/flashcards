@@ -5,10 +5,17 @@ import Deck from '../components/Deck';
 import FABContainer from '../components/FABContainer';
 import FAB from '../components/FAB';
 import DeckFormDialog from '../components/DeckFormDialog';
+import { fetchDecks } from '../actions';
 
 export class Main extends Component {
   state = {
     formVisible: false
+  }
+
+  componentDidMount() {
+    const { fetchDecks } = this.props;
+
+    fetchDecks();
   }
 
   renderItem = ({ item }) => {
@@ -25,8 +32,7 @@ export class Main extends Component {
 
   render() {
     const {
-      decks,
-      createDeck
+      decks
     } = this.props;
 
     return (
@@ -34,7 +40,7 @@ export class Main extends Component {
         <FlatList
           data={decks}
           renderItem={this.renderItem}
-          keyExtractor={item => item['title']}
+          keyExtractor={item => item.id}
         />
         <FABContainer>
           <FAB handlePress={() => this.openForm()} />
@@ -48,6 +54,10 @@ export class Main extends Component {
   }
 }
 
-const mapStateToProps = ({ decks }) => ({ decks });
+const mapStateToProps = ({ decks }) => ({ decks: Object.values(decks) });
 
-export default connect(mapStateToProps)(Main);
+const mapDispatchToProps = dispatch => ({
+  fetchDecks: () => dispatch(fetchDecks())
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Main);

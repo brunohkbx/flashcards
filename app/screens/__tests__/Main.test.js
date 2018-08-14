@@ -6,17 +6,19 @@ import configureMockStore from 'redux-mock-store';
 describe('Main', () => {
   const setup = propOverrides => {
     const defaultProps = Object.assign({
-      decks: [
-        {
+      decks: {
+        '259162c6-8c55-446b-aa4f-cf9a6fcffc2f': {
           title: 'React',
           questions: [
             {
               question: 'What is React?',
               answer: 'A library for managing user interfaces'
             }
-          ]
+          ],
+          id: '259162c6-8c55-446b-aa4f-cf9a6fcffc2f'
         }
-      ]
+      },
+      fetchDecks: jest.fn()
     }, propOverrides)
 
     const store = configureMockStore()({});
@@ -53,6 +55,13 @@ describe('Main', () => {
     const { wrapper } = setup();
 
     expect(wrapper).toMatchSnapshot();
+  });
+
+  it('fetches all the decks when component is mounted', () => {
+    const mockFetchDecks = jest.fn();
+    const { wrapper } = setup({ fetchDecks: mockFetchDecks });
+
+    expect(mockFetchDecks).toHaveBeenCalled();
   });
 
   it('opens DeckFormDialog when FAB is pressed', () => {

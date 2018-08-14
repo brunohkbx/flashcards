@@ -44,7 +44,7 @@ exports[`Dumb DeckFormDialog renders properly 1`] = `
   </withTheme(DialogTitle)>
   <DialogContent>
     <TextInput
-      errorMessage={null}
+      errorMessage=""
       handleBlur={[Function]}
       handleChangeText={[Function]}
       label="Title"

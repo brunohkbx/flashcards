@@ -10,8 +10,9 @@ exports[`Main renders properly 1`] = `
 >
   <FlatList
     data={
-      Array [
-        Object {
+      Object {
+        "259162c6-8c55-446b-aa4f-cf9a6fcffc2f": Object {
+          "id": "259162c6-8c55-446b-aa4f-cf9a6fcffc2f",
           "questions": Array [
             Object {
               "answer": "A library for managing user interfaces",
@@ -20,7 +21,7 @@ exports[`Main renders properly 1`] = `
           ],
           "title": "React",
         },
-      ]
+      }
     }
     disableVirtualization={false}
     horizontal={false}
