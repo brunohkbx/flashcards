@@ -9,7 +9,7 @@ const FAB = ({ primary, handlePress }) => {
   return (
     <_FAB
       dark
-      style={{backgroundColor}}
+      style={{backgroundColor, elevation: 0}}
       icon="add"
       onPress={handlePress}
     />

@@ -18,7 +18,8 @@ describe('Main', () => {
           id: '259162c6-8c55-446b-aa4f-cf9a6fcffc2f'
         }
       },
-      fetchDecks: jest.fn()
+      fetchDecks: jest.fn(),
+      deleteDeck: jest.fn()
     }, propOverrides)
 
     const store = configureMockStore()({});
@@ -43,11 +44,39 @@ describe('Main', () => {
         .simulate('dismiss')
     }
 
+    const dismissConfirmDialog = () => {
+      wrapper
+        .find('ConfirmDialog')
+        .dive()
+        .simulate('dismiss')
+    }
+
+    const cancelConfirmDialog = () => {
+      wrapper
+        .find('ConfirmDialog')
+        .dive()
+        .find('DialogActions')
+        .childAt(0)
+        .simulate('press')
+    }
+
+    const confirmConfirmDialog = () => {
+      wrapper
+        .find('ConfirmDialog')
+        .dive()
+        .find('DialogActions')
+        .childAt(1)
+        .simulate('press')
+    }
+
     return {
       defaultProps,
       wrapper,
       pressOnFab,
-      dismissDeckFormDialog
+      dismissDeckFormDialog,
+      dismissConfirmDialog,
+      cancelConfirmDialog,
+      confirmConfirmDialog
     }
   }
 
@@ -64,21 +93,65 @@ describe('Main', () => {
     expect(mockFetchDecks).toHaveBeenCalled();
   });
 
-  it('opens DeckFormDialog when FAB is pressed', () => {
-    const { wrapper, pressOnFab } = setup();
-    const spy = jest.spyOn(wrapper.instance(), 'openForm');
+  describe('DeckFormDialog', () => {
+    it('opens when FAB is pressed', () => {
+      const { wrapper, pressOnFab } = setup();
+      const spy = jest.spyOn(wrapper.instance(), 'openForm');
 
-    pressOnFab();
+      pressOnFab();
 
-    expect(spy).toHaveBeenCalled();
+      expect(spy).toHaveBeenCalled();
+    });
+
+    it('closes on dismiss', () => {
+      const { wrapper, dismissDeckFormDialog } = setup();
+      const spy = jest.spyOn(wrapper.instance(), 'closeForm');
+
+      dismissDeckFormDialog();
+
+      expect(spy).toHaveBeenCalled();
+    });
   });
 
-  it('closes DeckFormDialog on dismiss', () => {
-    const { wrapper, dismissDeckFormDialog } = setup();
-    const spy = jest.spyOn(wrapper.instance(), 'closeForm');
+  describe('ConfirmDialog', () => {
+    it('closes on dismiss', () => {
+      const { dismissConfirmDialog, wrapper } = setup();
+      const spy = jest.spyOn(wrapper.instance(), 'closeConfirmRemoveDialog');
 
-    dismissDeckFormDialog();
+      dismissConfirmDialog();
 
-    expect(spy).toHaveBeenCalled();
+      expect(spy).toHaveBeenCalled();
+    });
+
+    describe('Cancel button', () => {
+      it('closes', () => {
+        const { cancelConfirmDialog, wrapper } = setup();
+        const spy = jest.spyOn(wrapper.instance(), 'closeConfirmRemoveDialog');
+
+        cancelConfirmDialog();
+
+        expect(spy).toHaveBeenCalled();
+      });
+    });
+
+    describe('Submit button', () => {
+      it('closes', () => {
+        const { confirmConfirmDialog, wrapper } = setup();
+        const spy = jest.spyOn(wrapper.instance(), 'closeConfirmRemoveDialog');
+
+        confirmConfirmDialog();
+
+        expect(spy).toHaveBeenCalled();
+      });
+
+      it('deletes the deck', () => {
+        const mockDeleteDecks = jest.fn();
+        const { confirmConfirmDialog } = setup({ deleteDeck: mockDeleteDecks });
+
+        confirmConfirmDialog();
+
+        expect(mockDeleteDecks).toHaveBeenCalled();
+      });
+    });
   });
 });

@@ -8,6 +8,7 @@ exports[`FAB changes background-color to primary when primary is true 1`] = `
   style={
     Object {
       "backgroundColor": "#3f51b5",
+      "elevation": 0,
     }
   }
 />
@@ -21,6 +22,7 @@ exports[`FAB changes background-color to secondary when primary is false 1`] = `
   style={
     Object {
       "backgroundColor": "#ff4081",
+      "elevation": 0,
     }
   }
 />

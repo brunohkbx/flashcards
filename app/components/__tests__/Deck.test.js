@@ -11,14 +11,23 @@ describe('Deck', () => {
   const setup = propOverrides => {
     const defaultProps = Object.assign({
       title: 'foo',
-      flashcardsCount: 5
+      flashcardsCount: 5,
+      handleDeletePress: jest.fn()
     }, propOverrides)
 
     const wrapper = shallow(<Deck {...defaultProps} />);
 
+    const deleteDeck = () => {
+      wrapper
+        .find('CardActions')
+        .childAt(1)
+        .simulate('press');
+    }
+
     return {
       defaultProps,
-      wrapper
+      wrapper,
+      deleteDeck
     }
   }
 
@@ -38,5 +47,14 @@ describe('Deck', () => {
     const { defaultProps, wrapper } =  setup();
 
     expect(pluralize).toHaveBeenCalledWith('card', defaultProps.flashcardsCount, true);
+  });
+
+  test('delete onPress calls handleDeletePress', () => {
+    const mockHandleDeletePress = jest.fn();
+    const { deleteDeck } = setup({ handleDeletePress: mockHandleDeletePress });
+
+    deleteDeck();
+
+    expect(mockHandleDeletePress).toHaveBeenCalled();
   });
 });

@@ -31,7 +31,7 @@ exports[`Deck renders properly 1`] = `
         Edit
       </withTheme(Button)>
       <withTheme(Button)
-        onPress={[Function]}
+        onPress={[MockFunction]}
         primary={true}
       >
         Delete

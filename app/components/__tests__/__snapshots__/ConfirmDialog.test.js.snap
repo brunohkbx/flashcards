@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ConfirmDialog renders properly 1`] = `
+<withTheme(Dialog)
+  onDismiss={[MockFunction]}
+  visible={false}
+>
+  <withTheme(DialogTitle) />
+  <DialogContent>
+    <Paragraph />
+  </DialogContent>
+  <DialogActions>
+    <withTheme(Button)
+      onPress={[MockFunction]}
+      primary={true}
+    >
+      cancel
+    </withTheme(Button)>
+    <withTheme(Button)
+      onPress={[MockFunction]}
+      primary={true}
+    >
+      Submit
+    </withTheme(Button)>
+  </DialogActions>
+</withTheme(Dialog)>
+`;

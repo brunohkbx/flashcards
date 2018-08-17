@@ -70,7 +70,7 @@ describe('Dumb DeckFormDialog', () => {
     });
   });
 
-  describe('Create button', () => {
+  describe('Submit button', () => {
     it('calls handleSubmit', () => {
       const mockHandleSubmit = jest.fn();
       const { submit } = setup({ handleSubmit: mockHandleSubmit });
@@ -125,7 +125,7 @@ describe('DeckFormDialog enhanced with Formik ', () => {
     }
   }
 
-  describe('Cancel', () => {
+  describe('Cancel button ', () => {
     it('dismiss the form', () => {
       const mockHandleDismiss = jest.fn();
       const { dismiss } = setup({ handleDismiss: mockHandleDismiss });
@@ -136,7 +136,7 @@ describe('DeckFormDialog enhanced with Formik ', () => {
     });
   });
 
-  describe('Submit', () => {
+  describe('Submit button', () => {
     it('dismiss the form', () => {
       const mockHandleDismiss = jest.fn();
       const { submit } = setup({ handleDismiss: mockHandleDismiss });

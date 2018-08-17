@@ -1,18 +1,41 @@
 import reducer from '../decks';
 import {
   CREATE_DECK,
-  FETCH_DECKS
+  FETCH_DECKS,
+  DELETE_DECK
 } from '../../constants';
 
 describe('decks reducer', () => {
-  it('handles CREATE_DECK', () => {
+  const setup = () => {
     const deck = {
-      '8e585af3-9db2-4f0a-9f7c-0d6f4c5ddda7': {
-        id: '8e585af3-9db2-4f0a-9f7c-0d6f4c5ddda7',
+      '1': {
+        id: '1',
         questions: [],
         title: 'React'
       }
     }
+
+    const decks = {
+      '1': {
+        id: '1',
+        questions: [],
+        title: 'React'
+      },
+      '2': {
+        id: '2',
+        questions: [],
+        title: 'Redux'
+      }
+    }
+
+    return {
+      deck,
+      decks
+    }
+  }
+
+  it('handles CREATE_DECK', () => {
+    const { deck } = setup();
 
     expect(
       reducer({}, { type: CREATE_DECK, deck })
@@ -20,22 +43,25 @@ describe('decks reducer', () => {
   });
 
   it('handles FETCH_DECKS', () => {
-    const decks = {
-      '8e585af3-9db2-4f0a-9f7c-0d6f4c5ddda7': {
-        id: '8e585af3-9db2-4f0a-9f7c-0d6f4c5ddda7',
-        questions: [],
-        title: 'React'
-      },
-      '68f3a730-9a6f-4bf7-b8a5-096b8ebf700c': {
-        id: '68f3a730-9a6f-4bf7-b8a5-096b8ebf700c',
-        questions: [],
-        title: 'Redux'
-      }
-    }
+    const { decks }  = setup();
 
     expect(
       reducer({}, { type: FETCH_DECKS, decks })
     ).toEqual(decks)
+  });
+
+  it('handles DELETE_DECK', () => {
+    const { decks }  = setup();
+
+    expect(
+      reducer(decks, { type: DELETE_DECK, id: '1' })
+    ).toEqual({
+      '2': {
+        id: '2',
+        questions: [],
+        title: 'Redux'
+      }
+    })
   });
 
   it('handles default state', () => {
