@@ -13,7 +13,7 @@ import { capitalize } from '../lib/stringUtil';
 import pluralize from 'pluralize';
 import { TouchableOpacity } from 'react-native';
 
-const Deck = ({ title, flashcardsCount }) => {
+const Deck = ({ title, flashcardsCount, handleDeletePress }) => {
   return (
     <Card style={styles.card}>
       <TouchableOpacity>
@@ -23,7 +23,7 @@ const Deck = ({ title, flashcardsCount }) => {
         </CardContent>
         <CardActions>
           <Button primary onPress={() => {}}>Edit</Button>
-          <Button primary onPress={() => {}}>Delete</Button>
+          <Button primary onPress={handleDeletePress}>Delete</Button>
         </CardActions>
       </TouchableOpacity>
     </Card>
@@ -40,7 +40,8 @@ const styles = StyleSheet.create({
 
 Deck.propTypes = {
   title: PropTypes.string.isRequired,
-  flashcardsCount: PropTypes.number
+  flashcardsCount: PropTypes.number,
+  handleDeletePress: PropTypes.func.isRequired
 }
 
 Deck.defaultProps = {

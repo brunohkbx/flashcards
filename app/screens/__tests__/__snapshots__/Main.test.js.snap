@@ -45,5 +45,14 @@ exports[`Main renders properly 1`] = `
     handleDismiss={[Function]}
     visible={false}
   />
+  <ConfirmDialog
+    actionCancelText="cancel"
+    actionSubmitText="Delete"
+    content="This deck and all it cards will be deleted. You can edit this deck if you want to change something."
+    handleDismiss={[Function]}
+    handleSubmitPress={[Function]}
+    title="Delete deck?"
+    visible={false}
+  />
 </Component>
 `;

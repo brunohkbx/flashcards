@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Dumb DeckFormDialog Create button displays an error message if input is invalid 1`] = `
+exports[`Dumb DeckFormDialog Submit button displays an error message if input is invalid 1`] = `
 <withTheme(Dialog)
   onDismiss={[MockFunction]}
   visible={true}
