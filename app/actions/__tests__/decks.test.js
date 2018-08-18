@@ -9,20 +9,18 @@ describe('decks actions', () => {
     const middlewares = [thunk];
     const mockStore = configureMockStore(middlewares);
     const store = mockStore({ decks: {} });
-    const data = { title: 'React', id: 'babdccea-521a-42be-9a08-9cd9ce2b40a' };
 
     return {
-      store,
-      data
+      store
     }
   }
 
   describe('createDeck', () => {
     it('stores the deck in the database and dispatches CREATE_DECK', async () => {
-      const { store, data } = setup();
+      const { store } = setup();
       jest.spyOn(StorageUtil, 'createDeck');
 
-      await store.dispatch(actions.createDeck(data));
+      await store.dispatch(actions.createDeck({}));
 
       expect(StorageUtil.createDeck).toHaveBeenCalled();
       expect(store.getActions()[0]).toHaveProperty('type', CREATE_DECK);
@@ -43,13 +41,13 @@ describe('decks actions', () => {
 
   describe('deleteDeck', () => {
     it('deletes the deck from database and dispatches DELETE_DECK', async () => {
-      const { store, data: { id }} = setup();
+      const { store } = setup();
       jest.spyOn(StorageUtil, 'deleteDeck');
 
-      await store.dispatch(actions.deleteDeck(id));
+      await store.dispatch(actions.deleteDeck('1'));
 
-      expect(StorageUtil.deleteDeck).toHaveBeenCalledWith(id);
-      expect(store.getActions()[0]).toEqual({ 'type': DELETE_DECK, id });
+      expect(StorageUtil.deleteDeck).toHaveBeenCalledWith('1');
+      expect(store.getActions()[0]).toEqual({ 'type': DELETE_DECK, id: '1' });
     });
   });
 })

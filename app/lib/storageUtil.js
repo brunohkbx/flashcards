@@ -12,7 +12,7 @@ export const createDeck = deck => {
 }
 
 export const deleteDeck = id => {
-  getDecks()
+  return getDecks()
     .then(decks => JSON.parse(decks))
     .then(decks => pickBy(decks, deck => deck.id !== id))
     .then(decks => AsyncStorage.setItem(DECK_STORAGE_KEY, JSON.stringify(decks)));

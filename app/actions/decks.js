@@ -18,8 +18,12 @@ export const createDeck = ({ title }) => dispatch => {
     }
   }
 
-  StorageUtil.createDeck(deck);
-  dispatch({ type: CREATE_DECK, deck });
+  return StorageUtil
+    .createDeck(deck)
+    .then(() => dispatch({
+      type: CREATE_DECK,
+      deck
+    }))
 }
 
 export const fetchDecks = () => dispatch => {
@@ -32,6 +36,10 @@ export const fetchDecks = () => dispatch => {
 }
 
 export const deleteDeck = id => dispatch => {
-  StorageUtil.deleteDeck(id);
-  dispatch({ type: DELETE_DECK, id });
+  return StorageUtil
+    .deleteDeck(id)
+    .then(() => dispatch({
+      type: DELETE_DECK,
+      id
+    }));
 }
