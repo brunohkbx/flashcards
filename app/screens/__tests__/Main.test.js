@@ -6,8 +6,8 @@ import configureMockStore from 'redux-mock-store';
 describe('Main', () => {
   const setup = propOverrides => {
     const defaultProps = Object.assign({
-      decks: {
-        '259162c6-8c55-446b-aa4f-cf9a6fcffc2f': {
+      decks: [
+        {
           title: 'React',
           questions: [
             {
@@ -17,7 +17,7 @@ describe('Main', () => {
           ],
           id: '259162c6-8c55-446b-aa4f-cf9a6fcffc2f'
         }
-      },
+      ],
       createDeck: jest.fn(),
       fetchDecks: jest.fn(),
       deleteDeck: jest.fn()
@@ -129,22 +129,58 @@ describe('Main', () => {
       expect(spy).toHaveBeenCalled();
     });
 
-    it('creates a new deck onSubmit', () => {
-      const mockCreateDeck = jest.fn();
-      const { submitDeckFormDialog } = setup({ createDeck: mockCreateDeck });
+    describe('Creating a deck', () => {
+      it('renders the title and action button properly', () => {
+        const { wrapper } = setup();
 
-      submitDeckFormDialog();
+        expect(wrapper).toMatchSnapshot();
+      });
 
-      expect(mockCreateDeck).toHaveBeenCalled();
+      it('creates a new deck onSubmit', () => {
+        const mockCreateDeck = jest.fn();
+        const { submitDeckFormDialog } = setup({ createDeck: mockCreateDeck });
+
+        submitDeckFormDialog();
+
+        expect(mockCreateDeck).toHaveBeenCalledWith(expect.any(Object));
+      });
+
+      it('resets the form onSubmit', () => {
+        const mockResetForm = jest.fn();
+        const { submitDeckFormDialog } = setup({ resetForm: mockResetForm });
+
+        submitDeckFormDialog();
+
+        expect(mockResetForm).toHaveBeenCalled();
+      });
     });
 
-    it('resets the form onSubmit', () => {
+    describe('Editing a existent deck', () => {
+      const mockEditDeck = jest.fn();
       const mockResetForm = jest.fn();
-      const { submitDeckFormDialog } = setup({ resetForm: mockResetForm });
+      const { submitDeckFormDialog, wrapper } = setup(
+        { editDeck: mockEditDeck, resetForm: mockResetForm }
+      );
 
-      submitDeckFormDialog();
+      beforeAll(() => {
+        wrapper.setState({ currentDeck: '259162c6-8c55-446b-aa4f-cf9a6fcffc2f' });
+      });
 
-      expect(mockResetForm).toHaveBeenCalled();
+      it('renders the title and action button properly', () => {
+        expect(wrapper).toMatchSnapshot();
+      });
+
+      it('edits the deck onSubmit', () => {
+        submitDeckFormDialog();
+
+        expect(mockEditDeck).toHaveBeenCalledWith(expect.any(Object));
+      });
+
+      it('resets the form onSubmit', () => {
+        submitDeckFormDialog();
+
+        expect(mockResetForm).toHaveBeenCalled();
+      });
     });
   });
 

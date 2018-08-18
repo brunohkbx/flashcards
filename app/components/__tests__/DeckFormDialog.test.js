@@ -12,7 +12,9 @@ describe('Dumb DeckFormDialog', () => {
       handleBlur: jest.fn(() => jest.fn),
       touched: {},
       errors: {},
-      values: {}
+      values: {},
+      title: 'Create New Deck',
+      actionSubmitText: 'Create'
     }, propOverrides)
 
     const wrapper = shallow(<DeckFormDialog {...defaultProps} />);
@@ -98,6 +100,8 @@ describe('DeckFormDialog enhanced with Formik ', () => {
       handleDismiss: jest.fn(),
       handleSubmit: jest.fn(),
       createDeck: jest.fn(),
+      title: 'Create New Deck',
+      actionSubmitText: 'Create'
     }, propOverrides)
 
     const wrapper = shallow(<Form {...defaultProps} />);

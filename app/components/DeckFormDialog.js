@@ -15,22 +15,27 @@ export const Form = props => {
   const {
     visible,
     handleDismiss,
-    handleSubmit
+    handleSubmit,
+    deck,
+    title,
+    actionSubmitText
   } = props;
 
   validationSchema = Yup.object().shape({
-    title: Yup.string()
-      .required('Required')
+    title: Yup.string().required('Required')
   });
 
   return (
     <Formik
-      initialValues={{ title: '' }}
+      initialValues={deck}
       validationSchema={validationSchema}
+      enableReinitialize
       render={props =>
         <DeckFormDialog
           visible={visible}
-          handleDismiss={() => {handleDismiss(); props.resetForm()}}
+          handleDismiss={() => { handleDismiss(); props.resetForm({}); }}
+          title={title}
+          actionSubmitText={actionSubmitText}
           {...props}
         />
       }
@@ -49,7 +54,9 @@ export class DeckFormDialog extends Component {
       handleBlur,
       touched,
       errors,
-      values
+      values,
+      title,
+      actionSubmitText
     } = this.props;
 
     return (
@@ -57,7 +64,7 @@ export class DeckFormDialog extends Component {
         visible={visible}
         onDismiss={handleDismiss}
       >
-        <DialogTitle>Create New Deck</DialogTitle>
+        <DialogTitle>{title}</DialogTitle>
         <DialogContent>
           <TextInput
             label="Title"
@@ -69,7 +76,7 @@ export class DeckFormDialog extends Component {
         </DialogContent>
         <DialogActions>
           <Button primary onPress={handleDismiss}>Cancel</Button>
-          <Button primary onPress={handleSubmit}>Create</Button>
+          <Button primary onPress={handleSubmit}>{actionSubmitText}</Button>
         </DialogActions>
       </Dialog>
     );
@@ -79,7 +86,9 @@ export class DeckFormDialog extends Component {
 Form.propTypes = {
   visible: PropTypes.bool,
   handleDismiss: PropTypes.func.isRequired,
-  handleSubmit: PropTypes.func.isRequired
+  handleSubmit: PropTypes.func.isRequired,
+  title: PropTypes.string.isRequired,
+  actionSubmitText: PropTypes.string.isRequired
 }
 
 Form.defaultProps = {
