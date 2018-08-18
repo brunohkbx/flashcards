@@ -18,6 +18,7 @@ describe('Main', () => {
           id: '259162c6-8c55-446b-aa4f-cf9a6fcffc2f'
         }
       },
+      createDeck: jest.fn(),
       fetchDecks: jest.fn(),
       deleteDeck: jest.fn()
     }, propOverrides)
@@ -35,13 +36,28 @@ describe('Main', () => {
 
     const dismissDeckFormDialog = () => {
       wrapper
-        .find('Connect(Form)')
-        .dive({ context: { store }})
+        .find('Form')
         .dive()
         .dive()
         .find('DeckFormDialog')
         .dive()
         .simulate('dismiss')
+    }
+
+    const submitDeckFormDialog = () => {
+      wrapper
+        .find('Form')
+        .dive()
+        .simulate(
+          'submit',
+          {},
+          Object.assign(
+            {
+              resetForm: jest.fn(),
+              setSubmitting: jest.fn()
+            }, propOverrides
+          )
+        );
     }
 
     const dismissConfirmDialog = () => {
@@ -74,6 +90,7 @@ describe('Main', () => {
       wrapper,
       pressOnFab,
       dismissDeckFormDialog,
+      submitDeckFormDialog,
       dismissConfirmDialog,
       cancelConfirmDialog,
       confirmConfirmDialog
@@ -110,6 +127,24 @@ describe('Main', () => {
       dismissDeckFormDialog();
 
       expect(spy).toHaveBeenCalled();
+    });
+
+    it('creates a new deck onSubmit', () => {
+      const mockCreateDeck = jest.fn();
+      const { submitDeckFormDialog } = setup({ createDeck: mockCreateDeck });
+
+      submitDeckFormDialog();
+
+      expect(mockCreateDeck).toHaveBeenCalled();
+    });
+
+    it('resets the form onSubmit', () => {
+      const mockResetForm = jest.fn();
+      const { submitDeckFormDialog } = setup({ resetForm: mockResetForm });
+
+      submitDeckFormDialog();
+
+      expect(mockResetForm).toHaveBeenCalled();
     });
   });
 

@@ -41,8 +41,9 @@ exports[`Main renders properly 1`] = `
       primary={false}
     />
   </Styled(Component)>
-  <Connect(Form)
+  <Form
     handleDismiss={[Function]}
+    handleSubmit={[Function]}
     visible={false}
   />
   <ConfirmDialog

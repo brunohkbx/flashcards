@@ -1,6 +1,5 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import {
@@ -11,25 +10,18 @@ import {
   DialogTitle
 } from 'react-native-paper';
 import TextInput from './TextInput';
-import { createDeck } from '../actions';
 
 export const Form = props => {
   const {
     visible,
     handleDismiss,
-    createDeck
+    handleSubmit
   } = props;
 
   validationSchema = Yup.object().shape({
     title: Yup.string()
       .required('Required')
   });
-
-  handleSubmit = (values, FormikBag) => {
-    handleDismiss();
-    createDeck(values);
-    FormikBag.resetForm();
-  }
 
   return (
     <Formik
@@ -42,57 +34,56 @@ export const Form = props => {
           {...props}
         />
       }
-      onSubmit={handleSubmit}
+      onSubmit={(values, actions) => handleSubmit(values, actions)}
     />
   )
 }
 
-export const DeckFormDialog = props => {
-  const {
-    visible,
-    handleDismiss,
-    handleSubmit,
-    handleChange,
-    handleBlur,
-    touched,
-    errors,
-    values
-  } = props;
+export class DeckFormDialog extends Component {
+  render() {
+    const {
+      visible,
+      handleDismiss,
+      handleSubmit,
+      handleChange,
+      handleBlur,
+      touched,
+      errors,
+      values
+    } = this.props;
 
-  return (
-    <Dialog
-      visible={visible}
-      onDismiss={handleDismiss}
-    >
-      <DialogTitle>Create New Deck</DialogTitle>
-      <DialogContent>
-        <TextInput
-          label="Title"
-          value={values.title}
-          errorMessage={touched.title && errors.title ? errors.title : ""}
-          handleChangeText={handleChange('title')}
-          handleBlur={handleBlur('title')}
-        />
-      </DialogContent>
-      <DialogActions>
-        <Button primary onPress={handleDismiss}>Cancel</Button>
-        <Button primary onPress={handleSubmit}>Create</Button>
-      </DialogActions>
-    </Dialog>
-  );
+    return (
+      <Dialog
+        visible={visible}
+        onDismiss={handleDismiss}
+      >
+        <DialogTitle>Create New Deck</DialogTitle>
+        <DialogContent>
+          <TextInput
+            label="Title"
+            value={values.title}
+            errorMessage={touched.title && errors.title ? errors.title : ""}
+            handleChangeText={handleChange('title')}
+            handleBlur={handleBlur('title')}
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button primary onPress={handleDismiss}>Cancel</Button>
+          <Button primary onPress={handleSubmit}>Create</Button>
+        </DialogActions>
+      </Dialog>
+    );
+  }
 }
 
 Form.propTypes = {
   visible: PropTypes.bool,
-  handleDismiss: PropTypes.func.isRequired
+  handleDismiss: PropTypes.func.isRequired,
+  handleSubmit: PropTypes.func.isRequired
 }
 
 Form.defaultProps = {
   visible: false
 }
 
-const mapDispatchToProps = dispatch => ({
-  createDeck: data => dispatch(createDeck(data))
-})
-
-export default connect(null, mapDispatchToProps)(Form);
+export default Form;

@@ -96,6 +96,7 @@ describe('DeckFormDialog enhanced with Formik ', () => {
     const defaultProps = Object.assign({
       visible: true,
       handleDismiss: jest.fn(),
+      handleSubmit: jest.fn(),
       createDeck: jest.fn(),
     }, propOverrides)
 
@@ -126,7 +127,7 @@ describe('DeckFormDialog enhanced with Formik ', () => {
   }
 
   describe('Cancel button ', () => {
-    it('dismiss the form', () => {
+    it('dismisses the form', () => {
       const mockHandleDismiss = jest.fn();
       const { dismiss } = setup({ handleDismiss: mockHandleDismiss });
 
@@ -137,31 +138,13 @@ describe('DeckFormDialog enhanced with Formik ', () => {
   });
 
   describe('Submit button', () => {
-    it('dismiss the form', () => {
-      const mockHandleDismiss = jest.fn();
-      const { submit } = setup({ handleDismiss: mockHandleDismiss });
+    it('submits the form', () => {
+      const mockHandleSubmit = jest.fn();
+      const { submit } = setup({ handleSubmit: mockHandleSubmit });
 
       submit();
 
-      expect(mockHandleDismiss).toHaveBeenCalled();
-    });
-
-    it('creates a new deck', () => {
-      const mockCreateDeck = jest.fn();
-      const { submit } = setup({ createDeck: mockCreateDeck });
-
-      submit();
-
-      expect(mockCreateDeck).toHaveBeenCalled();
-    });
-
-    it('clears all form input', () => {
-      const mockResetForm = jest.fn();
-      const { submit } = setup({ resetForm: mockResetForm });
-
-      submit();
-
-      expect(mockResetForm).toHaveBeenCalled();
+      expect(mockHandleSubmit).toHaveBeenCalled();
     });
   });
 });
