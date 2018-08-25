@@ -15,7 +15,7 @@ import { TouchableOpacity } from 'react-native';
 
 const Deck = ({ title, flashcardsCount, handleEditPress, handleDeletePress }) => {
   return (
-    <Card style={styles.card}>
+    <Card>
       <TouchableOpacity>
         <CardContent style={{marginHorizontal: 8}}>
           <Title>{capitalize(title)}</Title>
@@ -29,14 +29,6 @@ const Deck = ({ title, flashcardsCount, handleEditPress, handleDeletePress }) =>
     </Card>
   );
 }
-
-const styles = StyleSheet.create({
-  card: {
-    elevation: 0,
-    borderWidth: StyleSheet.hairlineWidth,
-    borderColor: 'rgba(0, 0, 0, .32)'
-  }
-});
 
 Deck.propTypes = {
   title: PropTypes.string.isRequired,
