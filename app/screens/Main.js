@@ -9,7 +9,8 @@ import ConfirmDialog from '../components/ConfirmDialog';
 import {
   fetchDecks,
   deleteDeck,
-  createDeck
+  createDeck,
+  editDeck
 } from '../actions';
 
 export class Main extends Component {
@@ -26,14 +27,18 @@ export class Main extends Component {
   }
 
   openForm = () => this.setState({ formVisible: true });
-  closeForm = () => this.setState({ formVisible: false });
+  openEditForm = deckId => this.setState({ formVisible: true, currentDeck: deckId });
+  closeForm = () => this.setState({ formVisible: false, currentDeck: null });
   openConfirmRemoveDialog = deckId => this.setState({ confirmRemoveDialogVisible: true, currentDeck: deckId });
   closeConfirmRemoveDialog = () => this.setState({ confirmRemoveDialogVisible: false, currentDeck: null });
 
   submitForm = (values, actions) => this.setState(
     { formVisible: false },
     () => {
-      this.props.createDeck(values);
+      const { currentDeck } = this.state;
+      const { createDeck, editDeck } = this.props;
+
+      currentDeck ? editDeck(values) : createDeck(values);
       actions.resetForm();
       actions.setSubmitting(false);
     });
@@ -43,6 +48,7 @@ export class Main extends Component {
       <Deck
         title={item.title}
         flashcardsCount={item.questions.length}
+        handleEditPress={() => this.openEditForm(item.id)}
         handleDeletePress={() => this.openConfirmRemoveDialog(item.id)}
       />
     );
@@ -72,8 +78,11 @@ export class Main extends Component {
         </FABContainer>
         <DeckFormDialog
           visible={formVisible}
+          deck={decks.find(deck => deck.id === currentDeck) || {}}
           handleDismiss={() => this.closeForm()}
           handleSubmit={this.submitForm}
+          title={currentDeck ? 'Edit Deck' : 'Create New Deck'}
+          actionSubmitText={currentDeck ? 'Edit' : 'Create'}
         />
         <ConfirmDialog
           visible={confirmRemoveDialogVisible}
@@ -92,6 +101,7 @@ const mapStateToProps = ({ decks }) => ({ decks: Object.values(decks) });
 
 const mapDispatchToProps = dispatch => ({
   createDeck: data => dispatch(createDeck(data)),
+  editDeck: data => dispatch(editDeck(data)),
   fetchDecks: () => dispatch(fetchDecks()),
   deleteDeck: id => dispatch(deleteDeck(id))
 })

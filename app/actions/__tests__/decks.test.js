@@ -2,7 +2,12 @@ import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import * as StorageUtil from '../../lib/storageUtil';
 import * as actions from '../../actions';
-import { CREATE_DECK, FETCH_DECKS, DELETE_DECK } from '../../constants';
+import {
+  CREATE_DECK,
+  FETCH_DECKS,
+  DELETE_DECK,
+  EDIT_DECK
+} from '../../constants';
 
 describe('decks actions', () => {
   const setup = () => {
@@ -16,7 +21,7 @@ describe('decks actions', () => {
   }
 
   describe('createDeck', () => {
-    it('stores the deck in the database and dispatches CREATE_DECK', async () => {
+    it('stores the deck in the storage and dispatches CREATE_DECK', async () => {
       const { store } = setup();
       jest.spyOn(StorageUtil, 'createDeck');
 
@@ -28,7 +33,7 @@ describe('decks actions', () => {
   });
 
   describe('fetchDecks', () => {
-    it('fetches the decks from database and dispatches FETCH_DECKS', async () => {
+    it('fetches all decks from storage and dispatches FETCH_DECKS', async () => {
       const { store } = setup();
       jest.spyOn(StorageUtil, 'getDecks');
 
@@ -40,7 +45,7 @@ describe('decks actions', () => {
   });
 
   describe('deleteDeck', () => {
-    it('deletes the deck from database and dispatches DELETE_DECK', async () => {
+    it('deletes the deck from storage and dispatches DELETE_DECK', async () => {
       const { store } = setup();
       jest.spyOn(StorageUtil, 'deleteDeck');
 
@@ -48,6 +53,22 @@ describe('decks actions', () => {
 
       expect(StorageUtil.deleteDeck).toHaveBeenCalledWith('1');
       expect(store.getActions()[0]).toEqual({ 'type': DELETE_DECK, id: '1' });
+    });
+  });
+
+  describe('editDeck', () => {
+    it('edits the deck from storage and dispatches EDIT_DECK', async () => {
+      const { store } = setup();
+      const deck = { title: 'foo', id: '1' };
+      jest.spyOn(StorageUtil, 'editDeck');
+
+      await store.dispatch(actions.editDeck(deck));
+
+      expect(StorageUtil.editDeck).toHaveBeenCalledWith({ '1': deck });
+      expect(store.getActions()[0]).toEqual({
+        'type': EDIT_DECK,
+        deck: { '1': deck }
+      });
     });
   });
 })

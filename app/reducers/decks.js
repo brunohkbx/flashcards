@@ -1,10 +1,11 @@
 import {
   CREATE_DECK,
   FETCH_DECKS,
-  DELETE_DECK
+  DELETE_DECK,
+  EDIT_DECK
 } from '../constants';
 
-import { pickBy } from 'lodash/object';
+import { pickBy, merge } from 'lodash/object';
 
 const decks = (state = {}, action) => {
   switch(action.type) {
@@ -14,6 +15,8 @@ const decks = (state = {}, action) => {
       return {...state, ...action.decks};
     case DELETE_DECK:
       return pickBy(state, deck => deck.id !== action.id);
+    case EDIT_DECK:
+      return merge({}, state, action.deck);
     default:
       return state;
   }

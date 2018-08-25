@@ -2,7 +2,8 @@ import reducer from '../decks';
 import {
   CREATE_DECK,
   FETCH_DECKS,
-  DELETE_DECK
+  DELETE_DECK,
+  EDIT_DECK
 } from '../../constants';
 
 describe('decks reducer', () => {
@@ -60,6 +61,25 @@ describe('decks reducer', () => {
         id: '2',
         questions: [],
         title: 'Redux'
+      }
+    })
+  });
+
+  it('handles EDIT_DECK', () => {
+    const { deck }  = setup();
+    const newDeck = {
+      '1': {
+        title: 'React 16'
+      }
+    }
+
+    expect(
+      reducer(deck, { type: EDIT_DECK, deck: newDeck })
+    ).toEqual({
+      '1': {
+        id: '1',
+        questions: [],
+        title: 'React 16'
       }
     })
   });

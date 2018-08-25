@@ -4,7 +4,8 @@ import * as StorageUtil from '../lib/storageUtil';
 import {
   CREATE_DECK,
   FETCH_DECKS,
-  DELETE_DECK
+  DELETE_DECK,
+  EDIT_DECK
 } from '../constants';
 
 export const createDeck = ({ title }) => dispatch => {
@@ -42,4 +43,15 @@ export const deleteDeck = id => dispatch => {
       type: DELETE_DECK,
       id
     }));
+}
+
+export const editDeck = data => dispatch => {
+  const deck = { [data.id]: data };
+
+  return StorageUtil
+    .editDeck(deck)
+    .then(() => dispatch({
+      type: EDIT_DECK,
+      deck
+    }))
 }

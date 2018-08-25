@@ -25,7 +25,7 @@ exports[`Deck renders properly 1`] = `
     </CardContent>
     <CardActions>
       <withTheme(Button)
-        onPress={[Function]}
+        onPress={[MockFunction]}
         primary={true}
       >
         Edit
