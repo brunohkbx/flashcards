@@ -1,8 +1,7 @@
 import React from 'react';
 import { Provider as PaperProvider } from 'react-native-paper';
 import { Provider as StoreProvider } from 'react-redux';
-import Main from './app/screens/Main';
-import StatusBar from './app/components/StatusBar';
+import { RootStack } from './app/config/routes';
 import store from './app/config/store';
 
 export default class App extends React.Component {
@@ -10,8 +9,7 @@ export default class App extends React.Component {
     return (
       <StoreProvider store={store}>
         <PaperProvider>
-          <StatusBar />
-          <Main />
+          <RootStack />
         </PaperProvider>
       </StoreProvider>
     );

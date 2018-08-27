@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SearchIcon renders properly 1`] = `
+<TouchableOpacity
+  activeOpacity={0.2}
+  onPress={[Function]}
+  style={
+    Object {
+      "marginHorizontal": 10,
+    }
+  }
+>
+  <Icon
+    allowFontScaling={false}
+    color="#ffffff"
+    name="search"
+    size={24}
+  />
+</TouchableOpacity>
+`;
