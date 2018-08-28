@@ -9,13 +9,19 @@ exports[`Dumb DeckFormDialog Submit button displays an error message if input is
     Create New Deck
   </withTheme(DialogTitle)>
   <DialogContent>
-    <TextInput
-      errorMessage="Required"
-      handleBlur={[Function]}
-      handleChangeText={[Function]}
+    <withTheme(TextInput)
+      autoFocus={true}
+      error={true}
       label="Title"
-      value=""
+      onBlur={[Function]}
+      onChangeText={[Function]}
     />
+    <withTheme(HelperText)
+      type="error"
+      visible={true}
+    >
+      Required
+    </withTheme(HelperText)>
   </DialogContent>
   <DialogActions>
     <withTheme(Button)
@@ -43,12 +49,16 @@ exports[`Dumb DeckFormDialog renders properly 1`] = `
     Create New Deck
   </withTheme(DialogTitle)>
   <DialogContent>
-    <TextInput
-      errorMessage=""
-      handleBlur={[Function]}
-      handleChangeText={[Function]}
+    <withTheme(TextInput)
+      autoFocus={true}
+      error={false}
       label="Title"
-      value=""
+      onBlur={[Function]}
+      onChangeText={[Function]}
+    />
+    <withTheme(HelperText)
+      type="error"
+      visible={false}
     />
   </DialogContent>
   <DialogActions>

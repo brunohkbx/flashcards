@@ -7,9 +7,10 @@ import {
   Dialog,
   DialogActions,
   DialogContent,
-  DialogTitle
+  DialogTitle,
+  HelperText,
+  TextInput
 } from 'react-native-paper';
-import TextInput from './TextInput';
 
 export const Form = props => {
   const {
@@ -69,10 +70,14 @@ export class DeckFormDialog extends Component {
           <TextInput
             label="Title"
             value={values.title}
-            errorMessage={touched.title && errors.title ? errors.title : ""}
-            handleChangeText={handleChange('title')}
-            handleBlur={handleBlur('title')}
+            onChangeText={handleChange('title')}
+            onBlur={handleBlur('title')}
+            error={!!(touched.title && errors.title)}
+            autoFocus
           />
+          <HelperText type="error" visible={!!(touched.title && errors.title)}>
+            {errors.title}
+          </HelperText>
         </DialogContent>
         <DialogActions>
           <Button primary onPress={handleDismiss}>Cancel</Button>
