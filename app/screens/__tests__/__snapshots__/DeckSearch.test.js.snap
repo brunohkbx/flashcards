@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DeckSearch renders properly 1`] = `
+<KeyboardAvoidingView
+  behavior="padding"
+  enabled={true}
+  keyboardVerticalOffset={0}
+  style={
+    Object {
+      "alignItems": "center",
+      "flex": 1,
+      "justifyContent": "center",
+    }
+  }
+>
+  <Component
+    style={
+      Object {
+        "alignItems": "center",
+      }
+    }
+  >
+    <Icon
+      allowFontScaling={false}
+      name="search"
+      size={125}
+    />
+    <Paragraph>
+      Enter a title and find your favorite deck
+    </Paragraph>
+  </Component>
+</KeyboardAvoidingView>
+`;

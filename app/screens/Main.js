@@ -6,6 +6,7 @@ import FABContainer from '../components/FABContainer';
 import FAB from '../components/FAB';
 import DeckFormDialog from '../components/DeckFormDialog';
 import ConfirmDialog from '../components/ConfirmDialog';
+import MainToolbar from '../components/MainToolbar';
 import {
   fetchDecks,
   deleteDeck,
@@ -14,6 +15,14 @@ import {
 } from '../actions';
 
 export class Main extends Component {
+  static navigationOptions = ({ navigation }) => {
+    return {
+      header: <MainToolbar
+                handleSearchPress={() => navigation.navigate('DeckSearch')}
+              />
+    };
+  };
+
   state = {
     formVisible: false,
     confirmRemoveDialogVisible: false,
