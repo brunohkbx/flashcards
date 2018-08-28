@@ -18,7 +18,8 @@
     "eject": "react-native-scripts eject",
     "android": "react-native-scripts android",
     "ios": "react-native-scripts ios",
-    "test": "jest"
+    "test": "jest",
+    "test-with-coverage": "jest --coverage && cat ./coverage/lcov.info | codacy-coverage"
   },
   "jest": {
     "preset": "jest-expo",
@@ -28,6 +29,7 @@
     ]
   },
   "dependencies": {
+    "codacy-coverage": "^3.0.0",
     "expo": "^27.0.1",
     "formik": "^1.0.2",
     "lodash": "^4.17.10",
