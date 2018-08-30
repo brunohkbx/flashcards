@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SearchToolbar renders property 1`] = `
+<withTheme(Toolbar)
+  style={
+    Object {
+      "backgroundColor": "#ffffff",
+    }
+  }
+>
+  <withTheme(Searchbar)
+    autoFocus={true}
+    icon="arrow-back"
+    onIconPress={[MockFunction]}
+    placeholder="Search Decks"
+    style={
+      Object {
+        "elevation": 0,
+      }
+    }
+    value=""
+  />
+</withTheme(Toolbar)>
+`;
