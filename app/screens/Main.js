@@ -4,15 +4,9 @@ import { View, FlatList } from 'react-native';
 import Deck from '../components/Deck';
 import FABContainer from '../components/FABContainer';
 import FAB from '../components/FAB';
-import DeckFormDialog from '../components/DeckFormDialog';
 import ConfirmDialog from '../components/ConfirmDialog';
 import MainToolbar from '../components/MainToolbar';
-import {
-  fetchDecks,
-  deleteDeck,
-  createDeck,
-  editDeck
-} from '../actions';
+import { fetchDecks, deleteDeck } from '../actions';
 
 export class Main extends Component {
   static navigationOptions = ({ navigation }) => {
@@ -24,7 +18,6 @@ export class Main extends Component {
   };
 
   state = {
-    formVisible: false,
     confirmRemoveDialogVisible: false,
     currentDeck: null
   }
@@ -35,29 +28,17 @@ export class Main extends Component {
     fetchDecks();
   }
 
-  openForm = () => this.setState({ formVisible: true });
-  openEditForm = deckId => this.setState({ formVisible: true, currentDeck: deckId });
-  closeForm = () => this.setState({ formVisible: false, currentDeck: null });
   openConfirmRemoveDialog = deckId => this.setState({ confirmRemoveDialogVisible: true, currentDeck: deckId });
   closeConfirmRemoveDialog = () => this.setState({ confirmRemoveDialogVisible: false, currentDeck: null });
-
-  submitForm = (values, actions) => this.setState(
-    { formVisible: false },
-    () => {
-      const { currentDeck } = this.state;
-      const { createDeck, editDeck } = this.props;
-
-      currentDeck ? editDeck(values) : createDeck(values);
-      actions.resetForm();
-      actions.setSubmitting(false);
-    });
 
   renderItem = ({ item }) => {
     return (
       <Deck
         title={item.title}
         flashcardsCount={item.questions.length}
-        handleEditPress={() => this.openEditForm(item.id)}
+        handleEditPress={
+          () => this.props.navigation.navigate('EditDeck', { deckId: item.id })
+        }
         handleDeletePress={() => this.openConfirmRemoveDialog(item.id)}
       />
     );
@@ -83,16 +64,10 @@ export class Main extends Component {
           keyExtractor={item => item.id}
         />
         <FABContainer>
-          <FAB handlePress={() => this.openForm()} />
+          <FAB
+            handlePress={() => this.props.navigation.navigate('CreateDeck')}
+          />
         </FABContainer>
-        <DeckFormDialog
-          visible={formVisible}
-          deck={decks.find(deck => deck.id === currentDeck) || {}}
-          handleDismiss={() => this.closeForm()}
-          handleSubmit={this.submitForm}
-          title={currentDeck ? 'Edit Deck' : 'Create New Deck'}
-          actionSubmitText={currentDeck ? 'Edit' : 'Create'}
-        />
         <ConfirmDialog
           visible={confirmRemoveDialogVisible}
           handleDismiss={() => this.closeConfirmRemoveDialog()}
@@ -109,8 +84,6 @@ export class Main extends Component {
 const mapStateToProps = ({ decks }) => ({ decks: Object.values(decks) });
 
 const mapDispatchToProps = dispatch => ({
-  createDeck: data => dispatch(createDeck(data)),
-  editDeck: data => dispatch(editDeck(data)),
   fetchDecks: () => dispatch(fetchDecks()),
   deleteDeck: id => dispatch(deleteDeck(id))
 })
