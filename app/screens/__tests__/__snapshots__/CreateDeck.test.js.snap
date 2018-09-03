@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CreateDeck renders properly 1`] = `
+<Component
+  style={
+    Object {
+      "flex": 1,
+      "padding": 8,
+    }
+  }
+>
+  <FormikDeckForm
+    actionSubmitText="Create"
+    formRef={[Function]}
+    handleSubmit={[Function]}
+    initialValues={
+      Object {
+        "questions": Array [],
+        "title": "",
+      }
+    }
+    title="Create New Deck"
+  />
+</Component>
+`;
