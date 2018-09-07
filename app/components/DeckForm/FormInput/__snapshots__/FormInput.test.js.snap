@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FormInput displays an error message when the input is invalid 1`] = `
+<Component>
+  <withTheme(TextInput)
+    error={true}
+    value="React"
+  />
+  <withTheme(HelperText)
+    type="error"
+    visible={true}
+  >
+    Required
+  </withTheme(HelperText)>
+</Component>
+`;
+
+exports[`FormInput renders properly 1`] = `
+<Component>
+  <withTheme(TextInput)
+    error={false}
+    value="React"
+  />
+</Component>
+`;

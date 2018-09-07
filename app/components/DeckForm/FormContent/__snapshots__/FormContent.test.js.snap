@@ -1,0 +1,34 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FormContent renders properly 1`] = `
+<ScrollView
+  onContentSizeChange={[MockFunction]}
+>
+  <C
+    autoFocus={true}
+    component={[Function]}
+    label="Title"
+    name="title"
+  />
+  <Headline>
+    Cards
+  </Headline>
+  <Styled(withTheme(Paper))
+    key="1"
+  >
+    <C
+      autoFocus={true}
+      component={[Function]}
+      label="Question"
+      multiline={true}
+      name="questions.0.question"
+    />
+    <C
+      component={[Function]}
+      label="Answer"
+      multiline={true}
+      name="questions.0.answer"
+    />
+  </Styled(withTheme(Paper))>
+</ScrollView>
+`;
