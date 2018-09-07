@@ -1,4 +1,3 @@
-import uuid from 'uuid';
 import * as StorageUtil from '../lib/storageUtil';
 
 import {
@@ -8,13 +7,11 @@ import {
   EDIT_DECK
 } from '../constants';
 
-export const createDeck = ({ title }) => dispatch => {
-  const id = uuid();
-
+export const createDeck = ({ title, questions, id }) => dispatch => {
   const deck = {
     [id]: {
       title,
-      questions: [],
+      questions,
       id
     }
   }

@@ -30,11 +30,13 @@ export class CreateDeck extends Component {
 
   submitForm = () => this.form.submitForm();
 
+  setFormRef = element => this.form = element;
+
   render() {
     return (
       <View style={{flex: 1, padding: 8}}>
         <DeckForm
-          formRef={node => this.form = node}
+          formRef={this.setFormRef}
           handleSubmit={this.handleSubmit}
           title="Create New Deck"
           actionSubmitText="Create"

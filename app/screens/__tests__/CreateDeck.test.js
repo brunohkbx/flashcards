@@ -56,6 +56,17 @@ describe('CreateDeck', () => {
       wrapperInstance.submitForm();
 
       expect(mockSubmitForm).toHaveBeenCalled();
-    })
-  })
+    });
+  });
+
+  describe('setFormRef', () => {
+    it('assigns a ref to this.form', () => {
+      const mockForm = jest.fn();
+      const { wrapperInstance } = setup();
+
+      wrapperInstance.setFormRef(mockForm);
+
+      expect(wrapperInstance.form).toEqual(mockForm);
+    });
+  });
 });
