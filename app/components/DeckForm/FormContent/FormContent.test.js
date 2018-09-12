@@ -15,7 +15,6 @@ describe('FormContent', () => {
         }],
         id: '1'
       },
-      handleContentSizeChange: jest.fn(),
       onFlashcardDeleted: jest.fn()
     }, propOverrides);
 
@@ -35,16 +34,5 @@ describe('FormContent', () => {
     const { wrapper } =  setup();
 
     expect(wrapper).toMatchSnapshot();
-  });
-
-  test('ScrollView onContentSizeChange calls handleContentSizeChange', () => {
-    const mockHandleContentSizeChange = jest.fn();
-    const { contentSizeChange } = setup(
-      { handleContentSizeChange: mockHandleContentSizeChange }
-    );
-
-    contentSizeChange();
-
-    expect(mockHandleContentSizeChange).toHaveBeenCalled();
   });
 });

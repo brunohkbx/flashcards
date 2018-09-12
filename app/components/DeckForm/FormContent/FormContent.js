@@ -17,7 +17,6 @@ const FormContent = props => {
   return (
     <ScrollView
       ref={scrollViewRef}
-      onContentSizeChange={handleContentSizeChange}
     >
       <Field
         name="title"
@@ -59,7 +58,6 @@ FormContent.propTypes = {
   handleChange: PropTypes.func.isRequired,
   values: PropTypes.object.isRequired,
   scrollViewRef: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
-  handleContentSizeChange: PropTypes.func,
   onFlashcardDeleted: PropTypes.func.isRequired
 };
 

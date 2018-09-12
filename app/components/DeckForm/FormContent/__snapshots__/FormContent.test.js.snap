@@ -1,9 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`FormContent renders properly 1`] = `
-<ScrollView
-  onContentSizeChange={[MockFunction]}
->
+<ScrollView>
   <C
     autoFocus={true}
     component={[Function]}

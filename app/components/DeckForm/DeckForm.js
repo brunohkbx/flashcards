@@ -52,10 +52,6 @@ export class DeckForm extends Component {
 
   setScrollViewRef = element => this.scrollView = element;
 
-  handleContentSizeChange = () => {
-    this.scrollView.scrollToEnd({animated: true});
-  }
-
   render() {
     const {
       handleChange,
@@ -75,9 +71,8 @@ export class DeckForm extends Component {
         >
           <FormContent
             scrollViewRef={this.setScrollViewRef}
-            handleContentSizeChange={this.handleContentSizeChange}
-            {...this.props}
             onFlashcardDeleted={this.handleRemoveFlashcard}
+            {...this.props}
           />
         </KeyboardAvoidingView>
         <FABContainer>

@@ -23,7 +23,6 @@ exports[`DeckForm renders properly 1`] = `
       errors={Object {}}
       handleBlur={[MockFunction]}
       handleChange={[MockFunction]}
-      handleContentSizeChange={[Function]}
       onFlashcardDeleted={[Function]}
       scrollViewRef={[Function]}
       touched={Object {}}

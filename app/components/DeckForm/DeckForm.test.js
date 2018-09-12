@@ -138,16 +138,4 @@ describe('DeckForm', () => {
       expect(wrapperInstance.scrollView).toEqual(mockScrollView);
     });
   });
-
-  describe('handleContentSizeChange', () => {
-    it('calls scrollToEnd on scrollView ref', () => {
-      const mockScrollToEnd = jest.fn();
-      const { wrapperInstance } = setup();
-      wrapperInstance.scrollView = { scrollToEnd: mockScrollToEnd };
-
-      wrapperInstance.handleContentSizeChange();
-
-      expect(mockScrollToEnd).toHaveBeenCalledWith({ animated: true });
-    });
-  });
 });
