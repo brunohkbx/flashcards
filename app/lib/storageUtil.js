@@ -1,5 +1,5 @@
 import { AsyncStorage } from 'react-native';
-import { pickBy, merge } from 'lodash/object';
+import { pickBy, assign } from 'lodash/object';
 
 const DECK_STORAGE_KEY = 'flashcards:deck';
 
@@ -21,7 +21,7 @@ export const deleteDeck = id => {
 export const editDeck = deck => {
   return getDecks()
     .then(decks => JSON.parse(decks))
-    .then(decks => merge(decks, deck))
+    .then(decks => assign(decks, deck))
     .then(decks => AsyncStorage.setItem(
       DECK_STORAGE_KEY, JSON.stringify(decks)
     ));

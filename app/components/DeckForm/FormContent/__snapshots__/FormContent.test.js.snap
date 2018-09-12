@@ -1,9 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`FormContent renders properly 1`] = `
-<ScrollView
-  onContentSizeChange={[MockFunction]}
->
+<ScrollView>
   <C
     autoFocus={true}
     component={[Function]}
@@ -13,8 +11,9 @@ exports[`FormContent renders properly 1`] = `
   <Headline>
     Cards
   </Headline>
-  <Styled(withTheme(Paper))
+  <Flashcard
     key="1"
+    onFlashcardDeleted={[Function]}
   >
     <C
       autoFocus={true}
@@ -29,6 +28,6 @@ exports[`FormContent renders properly 1`] = `
       multiline={true}
       name="questions.0.answer"
     />
-  </Styled(withTheme(Paper))>
+  </Flashcard>
 </ScrollView>
 `;

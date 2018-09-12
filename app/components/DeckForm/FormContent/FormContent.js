@@ -4,20 +4,19 @@ import { ScrollView } from 'react-native';
 import { Headline } from 'react-native-paper';
 import { Field } from 'formik';
 import FormInput from '../FormInput/FormInput';
-import FlashCard from '../../FlashCard';
+import Flashcard from '../../Flashcard';
 
 const FormContent = props => {
   const {
     handleChange,
     values,
     scrollViewRef,
-    handleContentSizeChange
+    onFlashcardDeleted
   } = props;
 
   return (
     <ScrollView
       ref={scrollViewRef}
-      onContentSizeChange={handleContentSizeChange}
     >
       <Field
         name="title"
@@ -29,7 +28,10 @@ const FormContent = props => {
       <Headline>Cards</Headline>
       {
         values.questions.map((question, index) => (
-          <FlashCard key={values.id}>
+          <Flashcard 
+            key={question.id} 
+            onFlashcardDeleted={() => onFlashcardDeleted(question.id)}
+          >
             <Field
               name={`questions.${index}.question`}
               label="Question"
@@ -45,7 +47,7 @@ const FormContent = props => {
               onChangeText={handleChange(`questions.${index}.answer`)}
               multiline
             />
-          </FlashCard>
+          </Flashcard>
         ))
       }
     </ScrollView>
@@ -56,7 +58,7 @@ FormContent.propTypes = {
   handleChange: PropTypes.func.isRequired,
   values: PropTypes.object.isRequired,
   scrollViewRef: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
-  handleContentSizeChange: PropTypes.func
+  onFlashcardDeleted: PropTypes.func.isRequired
 };
 
 export default FormContent;

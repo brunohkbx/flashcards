@@ -10,11 +10,12 @@ describe('FormContent', () => {
         title: 'React',
         questions: [{
           question: 'What is React?',
-          answer: 'A library for managing user interfaces'
+          answer: 'A library for managing user interfaces',
+          id: '1'
         }],
         id: '1'
       },
-      handleContentSizeChange: jest.fn()
+      onFlashcardDeleted: jest.fn()
     }, propOverrides);
 
     const wrapper = shallow(<FormContent {...defaultProps} />);
@@ -33,16 +34,5 @@ describe('FormContent', () => {
     const { wrapper } =  setup();
 
     expect(wrapper).toMatchSnapshot();
-  });
-
-  test('ScrollView onContentSizeChange calls handleContentSizeChange', () => {
-    const mockHandleContentSizeChange = jest.fn();
-    const { contentSizeChange } = setup(
-      { handleContentSizeChange: mockHandleContentSizeChange }
-    );
-
-    contentSizeChange();
-
-    expect(mockHandleContentSizeChange).toHaveBeenCalled();
   });
 });

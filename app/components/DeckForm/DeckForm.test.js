@@ -97,6 +97,34 @@ describe('DeckForm', () => {
       expect(
         mockSetFieldValue
       ).toHaveBeenCalledWith('questions.0.answer', '');
+
+      expect(
+        mockSetFieldValue
+      ).toHaveBeenCalledWith('questions.0.id', expect.any(String));
+    });
+  });
+
+  describe('handleRemoveFlashcard', () => {
+    it('removes the given question from formik values', () => {
+      const values = { questions: [
+          { id: '1' },
+          { id: '2' }
+        ]
+      };
+
+      const mockSetFieldValue = jest.fn();
+
+      const { wrapperInstance } = setup(
+        { values,
+          setFieldValue: mockSetFieldValue
+        }
+      );
+
+      wrapperInstance.handleRemoveFlashcard('1');
+
+      expect(
+        mockSetFieldValue
+      ).toHaveBeenCalledWith('questions', [{ id: '2' }]);
     });
   });
 
@@ -108,18 +136,6 @@ describe('DeckForm', () => {
       wrapperInstance.setScrollViewRef(mockScrollView);
 
       expect(wrapperInstance.scrollView).toEqual(mockScrollView);
-    });
-  });
-
-  describe('handleContentSizeChange', () => {
-    it('calls scrollToEnd on scrollView ref', () => {
-      const mockScrollToEnd = jest.fn();
-      const { wrapperInstance } = setup();
-      wrapperInstance.scrollView = { scrollToEnd: mockScrollToEnd };
-
-      wrapperInstance.handleContentSizeChange();
-
-      expect(mockScrollToEnd).toHaveBeenCalledWith({ animated: true });
     });
   });
 });

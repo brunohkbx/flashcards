@@ -69,7 +69,8 @@ describe('decks reducer', () => {
     const { deck }  = setup();
     const newDeck = {
       '1': {
-        title: 'React 16'
+        title: 'React 16',
+        id: '1'
       }
     }
 
@@ -78,7 +79,6 @@ describe('decks reducer', () => {
     ).toEqual({
       '1': {
         id: '1',
-        questions: [],
         title: 'React 16'
       }
     })
