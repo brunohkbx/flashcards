@@ -13,8 +13,9 @@ exports[`FormContent renders properly 1`] = `
   <Headline>
     Cards
   </Headline>
-  <Styled(withTheme(Paper))
+  <Flashcard
     key="1"
+    onFlashcardDeleted={[Function]}
   >
     <C
       autoFocus={true}
@@ -29,6 +30,6 @@ exports[`FormContent renders properly 1`] = `
       multiline={true}
       name="questions.0.answer"
     />
-  </Styled(withTheme(Paper))>
+  </Flashcard>
 </ScrollView>
 `;

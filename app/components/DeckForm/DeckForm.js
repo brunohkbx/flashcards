@@ -40,6 +40,14 @@ export class DeckForm extends Component {
 
     setFieldValue(`questions.${index}.question`, '');
     setFieldValue(`questions.${index}.answer`, '');
+    setFieldValue(`questions.${index}.id`, uuid());
+  }
+
+  handleRemoveFlashcard = id => {
+    const { values, setFieldValue } = this.props;
+
+    const questions = values.questions.filter(question => question.id !== id);
+    setFieldValue('questions', questions);
   }
 
   setScrollViewRef = element => this.scrollView = element;
@@ -69,6 +77,7 @@ export class DeckForm extends Component {
             scrollViewRef={this.setScrollViewRef}
             handleContentSizeChange={this.handleContentSizeChange}
             {...this.props}
+            onFlashcardDeleted={this.handleRemoveFlashcard}
           />
         </KeyboardAvoidingView>
         <FABContainer>

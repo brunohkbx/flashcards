@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Flashcard renders properly 1`] = `
+<withTheme(Card)>
+  <Styled(CardContent) />
+  <Styled(CardActions)>
+    <Styled(Component)>
+      <DeleteIcon
+        color="#3f51b5"
+        onPress={[MockFunction]}
+        size={24}
+      />
+    </Styled(Component)>
+  </Styled(CardActions)>
+</withTheme(Card)>
+`;
