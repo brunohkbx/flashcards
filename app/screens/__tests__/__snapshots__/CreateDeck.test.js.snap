@@ -10,7 +10,6 @@ exports[`CreateDeck renders properly 1`] = `
   }
 >
   <FormikDeckForm
-    actionSubmitText="Create"
     formRef={[Function]}
     handleSubmit={[Function]}
     initialValues={
@@ -20,7 +19,6 @@ exports[`CreateDeck renders properly 1`] = `
         "title": "",
       }
     }
-    title="Create New Deck"
   />
 </Component>
 `;

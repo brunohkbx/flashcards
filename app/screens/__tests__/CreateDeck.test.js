@@ -6,7 +6,8 @@ describe('CreateDeck', () => {
   const setup = propOverrides => {
     const defaultProps = Object.assign({
       navigation: {
-        setParams: jest.fn()
+        setParams: jest.fn(),
+        navigate: jest.fn()
       },
       createDeck: jest.fn()
     }, propOverrides)
@@ -44,6 +45,18 @@ describe('CreateDeck', () => {
       wrapperInstance.handleSubmit({}, actions);
 
       expect(mockCreateDeck).toHaveBeenCalledWith({});
+    });
+
+    it('redirects to MainScreen with a flashMessage', () => {
+      const mockNavigation = { navigate: jest.fn(), setParams: jest.fn() };
+      const actions = { setSubmitting: jest.fn() };
+      const { wrapperInstance } = setup({ navigation: mockNavigation });
+
+      wrapperInstance.handleSubmit({ title: 'Jest is cool' }, actions);
+
+      expect(mockNavigation.navigate).toHaveBeenCalledWith(
+        'Main', { flashMessage: 'Deck has been successfully created'}
+      );
     });
   });
 
