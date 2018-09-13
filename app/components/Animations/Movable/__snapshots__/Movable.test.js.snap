@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Movable renders properly 1`] = `
+<AnimatedComponent
+  style={
+    Array [
+      undefined,
+      Object {
+        "transform": Array [
+          Object {
+            "translateY": 0,
+          },
+        ],
+      },
+    ]
+  }
+>
+  <Component />
+</AnimatedComponent>
+`;

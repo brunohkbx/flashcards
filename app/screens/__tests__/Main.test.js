@@ -21,7 +21,8 @@ describe('Main', () => {
       fetchDecks: jest.fn(),
       deleteDeck: jest.fn(),
       navigation: {
-        navigate: jest.fn()
+        navigate: jest.fn(),
+        getParam: jest.fn()
       }
     }, propOverrides)
 
@@ -30,6 +31,8 @@ describe('Main', () => {
 
     const pressOnFab = () => {
       wrapper
+        .find('BottomFAB')
+        .dive()
         .find('FAB')
         .dive()
         .simulate('press')
@@ -60,6 +63,10 @@ describe('Main', () => {
         .simulate('press')
     }
 
+    const dismissSnackbar = () => {
+      wrapper.find('withTheme(Snackbar)').simulate('dismiss');
+    };
+
     return {
       defaultProps,
       wrapper,
@@ -67,7 +74,8 @@ describe('Main', () => {
       pressOnFab,
       dismissConfirmDialog,
       cancelConfirmDialog,
-      confirmConfirmDialog
+      confirmConfirmDialog,
+      dismissSnackbar
     }
   }
 
@@ -77,21 +85,48 @@ describe('Main', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('fetches all the decks when component is mounted', () => {
-    const mockFetchDecks = jest.fn();
-    const { wrapper } = setup({ fetchDecks: mockFetchDecks });
+  describe('componentDidMount', () => {
+    it('fetches all the decks', () => {
+      const mockFetchDecks = jest.fn();
 
-    expect(mockFetchDecks).toHaveBeenCalled();
+      setup({ fetchDecks: mockFetchDecks });
+
+      expect(mockFetchDecks).toHaveBeenCalled();
+    });
+  });
+
+  describe('componentDidUpdate', () => {
+    it('displays the snackbar if there is a flashMessage as navigation param', () => {
+      const { wrapper, wrapperInstance } = setup();
+      const mockNavigation = { getParam: jest.fn(() => 'foo') }
+      jest.spyOn(wrapperInstance, 'setState');
+
+      wrapper.setProps({ navigation: mockNavigation });
+
+      expect(
+        wrapperInstance.setState
+      ).toHaveBeenCalledWith({ snackBarVisible: true });
+    });
+
+    it('does not display the snackbar if there is not a flashMessage as navigation param', () => {
+      const { wrapper, wrapperInstance } = setup();
+      const mockNavigation = { getParam: jest.fn(() => undefined) };
+      jest.spyOn(wrapperInstance, 'setState');
+
+      wrapper.setProps({ navigation: mockNavigation });
+
+      expect(wrapperInstance.setState).not.toHaveBeenCalled();
+    });
   });
 
   describe('openConfirmRemoveDialog', () => {
     it('sets the state correctly', () => {
       const { wrapperInstance } = setup();
-      const spy = jest.spyOn(wrapperInstance, 'setState');
+      jest.spyOn(wrapperInstance, 'setState');
 
       wrapperInstance.openConfirmRemoveDialog('foo');
 
-      expect(spy).toHaveBeenCalledWith(
+      expect(wrapperInstance.setState).toHaveBeenCalledWith(
         {
           confirmRemoveDialogVisible: true,
           currentDeck: 'foo'
@@ -103,16 +138,29 @@ describe('Main', () => {
   describe('closeConfirmRemoveDialog', () => {
     it('sets the state correctly', () => {
       const { wrapperInstance } = setup();
-      const spy = jest.spyOn(wrapperInstance, 'setState');
+      jest.spyOn(wrapperInstance, 'setState');
 
       wrapperInstance.closeConfirmRemoveDialog();
 
-      expect(spy).toHaveBeenCalledWith(
+      expect(wrapperInstance.setState).toHaveBeenCalledWith(
         {
           confirmRemoveDialogVisible: false,
           currentDeck: null
         }
       );
+    });
+  });
+
+  describe('closeSnackBar', () => {
+    it('sets the state correctly', () => {
+      const { wrapperInstance } = setup();
+      jest.spyOn(wrapperInstance, 'setState');
+
+      wrapperInstance.closeSnackBar();
+
+      expect(
+        wrapperInstance.setState
+      ).toHaveBeenCalledWith({ snackBarVisible: false });
     });
   });
 
@@ -169,12 +217,33 @@ describe('Main', () => {
 
   describe('FAB button', () => {
     it('navigates to CreateDeck screen', () => {
-      const mockNavigation = { navigate: jest.fn() }
+      const mockNavigation = { navigate: jest.fn(), getParam: jest.fn() }
       const { pressOnFab } = setup({ navigation: mockNavigation });
 
       pressOnFab();
 
       expect(mockNavigation.navigate).toHaveBeenCalled();
+    });
+  });
+
+  describe('Movable', () => {
+    it('changes toValue when snackbar is visible', () => {
+      const { wrapper } = setup();
+
+      wrapper.setState({ snackBarVisible: true })
+
+      expect(wrapper).toMatchSnapshot();
+    });
+  });
+
+  describe('Snackbar', () => {
+    test('onDismiss calls closeSnackBar', () => {
+      const { dismissSnackbar, wrapperInstance } = setup();
+      jest.spyOn(wrapperInstance, 'closeSnackBar');
+
+      dismissSnackbar();
+
+      expect(wrapperInstance.closeSnackBar).toHaveBeenCalled();
     });
   });
 });

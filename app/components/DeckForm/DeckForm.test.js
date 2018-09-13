@@ -49,6 +49,8 @@ describe('DeckForm', () => {
 
     const pressOnFab = () => {
       wrapper
+        .find('BottomFAB')
+        .dive()
         .find('FAB')
         .dive()
         .simulate('press');
@@ -69,13 +71,13 @@ describe('DeckForm', () => {
 
   test('FAB onPress calls addNewQuestion', () => {
     const { pressOnFab, wrapperInstance } = setup();
-    const spy = jest
-      .spyOn(wrapperInstance, 'addNewQuestion')
-      .mockImplementation(() => jest.fn());
+    jest.spyOn(wrapperInstance, 'addNewQuestion').mockImplementation(
+      () => jest.fn()
+    );
 
     pressOnFab();
 
-    expect(spy).toHaveBeenCalled();
+    expect(wrapperInstance.addNewQuestion).toHaveBeenCalled();
   });
 
   describe('addNewQuestion', () => {

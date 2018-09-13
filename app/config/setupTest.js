@@ -4,3 +4,5 @@ require('stacktrace-parser');
 
 // React 16 Enzyme adapter
 configure({ adapter: new Adapter() });
+
+jest.mock('NativeAnimatedHelper');

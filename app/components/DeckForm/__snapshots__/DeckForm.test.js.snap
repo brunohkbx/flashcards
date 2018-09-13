@@ -29,12 +29,9 @@ exports[`DeckForm renders properly 1`] = `
       values={Object {}}
     />
   </KeyboardAvoidingView>
-  <Styled(Component)>
-    <FAB
-      handlePress={[Function]}
-      primary={false}
-    />
-  </Styled(Component)>
+  <BottomFAB
+    handlePress={[Function]}
+  />
 </Component>
 `;
 
@@ -42,13 +39,6 @@ exports[`FormikDeckForm renders properly 1`] = `
 <Formik
   component={[Function]}
   enableReinitialize={true}
-  initialValues={
-    Object {
-      "id": "606a1255-bac9-4f56-bc9e-d7b2ed696a35",
-      "questions": Array [],
-      "title": "",
-    }
-  }
   isInitialValid={false}
   onSubmit={[Function]}
   validateOnBlur={false}

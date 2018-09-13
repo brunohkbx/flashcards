@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BottomFAB renders properly 1`] = `
+<Styled(Component)>
+  <FAB
+    handlePress={[MockFunction]}
+    primary={false}
+  />
+</Styled(Component)>
+`;
