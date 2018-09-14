@@ -36,7 +36,6 @@ exports[`Main Movable changes toValue when snackbar is visible 1`] = `
     windowSize={21}
   />
   <withTheme(Movable)
-    move={true}
     style={
       Object {
         "flex": 1,
@@ -100,7 +99,6 @@ exports[`Main renders properly 1`] = `
     windowSize={21}
   />
   <withTheme(Movable)
-    move={false}
     style={
       Object {
         "flex": 1,

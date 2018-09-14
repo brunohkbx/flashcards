@@ -82,13 +82,8 @@ export class Main extends Component {
           keyExtractor={item => item.id}
         />
 
-        <Movable
-          toValue={snackBarVisible ? -46 : 0}
-          move={snackBarVisible}
-          style={{ flex: 1 }}
-        >
-          <BottomFAB handlePress={() => navigation.navigate('CreateDeck')}
-          />
+        <Movable toValue={snackBarVisible ? -46 : 0} style={{ flex: 1 }} >
+          <BottomFAB handlePress={() => navigation.navigate('CreateDeck')} />
         </Movable>
 
         <Snackbar
