@@ -28,21 +28,32 @@ export class Main extends Component {
     const { fetchDecks } = this.props;
 
     fetchDecks();
-  };
+  }
 
   componentDidUpdate(prevProps) {
     if (this.props.navigation !== prevProps.navigation) {
       const { navigation } = this.props;
       const flashMessage = navigation.getParam('flashMessage');
 
-      if(flashMessage)
+      if (flashMessage)
         this.setState({ snackBarVisible: true });
-    };
-  };
+    }
+  }
 
   openConfirmRemoveDialog = deckId => this.setState({ confirmRemoveDialogVisible: true, currentDeck: deckId });
   closeConfirmRemoveDialog = () => this.setState({ confirmRemoveDialogVisible: false, currentDeck: null });
   closeSnackBar = () => this.setState({ snackBarVisible: false });
+
+  onRemoveDeckDialogConfirm = () => {
+    const { deleteDeck } = this.props;
+    const { currentDeck } = this.state;
+
+    this.closeConfirmRemoveDialog();
+    deleteDeck(currentDeck);
+    this.props.navigation.setParams(
+      { flashMessage: 'Deck has been successfully deleted' }
+    );
+  };
 
   renderItem = ({ item }) => {
     return (
@@ -58,18 +69,9 @@ export class Main extends Component {
   }
 
   render() {
-    const {
-      decks,
-      deleteDeck,
-      navigation
-    } = this.props;
+    const { decks, navigation } = this.props;
 
-    const {
-      confirmRemoveDialogVisible,
-      currentDeck,
-      snackBarVisible
-    } = this.state;
-
+    const { confirmRemoveDialogVisible, snackBarVisible } = this.state;
     const flashMessage = navigation.getParam('flashMessage');
 
     return (
@@ -98,7 +100,7 @@ export class Main extends Component {
         <ConfirmDialog
           visible={confirmRemoveDialogVisible}
           handleDismiss={() => this.closeConfirmRemoveDialog()}
-          handleSubmitPress={() => {this.closeConfirmRemoveDialog(); deleteDeck(currentDeck);}}
+          handleSubmitPress={() => this.onRemoveDeckDialogConfirm()}
           title="Delete deck?"
           content="This deck and all it cards will be deleted. You can edit this deck if you want to change something."
           actionSubmitText="Delete"
