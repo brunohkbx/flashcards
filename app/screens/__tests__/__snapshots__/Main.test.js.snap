@@ -1,5 +1,69 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Main Movable changes toValue when snackbar is visible 1`] = `
+<Component
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+>
+  <FlatList
+    data={
+      Array [
+        Object {
+          "id": "259162c6-8c55-446b-aa4f-cf9a6fcffc2f",
+          "questions": Array [
+            Object {
+              "answer": "A library for managing user interfaces",
+              "question": "What is React?",
+            },
+          ],
+          "title": "React",
+        },
+      ]
+    }
+    disableVirtualization={false}
+    horizontal={false}
+    initialNumToRender={10}
+    keyExtractor={[Function]}
+    maxToRenderPerBatch={10}
+    numColumns={1}
+    onEndReachedThreshold={2}
+    renderItem={[Function]}
+    scrollEventThrottle={50}
+    updateCellsBatchingPeriod={50}
+    windowSize={21}
+  />
+  <withTheme(Movable)
+    move={true}
+    style={
+      Object {
+        "flex": 1,
+      }
+    }
+    toValue={-46}
+  >
+    <BottomFAB
+      handlePress={[Function]}
+    />
+  </withTheme(Movable)>
+  <withTheme(Snackbar)
+    onDismiss={[Function]}
+    visible={true}
+  />
+  <ConfirmDialog
+    actionCancelText="cancel"
+    actionSubmitText="Delete"
+    content="This deck and all it cards will be deleted. You can edit this deck if you want to change something."
+    handleDismiss={[Function]}
+    handleSubmitPress={[Function]}
+    title="Delete deck?"
+    visible={false}
+  />
+</Component>
+`;
+
 exports[`Main renders properly 1`] = `
 <Component
   style={
@@ -35,12 +99,23 @@ exports[`Main renders properly 1`] = `
     updateCellsBatchingPeriod={50}
     windowSize={21}
   />
-  <Styled(Component)>
-    <FAB
+  <withTheme(Movable)
+    move={false}
+    style={
+      Object {
+        "flex": 1,
+      }
+    }
+    toValue={0}
+  >
+    <BottomFAB
       handlePress={[Function]}
-      primary={false}
     />
-  </Styled(Component)>
+  </withTheme(Movable)>
+  <withTheme(Snackbar)
+    onDismiss={[Function]}
+    visible={false}
+  />
   <ConfirmDialog
     actionCancelText="cancel"
     actionSubmitText="Delete"

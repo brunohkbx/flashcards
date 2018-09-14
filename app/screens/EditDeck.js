@@ -22,10 +22,14 @@ export class EditDeck extends Component {
   }
 
   handleSubmit = (values, actions) => {
-    const { editDeck } = this.props;
+    const { editDeck, navigation } = this.props;
 
     editDeck(values);
     actions.setSubmitting(false);
+    navigation.navigate(
+      'Main',
+      { flashMessage: 'Deck has been successfully edited' }
+    );
   }
 
   submitForm = () => this.form.submitForm();
@@ -39,8 +43,6 @@ export class EditDeck extends Component {
           initialValues={deck}
           formRef={node => this.form = node}
           handleSubmit={this.handleSubmit}
-          title="Create New Deck"
-          actionSubmitText="Create"
         />
       </View>
     );

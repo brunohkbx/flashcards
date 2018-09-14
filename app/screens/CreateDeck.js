@@ -4,6 +4,7 @@ import { View } from 'react-native';
 import DeckForm from '../components/DeckForm';
 import { createDeck } from '../actions';
 import { Colors, ToolbarAction } from 'react-native-paper';
+import uuid from 'uuid';
 
 export class CreateDeck extends Component {
   static navigationOptions = ({ navigation }) => {
@@ -22,10 +23,14 @@ export class CreateDeck extends Component {
   }
 
   handleSubmit = (values, actions) => {
-    const { createDeck } = this.props;
+    const { createDeck, navigation } = this.props;
 
     createDeck(values);
     actions.setSubmitting(false);
+    navigation.navigate(
+      'Main',
+      { flashMessage: 'Deck has been successfully created' }
+    );
   }
 
   submitForm = () => this.form.submitForm();
@@ -36,10 +41,9 @@ export class CreateDeck extends Component {
     return (
       <View style={{flex: 1, padding: 8}}>
         <DeckForm
+          initialValues={{ title: '', questions: [], id: uuid() }}
           formRef={this.setFormRef}
           handleSubmit={this.handleSubmit}
-          title="Create New Deck"
-          actionSubmitText="Create"
         />
       </View>
     );

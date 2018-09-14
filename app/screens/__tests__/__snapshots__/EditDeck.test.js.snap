@@ -10,17 +10,15 @@ exports[`EditDeck renders properly 1`] = `
   }
 >
   <FormikDeckForm
-    actionSubmitText="Create"
     formRef={[Function]}
     handleSubmit={[Function]}
     initialValues={
       Object {
-        "id": "606a1255-bac9-4f56-bc9e-d7b2ed696a35",
+        "id": "606a1255",
         "questions": Array [],
-        "title": "",
+        "title": "React",
       }
     }
-    title="Create New Deck"
   />
 </Component>
 `;

@@ -6,9 +6,11 @@ describe('EditDeck', () => {
   const setup = propOverrides => {
     const defaultProps = Object.assign({
       navigation: {
-        setParams: jest.fn()
+        setParams: jest.fn(),
+        navigate: jest.fn()
       },
-      editDeck: jest.fn()
+      editDeck: jest.fn(),
+      deck: { id: '606a1255', questions: [], title: 'React' }
     }, propOverrides)
 
     const wrapper = shallow(<EditDeck {...defaultProps} />);
@@ -56,6 +58,18 @@ describe('EditDeck', () => {
       wrapperInstance.submitForm();
 
       expect(mockSubmitForm).toHaveBeenCalled();
-    })
+    });
+
+    it('redirects to MainScreen with a flashMessage', () => {
+      const mockNavigation = { navigate: jest.fn(), setParams: jest.fn() };
+      const actions = { setSubmitting: jest.fn() };
+      const { wrapperInstance } = setup({ navigation: mockNavigation });
+
+      wrapperInstance.handleSubmit({ title: 'Jest is cool' }, actions);
+
+      expect(mockNavigation.navigate).toHaveBeenCalledWith(
+        'Main', { flashMessage: 'Deck has been successfully edited' }
+      );
+    });
   })
 });

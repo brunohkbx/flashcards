@@ -4,8 +4,7 @@ import { Formik } from 'formik';
 import * as Yup from 'yup';
 import uuid from 'uuid';
 import { View, KeyboardAvoidingView } from 'react-native';
-import FABContainer from '../FABContainer';
-import FAB from '../FAB';
+import BottomFAB from '../BottomFAB';
 import { Header } from 'react-navigation';
 import FormContent from './FormContent';
 
@@ -75,22 +74,20 @@ export class DeckForm extends Component {
             {...this.props}
           />
         </KeyboardAvoidingView>
-        <FABContainer>
-          <FAB handlePress={() => this.addNewQuestion()} />
-        </FABContainer>
+        <BottomFAB handlePress={() => this.addNewQuestion()} />
       </View>
     );
   }
 }
 
 FormikDeckForm.propTypes = {
+  initialValues: PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    questions: PropTypes.array.isRequired,
+    id: PropTypes.string.isRequired
+  }),
+  formRef: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
   handleSubmit: PropTypes.func.isRequired,
-  initialValues: PropTypes.object,
-  formRef: PropTypes.oneOfType([PropTypes.func, PropTypes.object])
-};
-
-FormikDeckForm.defaultProps = {
-  initialValues: { title: '', questions: [], id: uuid() }
 };
 
 export default FormikDeckForm;
