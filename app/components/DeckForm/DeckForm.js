@@ -4,7 +4,8 @@ import { Formik } from 'formik';
 import * as Yup from 'yup';
 import uuid from 'uuid';
 import { View, KeyboardAvoidingView } from 'react-native';
-import BottomFAB from '../BottomFAB';
+import FAB from '../FAB';
+import BottomRightContainer from '../BottomRightContainer';
 import { Header } from 'react-navigation';
 import FormContent from './FormContent';
 
@@ -74,7 +75,9 @@ export class DeckForm extends Component {
             {...this.props}
           />
         </KeyboardAvoidingView>
-        <BottomFAB handlePress={() => this.addNewQuestion()} />
+        <BottomRightContainer right={16} bottom={16} >
+          <FAB handlePress={() => this.addNewQuestion()} />
+        </BottomRightContainer>
       </View>
     );
   }

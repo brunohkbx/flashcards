@@ -6,8 +6,9 @@ import ConfirmDialog from '../components/ConfirmDialog';
 import MainToolbar from '../components/MainToolbar';
 import { fetchDecks, deleteDeck } from '../actions';
 import { Snackbar } from 'react-native-paper';
-import BottomFAB from '../components/BottomFAB';
+import FAB from '../components/FAB';
 import { Movable } from '../components/Animations';
+import BottomRightContainer from '../components/BottomRightContainer';
 
 export class Main extends Component {
   static navigationOptions = ({ navigation }) => {
@@ -82,9 +83,11 @@ export class Main extends Component {
           keyExtractor={item => item.id}
         />
 
-        <Movable toValue={snackBarVisible ? -46 : 0} style={{ flex: 1 }} >
-          <BottomFAB handlePress={() => navigation.navigate('CreateDeck')} />
-        </Movable>
+        <BottomRightContainer right={16} bottom={16} >
+          <Movable toValue={snackBarVisible ? -46 : 0} >
+            <FAB handlePress={() => navigation.navigate('CreateDeck')} />
+          </Movable>
+        </BottomRightContainer>
 
         <Snackbar
           visible={snackBarVisible}

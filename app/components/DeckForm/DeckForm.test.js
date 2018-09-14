@@ -49,8 +49,6 @@ describe('DeckForm', () => {
 
     const pressOnFab = () => {
       wrapper
-        .find('BottomFAB')
-        .dive()
         .find('FAB')
         .dive()
         .simulate('press');
