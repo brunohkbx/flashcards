@@ -29,9 +29,15 @@ exports[`DeckForm renders properly 1`] = `
       values={Object {}}
     />
   </KeyboardAvoidingView>
-  <BottomFAB
-    handlePress={[Function]}
-  />
+  <Styled(Component)
+    bottom={16}
+    right={16}
+  >
+    <FAB
+      handlePress={[Function]}
+      primary={false}
+    />
+  </Styled(Component)>
 </Component>
 `;
 

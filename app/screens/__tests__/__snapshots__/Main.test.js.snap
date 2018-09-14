@@ -35,18 +35,19 @@ exports[`Main Movable changes toValue when snackbar is visible 1`] = `
     updateCellsBatchingPeriod={50}
     windowSize={21}
   />
-  <withTheme(Movable)
-    style={
-      Object {
-        "flex": 1,
-      }
-    }
-    toValue={-46}
+  <Styled(Component)
+    bottom={16}
+    right={16}
   >
-    <BottomFAB
-      handlePress={[Function]}
-    />
-  </withTheme(Movable)>
+    <withTheme(Movable)
+      toValue={-46}
+    >
+      <FAB
+        handlePress={[Function]}
+        primary={false}
+      />
+    </withTheme(Movable)>
+  </Styled(Component)>
   <withTheme(Snackbar)
     onDismiss={[Function]}
     visible={true}
@@ -98,18 +99,19 @@ exports[`Main renders properly 1`] = `
     updateCellsBatchingPeriod={50}
     windowSize={21}
   />
-  <withTheme(Movable)
-    style={
-      Object {
-        "flex": 1,
-      }
-    }
-    toValue={0}
+  <Styled(Component)
+    bottom={16}
+    right={16}
   >
-    <BottomFAB
-      handlePress={[Function]}
-    />
-  </withTheme(Movable)>
+    <withTheme(Movable)
+      toValue={0}
+    >
+      <FAB
+        handlePress={[Function]}
+        primary={false}
+      />
+    </withTheme(Movable)>
+  </Styled(Component)>
   <withTheme(Snackbar)
     onDismiss={[Function]}
     visible={false}

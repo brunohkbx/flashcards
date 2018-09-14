@@ -5,7 +5,7 @@ import { withTheme } from 'react-native-paper';
 
 export class Movable extends Component {
   state = {
-    translateYValue: new Animated.Value(0)
+    translateY: new Animated.Value(0)
   };
 
   animatedStyle = () => {
@@ -23,9 +23,9 @@ export class Movable extends Component {
   };
 
   animate = () => {
-    const { translateYValue } = this.state;
+    const { translateY } = this.state;
 
-    Animated.timing(translateYValue, this.animatedStyle()).start();
+    Animated.timing(translateY, this.animatedStyle()).start();
   }
 
   componentDidMount = () => {
@@ -39,15 +39,10 @@ export class Movable extends Component {
 
   render() {
     const { children, style } = this.props;
-    const { translateYValue } = this.state;
+    const { translateY } = this.state;
 
     return (
-      <Animated.View
-        style={[
-          style,
-          { transform: [{ translateY: translateYValue }] }
-        ]}
-      >
+      <Animated.View style={{ transform: [{ translateY }] }} >
         {children}
       </Animated.View>
     );

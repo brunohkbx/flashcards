@@ -63,7 +63,7 @@ describe('Movable', () => {
       wrapperInstance.animate();
 
       expect(Animated.timing).toHaveBeenCalledWith(
-        wrapperInstance.state.translateYValue,
+        wrapperInstance.state.translateY,
         wrapperInstance.animatedStyle()
       );
     });
