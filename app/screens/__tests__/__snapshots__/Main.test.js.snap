@@ -24,6 +24,7 @@ exports[`Main Movable changes toValue when snackbar is visible 1`] = `
       ]
     }
     disableVirtualization={false}
+    extraData={false}
     horizontal={false}
     initialNumToRender={10}
     keyExtractor={[Function]}
@@ -64,6 +65,34 @@ exports[`Main Movable changes toValue when snackbar is visible 1`] = `
 </Component>
 `;
 
+exports[`Main renderItem When there is a deck to be removed fades the deck 1`] = `
+<Fadable
+  fade={true}
+  onAnimationEnd={[Function]}
+>
+  <Deck
+    flashcardsCount={0}
+    handleDeletePress={[Function]}
+    handleEditPress={[Function]}
+    title="foo"
+  />
+</Fadable>
+`;
+
+exports[`Main renderItem renders correctly 1`] = `
+<Fadable
+  fade={false}
+  onAnimationEnd={[Function]}
+>
+  <Deck
+    flashcardsCount={0}
+    handleDeletePress={[Function]}
+    handleEditPress={[Function]}
+    title="foo"
+  />
+</Fadable>
+`;
+
 exports[`Main renders properly 1`] = `
 <Component
   style={
@@ -88,6 +117,7 @@ exports[`Main renders properly 1`] = `
       ]
     }
     disableVirtualization={false}
+    extraData={false}
     horizontal={false}
     initialNumToRender={10}
     keyExtractor={[Function]}

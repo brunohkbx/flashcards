@@ -19,6 +19,7 @@ describe('FormContent', () => {
     }, propOverrides);
 
     const wrapper = shallow(<FormContent {...defaultProps} />);
+    const wrapperInstance = wrapper.instance();
 
     const contentSizeChange = () => {
       wrapper.find('ScrollView').simulate('contentSizeChange');
@@ -26,6 +27,7 @@ describe('FormContent', () => {
 
     return {
       wrapper,
+      wrapperInstance,
       contentSizeChange
     };
   };
@@ -34,5 +36,18 @@ describe('FormContent', () => {
     const { wrapper } =  setup();
 
     expect(wrapper).toMatchSnapshot();
+  });
+
+  describe('handleFlashcardDelete', () => {
+    it('sets flashcardToRemove to null and calls onFlashcardDeleted as callback', () => {
+      const { wrapperInstance } = setup();
+      jest.spyOn(wrapperInstance, 'setState');
+
+      wrapperInstance.handleFlashcardDelete('1');
+
+      expect(wrapperInstance.setState).toHaveBeenCalledWith(
+        { flashcardToRemove: null }, expect.any(Function)
+      );
+    });
   });
 });

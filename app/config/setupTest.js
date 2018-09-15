@@ -6,3 +6,4 @@ require('stacktrace-parser');
 configure({ adapter: new Adapter() });
 
 jest.mock('NativeAnimatedHelper');
+import 'react-native/Libraries/Animated/src/bezier';

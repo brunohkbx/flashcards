@@ -11,23 +11,28 @@ exports[`FormContent renders properly 1`] = `
   <Headline>
     Cards
   </Headline>
-  <Flashcard
+  <Fadable
+    fade={false}
     key="1"
-    onFlashcardDeleted={[Function]}
+    onAnimationEnd={[Function]}
   >
-    <C
-      autoFocus={true}
-      component={[Function]}
-      label="Question"
-      multiline={true}
-      name="questions.0.question"
-    />
-    <C
-      component={[Function]}
-      label="Answer"
-      multiline={true}
-      name="questions.0.answer"
-    />
-  </Flashcard>
+    <Flashcard
+      onFlashcardDeleted={[Function]}
+    >
+      <C
+        autoFocus={true}
+        component={[Function]}
+        label="Question"
+        multiline={true}
+        name="questions.0.question"
+      />
+      <C
+        component={[Function]}
+        label="Answer"
+        multiline={true}
+        name="questions.0.answer"
+      />
+    </Flashcard>
+  </Fadable>
 </ScrollView>
 `;

@@ -53,14 +53,6 @@ export class DeckForm extends Component {
   setScrollViewRef = element => this.scrollView = element;
 
   render() {
-    const {
-      handleChange,
-      touched,
-      errors,
-      values,
-      setFieldValue
-    } = this.props;
-
     return (
       <View style={{flex: 1, padding: 8}}>
         <KeyboardAvoidingView
