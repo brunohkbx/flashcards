@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
 import { View, FlatList } from 'react-native';
 import Deck from '../components/Deck';
 import ConfirmDialog from '../components/ConfirmDialog';
@@ -7,8 +7,8 @@ import MainToolbar from '../components/MainToolbar';
 import { fetchDecks, deleteDeck } from '../actions';
 import { Snackbar } from 'react-native-paper';
 import FAB from '../components/FAB';
-import { Movable } from '../components/Animations';
 import BottomRightContainer from '../components/BottomRightContainer';
+import { Movable, Fadable } from '../components/Animations';
 
 export class Main extends Component {
   static navigationOptions = ({ navigation }) => {
@@ -20,9 +20,12 @@ export class Main extends Component {
   };
 
   state = {
-    confirmRemoveDialogVisible: false,
-    currentDeck: null,
+    dialogVisible: false,
     snackBarVisible: false,
+    selectedDeck: {
+      id: null,
+      remove: false
+    }
   }
 
   componentDidMount() {
@@ -41,44 +44,69 @@ export class Main extends Component {
     }
   }
 
-  openConfirmRemoveDialog = deckId => this.setState({ confirmRemoveDialogVisible: true, currentDeck: deckId });
-  closeConfirmRemoveDialog = () => this.setState({ confirmRemoveDialogVisible: false, currentDeck: null });
+  openDialog = deckId => {
+    const selectedDeck = { ...this.state.selectedDeck, ['id']: deckId };
+
+    this.setState({ dialogVisible: true, selectedDeck });
+  }
+
+  closeDialog = () => {
+    const selectedDeck = { ...this.state.selectedDeck, ['id']: null };
+
+    this.setState({ dialogVisible: false, selectedDeck });
+  }
+
+  submitDialog = () => {
+    const selectedDeck = {...this.state.selectedDeck, ['remove']: true};
+
+    this.setState({ dialogVisible: false, selectedDeck });
+  }
+
   closeSnackBar = () => this.setState({ snackBarVisible: false });
 
-  onRemoveDeckDialogConfirm = () => {
-    const { deleteDeck } = this.props;
-    const { currentDeck } = this.state;
+  handleDeckDelete = id => {
+    const { deleteDeck, navigation } = this.props;
 
-    this.closeConfirmRemoveDialog();
-    deleteDeck(currentDeck);
-    this.props.navigation.setParams(
-      { flashMessage: 'Deck has been successfully deleted' }
+    return deleteDeck(id)
+      .then(() => this.setState({ selectedDeck: { id: null, remove: false }}))
+      .then(() => navigation.setParams(
+        { flashMessage: 'Deck has been successfully deleted' }
+      )
     );
-  };
+  }
 
   renderItem = ({ item }) => {
+    const { navigation } = this.props;
+    const { selectedDeck: { id, remove }} = this.state;
+
     return (
-      <Deck
-        title={item.title}
-        flashcardsCount={item.questions.length}
-        handleEditPress={
-          () => this.props.navigation.navigate('EditDeck', { deckId: item.id })
-        }
-        handleDeletePress={() => this.openConfirmRemoveDialog(item.id)}
-      />
+      <Fadable
+        fade={remove && item.id === id}
+        onAnimationEnd={() => this.handleDeckDelete(item.id)}
+      >
+        <Deck
+          title={item.title}
+          flashcardsCount={item.questions.length}
+          handleEditPress={
+            () => navigation.navigate('EditDeck', { deckId: item.id })
+          }
+          handleDeletePress={() => this.openDialog(item.id)}
+        />
+      </Fadable>
     );
   }
 
   render() {
     const { decks, navigation } = this.props;
 
-    const { confirmRemoveDialogVisible, snackBarVisible } = this.state;
+    const { dialogVisible, snackBarVisible, selectedDeck } = this.state;
     const flashMessage = navigation.getParam('flashMessage');
 
     return (
       <View style={{flex: 1}}>
         <FlatList
           data={decks}
+          extraData={selectedDeck.remove}
           renderItem={this.renderItem}
           keyExtractor={item => item.id}
         />
@@ -96,9 +124,9 @@ export class Main extends Component {
           {flashMessage}
         </Snackbar>
         <ConfirmDialog
-          visible={confirmRemoveDialogVisible}
-          handleDismiss={() => this.closeConfirmRemoveDialog()}
-          handleSubmitPress={() => this.onRemoveDeckDialogConfirm()}
+          visible={dialogVisible}
+          handleDismiss={this.closeDialog}
+          handleSubmitPress={this.submitDialog}
           title="Delete deck?"
           content="This deck and all it cards will be deleted. You can edit this deck if you want to change something."
           actionSubmitText="Delete"

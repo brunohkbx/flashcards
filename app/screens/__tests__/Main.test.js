@@ -118,33 +118,58 @@ describe('Main', () => {
     });
   });
 
-  describe('openConfirmRemoveDialog', () => {
+  describe('openDialog', () => {
     it('sets the state correctly', () => {
       const { wrapperInstance } = setup();
       jest.spyOn(wrapperInstance, 'setState');
 
-      wrapperInstance.openConfirmRemoveDialog('foo');
+      wrapperInstance.openDialog('1');
 
       expect(wrapperInstance.setState).toHaveBeenCalledWith(
         {
-          confirmRemoveDialogVisible: true,
-          currentDeck: 'foo'
+          dialogVisible: true,
+          selectedDeck: {
+            ...wrapperInstance.state.selectedDeck,
+            id: '1'
+          }
         }
       );
     });
   });
 
-  describe('closeConfirmRemoveDialog', () => {
+  describe('closeDialog', () => {
     it('sets the state correctly', () => {
       const { wrapperInstance } = setup();
       jest.spyOn(wrapperInstance, 'setState');
 
-      wrapperInstance.closeConfirmRemoveDialog();
+      wrapperInstance.closeDialog();
 
       expect(wrapperInstance.setState).toHaveBeenCalledWith(
         {
-          confirmRemoveDialogVisible: false,
-          currentDeck: null
+          dialogVisible: false,
+          selectedDeck: {
+            ...wrapperInstance.state.selectedDeck,
+            id: null
+          }
+        }
+      );
+    });
+  });
+
+  describe('submitDialog', () => {
+    it('sets the state correctly', () => {
+      const { wrapperInstance } = setup();
+      jest.spyOn(wrapperInstance, 'setState');
+
+      wrapperInstance.submitDialog();
+
+      expect(wrapperInstance.setState).toHaveBeenCalledWith(
+        {
+          dialogVisible: false,
+          selectedDeck: {
+            ...wrapperInstance.state.selectedDeck,
+            remove: true
+          }
         }
       );
     });
@@ -163,81 +188,59 @@ describe('Main', () => {
     });
   });
 
-  describe('onRemoveDeckDialogConfirm', () => {
-    it('calls closeConfirmRemoveDialog', () => {
-      const { wrapperInstance } = setup();
-      jest.spyOn(wrapperInstance, 'closeConfirmRemoveDialog');
-
-      wrapperInstance.onRemoveDeckDialogConfirm();
-
-      expect(wrapperInstance.closeConfirmRemoveDialog).toHaveBeenCalled();
-    });
-
-    it('calls deleteDeck with the currentDeck', () => {
-      const mockDeleteDeck = jest.fn();
+  describe('handleDeckDelete', () => {
+    it('calls deleteDeck with the given deck id', () => {
+      const mockDeleteDeck = jest.fn(() => Promise.resolve());
       const { wrapperInstance } = setup({ deleteDeck: mockDeleteDeck });
 
-      wrapperInstance.onRemoveDeckDialogConfirm();
+      wrapperInstance.handleDeckDelete('1');
 
-      expect(mockDeleteDeck).toHaveBeenCalledWith(wrapperInstance.state.currentDeck);
+      expect(mockDeleteDeck).toHaveBeenCalledWith('1');
+    });
+
+    it('resets selectedDeck in state', async () => {
+      const mockDeleteDeck = jest.fn(() => Promise.resolve());
+      const { wrapperInstance } = setup({ deleteDeck: mockDeleteDeck });
+      jest.spyOn(wrapperInstance, 'setState');
+
+      await wrapperInstance.handleDeckDelete('1');
+
+      expect(
+        wrapperInstance.setState
+      ).toHaveBeenCalledWith({ selectedDeck: { id: null, remove: false }});
     });
 
     it('adds a flashMessage to navigation params', () => {
-      const mockNavigation = {
-        navigate: jest.fn(),
-        getParam: jest.fn(),
-        setParams: jest.fn()
-      };
+      const mockSetParams = jest.fn();
+      const mockDeleteDeck = jest.fn(() => new Promise.resolve());
+      const { wrapperInstance } = setup({ deleteDeck: mockDeleteDeck });
+      jest.spyOn(wrapperInstance, 'setState');
+      wrapperInstance.props.navigation.setParams = mockSetParams;
 
-      const { wrapperInstance } = setup({ navigation: mockNavigation });
-
-      wrapperInstance.onRemoveDeckDialogConfirm();
-
-      expect(mockNavigation.setParams).toHaveBeenCalledWith(
-        { flashMessage: 'Deck has been successfully deleted' }
-      );
+      wrapperInstance.handleDeckDelete('1').then(() => {
+        expect(mockSetParams).toHaveBeenCalledWith(
+          {flashMessage: 'Deck has been successfully deleted'}
+        )
+      });
     });
   });
 
   describe('renderItem', () => {
-    it('renders correctly a Deck', () => {
+    describe('When there is a deck to be removed', () => {
+      it('fades the deck', () => {
+        const { wrapper, wrapperInstance } = setup();
+        const item = { item: { title: 'foo', questions: [], id: 1}};
+        wrapper.setState({ selectedDeck: { id: 1, remove: true }});
+
+        expect(wrapperInstance.renderItem(item)).toMatchSnapshot();
+      });
+    });
+
+    it('renders correctly', () => {
       const { wrapperInstance } = setup();
       const item = { item: { title: 'foo', questions: [] }};
 
-      expect(wrapperInstance.renderItem(item));
-    });
-  });
-
-  describe('ConfirmDialog', () => {
-    it('closes on dismiss', () => {
-      const { dismissConfirmDialog, wrapper } = setup();
-      const spy = jest.spyOn(wrapper.instance(), 'closeConfirmRemoveDialog');
-
-      dismissConfirmDialog();
-
-      expect(spy).toHaveBeenCalled();
-    });
-
-    describe('Cancel button', () => {
-      it('closes on press', () => {
-        const { cancelConfirmDialog, wrapper } = setup();
-        const spy = jest.spyOn(wrapper.instance(), 'closeConfirmRemoveDialog');
-
-        cancelConfirmDialog();
-
-        expect(spy).toHaveBeenCalled();
-      });
-    });
-
-    describe('Submit button', () => {
-      test('handleSubmitPress calls onRemoveDeckDialogConfirm', () => {
-        const { submitConfirmDialog, wrapperInstance } = setup();
-        jest.spyOn(wrapperInstance, 'onRemoveDeckDialogConfirm');
-
-        submitConfirmDialog();
-
-        expect(wrapperInstance.onRemoveDeckDialogConfirm).toHaveBeenCalled();
-      });
+      expect(wrapperInstance.renderItem(item)).toMatchSnapshot();
     });
   });
 

@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Fadable renders properly 1`] = `
+<AnimatedComponent
+  style={
+    Object {
+      "opacity": 1,
+    }
+  }
+>
+  <Component />
+</AnimatedComponent>
+`;
