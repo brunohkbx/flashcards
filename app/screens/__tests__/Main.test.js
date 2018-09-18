@@ -242,6 +242,25 @@ describe('Main', () => {
 
       expect(wrapperInstance.renderItem(item)).toMatchSnapshot();
     });
+
+    it('redirects to DeckDetail screen when the deck is clicked', () => {
+      const mockNavigate = jest.fn();
+      const { wrapperInstance } = setup();
+      wrapperInstance.props.navigation.navigate = mockNavigate;
+      const item = { item: { title: 'foo', id: '123', questions: [] }};
+      const deckWrapper = wrapperInstance.renderItem(item);
+
+      shallow(deckWrapper)
+        .find('Deck')
+        .dive()
+        .find('TouchableOpacity')
+        .simulate('press')
+
+      expect(mockNavigate).toHaveBeenCalledWith(
+        'DeckDetail',
+        { deckId: '123' }
+      );
+    });
   });
 
   describe('FAB button', () => {

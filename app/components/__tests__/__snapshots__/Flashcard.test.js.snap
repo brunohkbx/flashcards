@@ -1,5 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Flashcard does not render a action when onFlashcardDeleted is null 1`] = `
+<withTheme(Card)>
+  <Styled(CardContent) />
+</withTheme(Card)>
+`;
+
 exports[`Flashcard renders properly 1`] = `
 <withTheme(Card)>
   <Styled(CardContent) />

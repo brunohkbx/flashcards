@@ -4,6 +4,7 @@ import Main from '../screens/Main';
 import DeckSearch from '../screens/DeckSearch';
 import CreateDeck from '../screens/CreateDeck';
 import EditDeck from '../screens/EditDeck';
+import DeckDetail from '../screens/DeckDetail';
 import { primaryColor, white } from './theme';
 
 export const RootStack =  createStackNavigator(
@@ -25,6 +26,9 @@ export const RootStack =  createStackNavigator(
       navigationOptions: {
         title: 'Edit Deck'
       }
+    },
+    DeckDetail: {
+      screen: DeckDetail
     }
   },
   {

@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DeleteIcon renders properly 1`] = `
+<TouchableOpacity
+  activeOpacity={0.2}
+  onPress={[MockFunction]}
+>
+  <Icon
+    allowFontScaling={false}
+    name="ios-card-outline"
+    size={12}
+  />
+</TouchableOpacity>
+`;

@@ -74,6 +74,7 @@ exports[`Main renderItem When there is a deck to be removed fades the deck 1`] =
     flashcardsCount={0}
     handleDeletePress={[Function]}
     handleEditPress={[Function]}
+    onPress={[Function]}
     title="foo"
   />
 </Fadable>
@@ -88,6 +89,7 @@ exports[`Main renderItem renders correctly 1`] = `
     flashcardsCount={0}
     handleDeletePress={[Function]}
     handleEditPress={[Function]}
+    onPress={[Function]}
     title="foo"
   />
 </Fadable>

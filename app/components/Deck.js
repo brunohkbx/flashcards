@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { StyleSheet } from 'react-native';
 import {
   Button,
   Card,
@@ -13,10 +12,18 @@ import { capitalize } from '../lib/stringUtil';
 import pluralize from 'pluralize';
 import { TouchableOpacity } from 'react-native';
 
-const Deck = ({ title, flashcardsCount, handleEditPress, handleDeletePress }) => {
+const Deck = props => {
+  const {
+    title,
+    flashcardsCount,
+    handleEditPress,
+    handleDeletePress,
+    onPress
+  } = props;
+
   return (
     <Card>
-      <TouchableOpacity>
+      <TouchableOpacity onPress={onPress}>
         <CardContent style={{marginHorizontal: 8}}>
           <Title>{capitalize(title)}</Title>
           <Subheading>{pluralize('card', flashcardsCount, true)}</Subheading>
@@ -34,7 +41,8 @@ Deck.propTypes = {
   title: PropTypes.string.isRequired,
   flashcardsCount: PropTypes.number,
   handleEditPress: PropTypes.func.isRequired,
-  handleDeletePress: PropTypes.func.isRequired
+  handleDeletePress: PropTypes.func.isRequired,
+  onPress: PropTypes.func.isRequired
 }
 
 Deck.defaultProps = {

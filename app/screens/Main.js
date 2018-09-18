@@ -91,6 +91,7 @@ export class Main extends Component {
             () => navigation.navigate('EditDeck', { deckId: item.id })
           }
           handleDeletePress={() => this.openDialog(item.id)}
+          onPress={() => navigation.navigate('DeckDetail', { deckId: item.id })}
         />
       </Fadable>
     );
