@@ -21,6 +21,12 @@ describe('Flashcard', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
+  it('does not render a action when onFlashcardDeleted is null', () => {
+    const { wrapper } = setup({ onFlashcardDeleted: null })
+
+    expect(wrapper).toMatchSnapshot();
+  });
+
   test('DeleteIcon onPress calls onFlashcardDeleted', () => {
     const mockOnFlashcardDeleted = jest.fn();
     const { deleteFlashcard } = setup({ onFlashcardDeleted: mockOnFlashcardDeleted });

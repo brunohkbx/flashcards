@@ -6,7 +6,6 @@ import CardAction from '../components/Card/CardAction';
 import RightAlignedActions from '../components/Card/RightAlignedActions';
 import { DeleteIcon } from './Icons';
 import { primaryColor } from '../config/theme';
-import { View }  from 'react-native';
 
 const Content = styled(CardContent)`
   padding-top: 0;
@@ -20,22 +19,24 @@ const Flashcard = ({ children, onFlashcardDeleted }) => {
       <Content>
         {children}
       </Content>
-      <RightAlignedActions>
-        <CardAction>
-          <DeleteIcon
-            size={24}
-            color={primaryColor}
-            onPress={onFlashcardDeleted}
-          />
-        </CardAction>
-      </RightAlignedActions>
+      {onFlashcardDeleted &&
+        <RightAlignedActions>
+          <CardAction>
+            <DeleteIcon
+              size={24}
+              color={primaryColor}
+              onPress={onFlashcardDeleted}
+            />
+          </CardAction>
+        </RightAlignedActions>
+      }
     </Card>
   );
 };
 
 Flashcard.propTypes = {
   children: PropTypes.node,
-  onFlashcardDeleted: PropTypes.func.isRequired
+  onFlashcardDeleted: PropTypes.func
 };
 
 export default Flashcard;

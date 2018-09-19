@@ -13,7 +13,8 @@ describe('Deck', () => {
       title: 'foo',
       flashcardsCount: 5,
       handleEditPress: jest.fn(),
-      handleDeletePress: jest.fn()
+      handleDeletePress: jest.fn(),
+      onPress: jest.fn()
     }, propOverrides)
 
     const wrapper = shallow(<Deck {...defaultProps} />);

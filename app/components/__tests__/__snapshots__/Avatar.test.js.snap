@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Avatar renders properly 1`] = `
+<Component
+  backgroundColor="#ffffff"
+  borderRadius={50}
+  className="sc-bdVaJa dixGsI"
+  height={100}
+  width={100}
+/>
+`;

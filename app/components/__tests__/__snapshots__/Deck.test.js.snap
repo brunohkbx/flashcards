@@ -4,6 +4,7 @@ exports[`Deck renders properly 1`] = `
 <withTheme(Card)>
   <TouchableOpacity
     activeOpacity={0.2}
+    onPress={[MockFunction]}
   >
     <CardContent
       style={
