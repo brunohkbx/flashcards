@@ -5,6 +5,7 @@ import DeckSearch from '../screens/DeckSearch';
 import CreateDeck from '../screens/CreateDeck';
 import EditDeck from '../screens/EditDeck';
 import DeckDetail from '../screens/DeckDetail';
+import Quiz from '../screens/Quiz/Quiz';
 import { primaryColor, white } from './theme';
 
 export const RootStack =  createStackNavigator(
@@ -32,6 +33,12 @@ export const RootStack =  createStackNavigator(
     },
     DeckDetail: {
       screen: DeckDetail
+    },
+    Quiz: {
+      screen: Quiz,
+      navigationOptions: {
+        title: 'Quiz'
+      }
     }
   },
   {

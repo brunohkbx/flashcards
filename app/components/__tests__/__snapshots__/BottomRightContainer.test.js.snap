@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BottomRightContainer renders properly 1`] = `
+<Component
+  bottom={16}
+  className="sc-bdVaJa fkjgPF"
+  right={16}
+/>
+`;

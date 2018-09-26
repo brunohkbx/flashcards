@@ -1,0 +1,57 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Quiz renders properly when the quiz has ended 1`] = `
+<Styled(Component)>
+  <Result
+    onRestartQuiz={[Function]}
+    score={1}
+    totalQuestions={1}
+  />
+</Styled(Component)>
+`;
+
+exports[`Quiz renders properly when the quiz is not over yet 1`] = `
+<Styled(Component)>
+  <ScrollView
+    contentContainerStyle={
+      Object {
+        "flexGrow": 1,
+      }
+    }
+  >
+    <Fadable
+      fade={false}
+      onAnimationEnd={[Function]}
+    >
+      <FlashcardCollapsed
+        currentQuestion={1}
+        flashcard={
+          Object {
+            "answer": "A library for managing user interfaces",
+            "question": "What is React?",
+          }
+        }
+        totalQuestions={1}
+      />
+    </Fadable>
+    <Styled(Component)>
+      <withTheme(Button)
+        color="#03dac4"
+        icon="close"
+        mode="outlined"
+        onPress={[Function]}
+      >
+        I was wrong
+      </withTheme(Button)>
+      <withTheme(Button)
+        icon="done"
+        mode="contained"
+        onPress={[Function]}
+        primary={true}
+      >
+        I was right
+      </withTheme(Button)>
+    </Styled(Component)>
+  </ScrollView>
+</Styled(Component)>
+`;

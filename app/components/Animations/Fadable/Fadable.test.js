@@ -41,31 +41,49 @@ describe('Fadable', () => {
     });
   });
 
+  describe('startAnimation', () => {
+    it('starts the animation and calls onComplete when it ends', () => {
+      const mockAnimatedStart = jest.fn();
+      const { wrapperInstance } = setup();
+      jest.spyOn(Animated, 'timing')
+        .mockImplementation(() => ({ start: mockAnimatedStart }));
+
+      wrapperInstance.startAnimation();
+
+      expect(Animated.timing).toHaveBeenCalledWith(
+        wrapperInstance.state.opacity,
+        { toValue: 0, duration: 350, useNativeDriver: true  }
+      );
+
+      expect(
+        mockAnimatedStart
+      ).toHaveBeenCalledWith(wrapperInstance.onComplete);
+    });
+  });
+
   describe('componentDidUpdate', async () => {
     describe('When component is faded', () => {
       it('starts the animation', () => {
         const { wrapper, wrapperInstance } = setup();
-        jest.spyOn(Animated, 'timing');
+        jest.spyOn(wrapperInstance, 'startAnimation');
 
         wrapper.setProps({ fade: true });
 
-        expect(Animated.timing).toHaveBeenCalledWith(
-          wrapperInstance.state.opacity,
-          { toValue: 0, duration: 350, useNativeDriver: true  }
-        );
+        expect(wrapperInstance.startAnimation).toHaveBeenCalled();
       });
 
-      it('calls onComplete when animation ends', () => {
-        const { wrapper, wrapperInstance } = setup();
-        const mockAnimatedStart = jest.fn();
-        jest.spyOn(Animated, 'timing')
-          .mockImplementation(() => ({ start: mockAnimatedStart }));
+      it('resets opacity and visible when component was faded and now is not anymore', () => {
+        const { wrapper, wrapperInstance } = setup({ fade: true });
+        jest.spyOn(wrapperInstance, 'setState');
 
-        wrapper.setProps({ fade: true });
+        wrapper.setProps({ fade: false });
 
-        expect(
-          mockAnimatedStart
-        ).toHaveBeenCalledWith(wrapperInstance.onComplete);
+        expect(wrapperInstance.setState).toHaveBeenCalledWith(
+          {
+            visible: true,
+            opacity: new Animated.Value(1)
+          }
+        );
       });
     });
 
