@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { View } from 'react-native';
+import Container from '../components/Container';
 import DeckForm from '../components/DeckForm';
 import { editDeck } from '../actions';
-import { Colors, ToolbarAction } from 'react-native-paper';
+import { Colors, Appbar } from 'react-native-paper';
 
 export class EditDeck extends Component {
   static navigationOptions = ({ navigation }) => {
     return {
       headerRight:
-        <ToolbarAction
+        <Appbar.Action
           icon="done"
           color={Colors.white}
           onPress={() => navigation.getParam('submitForm')()}
@@ -38,13 +38,13 @@ export class EditDeck extends Component {
     const { deck } = this.props;
 
     return (
-      <View style={{flex: 1, padding: 8}}>
+      <Container>
         <DeckForm
           initialValues={deck}
           formRef={node => this.form = node}
           handleSubmit={this.handleSubmit}
         />
-      </View>
+      </Container>
     );
   }
 }

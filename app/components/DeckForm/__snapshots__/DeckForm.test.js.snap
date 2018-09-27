@@ -12,7 +12,7 @@ exports[`DeckForm renders properly 1`] = `
   <KeyboardAvoidingView
     behavior="padding"
     enabled={true}
-    keyboardVerticalOffset={94}
+    keyboardVerticalOffset={99}
     style={
       Object {
         "flex": 1,
@@ -33,9 +33,8 @@ exports[`DeckForm renders properly 1`] = `
     bottom={16}
     right={16}
   >
-    <FAB
+    <withTheme(FAB)
       handlePress={[Function]}
-      primary={false}
     />
   </Styled(Component)>
 </Component>

@@ -58,6 +58,7 @@ class FormContent extends Component {
                   onChangeText={handleChange(`questions.${index}.question`)}
                   autoFocus
                   multiline
+                  mode="outlined"
                 />
                 <Field
                   name={`questions.${index}.answer`}
@@ -65,6 +66,7 @@ class FormContent extends Component {
                   component={FormInput}
                   onChangeText={handleChange(`questions.${index}.answer`)}
                   multiline
+                  mode="outlined"
                 />
               </Flashcard>
             </Fadable>

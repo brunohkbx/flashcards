@@ -8,14 +8,14 @@ import { DeleteIcon } from './Icons';
 import { primaryColor } from '../config/theme';
 
 const Content = styled(Card.Content)`
-  padding-top: 0;
+  margin-top: 8;
   padding-bottom: 8;
   margin-horizontal: 8;
 `;
 
 const Flashcard = ({ children, onFlashcardDeleted }) => {
   return (
-    <Card>
+    <Card style={{ marginVertical: 4}}>
       <Content>
         {children}
       </Content>
