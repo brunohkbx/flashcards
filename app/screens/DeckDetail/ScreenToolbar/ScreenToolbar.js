@@ -1,11 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import {
-  Toolbar,
-  ToolbarBackAction,
-  ToolbarContent,
-  ToolbarAction
-} from 'react-native-paper';
+import { Appbar } from 'react-native-paper';
 
 class ScreenToolbar extends Component {
   navigateTo = route => {
@@ -19,18 +14,18 @@ class ScreenToolbar extends Component {
     const { navigation } = this.props;
 
     return (
-      <Toolbar>
-        <ToolbarBackAction onPress={() => navigation.goBack()} />
-        <ToolbarContent title="Deck Details"/>
-        <ToolbarAction
+      <Appbar.Header>
+        <Appbar.BackAction onPress={() => navigation.goBack()} />
+        <Appbar.Content title="Deck Details"/>
+        <Appbar.Action
           icon="question-answer"
           onPress={() => {}}
         />
-        <ToolbarAction
+        <Appbar.Action
           icon="edit"
           onPress={() => this.navigateTo('EditDeck')}
         />
-      </Toolbar>
+      </Appbar.Header>
     );
   }
 }
