@@ -10,7 +10,10 @@ import { primaryColor, white } from './theme';
 export const RootStack =  createStackNavigator(
   {
     Main: {
-      screen: Main
+      screen: Main,
+      navigationOptions: {
+        title: 'Flashcards'
+      }
     },
     DeckSearch: {
       screen: DeckSearch

@@ -7,8 +7,7 @@ exports[`FAB changes background-color to primary when primary is true 1`] = `
   onPress={[MockFunction]}
   style={
     Object {
-      "backgroundColor": "#3f51b5",
-      "elevation": 0,
+      "margin": 10,
     }
   }
 />
@@ -21,8 +20,7 @@ exports[`FAB changes background-color to secondary when primary is false 1`] = `
   onPress={[MockFunction]}
   style={
     Object {
-      "backgroundColor": "#ff4081",
-      "elevation": 0,
+      "margin": 10,
     }
   }
 />

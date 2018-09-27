@@ -1,13 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Main Movable changes toValue when snackbar is visible 1`] = `
-<Component
-  style={
-    Object {
-      "flex": 1,
-    }
-  }
->
+<Styled(Component)>
   <FlatList
     data={
       Array [
@@ -43,9 +37,8 @@ exports[`Main Movable changes toValue when snackbar is visible 1`] = `
     <withTheme(Movable)
       toValue={-46}
     >
-      <FAB
+      <withTheme(FAB)
         handlePress={[Function]}
-        primary={false}
       />
     </withTheme(Movable)>
   </Styled(Component)>
@@ -62,7 +55,7 @@ exports[`Main Movable changes toValue when snackbar is visible 1`] = `
     title="Delete deck?"
     visible={false}
   />
-</Component>
+</Styled(Component)>
 `;
 
 exports[`Main renderItem When there is a deck to be removed fades the deck 1`] = `
@@ -96,13 +89,7 @@ exports[`Main renderItem renders correctly 1`] = `
 `;
 
 exports[`Main renders properly 1`] = `
-<Component
-  style={
-    Object {
-      "flex": 1,
-    }
-  }
->
+<Styled(Component)>
   <FlatList
     data={
       Array [
@@ -138,9 +125,8 @@ exports[`Main renders properly 1`] = `
     <withTheme(Movable)
       toValue={0}
     >
-      <FAB
+      <withTheme(FAB)
         handlePress={[Function]}
-        primary={false}
       />
     </withTheme(Movable)>
   </Styled(Component)>
@@ -157,5 +143,5 @@ exports[`Main renders properly 1`] = `
     title="Delete deck?"
     visible={false}
   />
-</Component>
+</Styled(Component)>
 `;

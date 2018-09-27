@@ -2,21 +2,21 @@
 
 exports[`Flashcard does not render a action when onFlashcardDeleted is null 1`] = `
 <withTheme(Card)>
-  <Styled(CardContent) />
+  <Styled(Card.Content) />
 </withTheme(Card)>
 `;
 
 exports[`Flashcard renders properly 1`] = `
 <withTheme(Card)>
-  <Styled(CardContent) />
-  <Styled(CardActions)>
+  <Styled(Card.Content) />
+  <Styled(Card.Actions)>
     <Styled(Component)>
       <DeleteIcon
-        color="#3f51b5"
+        color="#6200ee"
         onPress={[MockFunction]}
         size={24}
       />
     </Styled(Component)>
-  </Styled(CardActions)>
+  </Styled(Card.Actions)>
 </withTheme(Card)>
 `;

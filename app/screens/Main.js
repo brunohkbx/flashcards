@@ -3,22 +3,14 @@ import { connect } from 'react-redux';
 import { View, FlatList } from 'react-native';
 import Deck from '../components/Deck';
 import ConfirmDialog from '../components/ConfirmDialog';
-import MainToolbar from '../components/MainToolbar';
-import { fetchDecks, deleteDeck } from '../actions';
+import { fetchDecks, deleteDeck } from '../actions/index';
 import { Snackbar } from 'react-native-paper';
 import FAB from '../components/FAB';
+import Container from '../components/Container';
 import BottomRightContainer from '../components/BottomRightContainer';
-import { Movable, Fadable } from '../components/Animations';
+import { Movable, Fadable } from '../components/Animations/index';
 
 export class Main extends Component {
-  static navigationOptions = ({ navigation }) => {
-    return {
-      header: <MainToolbar
-                handleSearchPress={() => navigation.navigate('DeckSearch')}
-              />
-    };
-  };
-
   state = {
     dialogVisible: false,
     snackBarVisible: false,
@@ -104,7 +96,7 @@ export class Main extends Component {
     const flashMessage = navigation.getParam('flashMessage');
 
     return (
-      <View style={{flex: 1}}>
+      <Container>
         <FlatList
           data={decks}
           extraData={selectedDeck.remove}
@@ -132,7 +124,7 @@ export class Main extends Component {
           content="This deck and all it cards will be deleted. You can edit this deck if you want to change something."
           actionSubmitText="Delete"
         />
-      </View>
+      </Container>
     );
   }
 }

@@ -1,25 +1,30 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Deck renders properly 1`] = `
-<withTheme(Card)>
+<withTheme(Card)
+  style={
+    Object {
+      "marginVertical": 4,
+    }
+  }
+>
   <TouchableOpacity
     activeOpacity={0.2}
     onPress={[MockFunction]}
   >
-    <CardContent
-      style={
-        Object {
-          "marginHorizontal": 8,
-        }
-      }
-    >
+    <Card.Content>
       <Title />
       <Subheading />
-    </CardContent>
-    <CardActions>
+    </Card.Content>
+    <Card.Actions>
       <withTheme(Button)
         onPress={[MockFunction]}
         primary={true}
+        style={
+          Object {
+            "paddingRight": 9,
+          }
+        }
       >
         Edit
       </withTheme(Button)>
@@ -29,7 +34,7 @@ exports[`Deck renders properly 1`] = `
       >
         Delete
       </withTheme(Button)>
-    </CardActions>
+    </Card.Actions>
   </TouchableOpacity>
 </withTheme(Card)>
 `;

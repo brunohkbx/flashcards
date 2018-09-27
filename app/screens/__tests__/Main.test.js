@@ -30,13 +30,6 @@ describe('Main', () => {
     const wrapper = shallow(<Main {...defaultProps} />);
     const wrapperInstance = wrapper.instance();
 
-    const pressOnFab = () => {
-      wrapper
-        .find('FAB')
-        .dive()
-        .simulate('press')
-    }
-
     const dismissConfirmDialog = () => {
       wrapper
         .find('ConfirmDialog')
@@ -70,7 +63,6 @@ describe('Main', () => {
       defaultProps,
       wrapper,
       wrapperInstance,
-      pressOnFab,
       dismissConfirmDialog,
       cancelConfirmDialog,
       submitConfirmDialog,
@@ -260,17 +252,6 @@ describe('Main', () => {
         'DeckDetail',
         { deckId: '123' }
       );
-    });
-  });
-
-  describe('FAB button', () => {
-    it('navigates to CreateDeck screen', () => {
-      const mockNavigation = { navigate: jest.fn(), getParam: jest.fn() }
-      const { pressOnFab } = setup({ navigation: mockNavigation });
-
-      pressOnFab();
-
-      expect(mockNavigation.navigate).toHaveBeenCalled();
     });
   });
 

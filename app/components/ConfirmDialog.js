@@ -3,9 +3,6 @@ import PropTypes from 'prop-types';
 import {
   Button,
   Dialog,
-  DialogActions,
-  DialogContent,
-  DialogTitle,
   Paragraph
 } from 'react-native-paper';
 
@@ -25,14 +22,14 @@ export const ConfirmDialog = props => {
       visible={visible}
       onDismiss={handleDismiss}
     >
-      <DialogTitle>{title}</DialogTitle>
-      <DialogContent>
+      <Dialog.Title>{title}</Dialog.Title>
+      <Dialog.Content>
         <Paragraph>{content}</Paragraph>
-      </DialogContent>
-      <DialogActions>
+      </Dialog.Content>
+      <Dialog.Actions>
         <Button primary onPress={handleDismiss}>{actionCancelText}</Button>
         <Button primary onPress={handleSubmitPress}>{actionSubmitText}</Button>
-      </DialogActions>
+      </Dialog.Actions>
     </Dialog>
   );
 };
