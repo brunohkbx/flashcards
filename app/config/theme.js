@@ -2,7 +2,6 @@ import { Easing } from 'react-native';
 import { DefaultTheme, Colors } from 'react-native-paper';
 
 export const primaryColor = DefaultTheme.colors.primary;
-export const secondaryColor = DefaultTheme.colors.accent;
 export const white = Colors.white;
 
 export const theme = {

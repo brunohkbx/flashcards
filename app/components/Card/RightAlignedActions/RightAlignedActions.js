@@ -1,7 +1,7 @@
 import styled from 'styled-components';
-import { CardActions } from 'react-native-paper';
+import { Card } from 'react-native-paper';
 
-const RightAlignedActions = styled(CardActions)`
+const RightAlignedActions = styled(Card.Actions)`
   justify-content: flex-end;
 `;
 

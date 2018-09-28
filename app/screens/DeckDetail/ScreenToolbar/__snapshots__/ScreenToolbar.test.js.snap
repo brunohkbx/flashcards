@@ -1,22 +1,23 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`ScreenToolbar renders properly 1`] = `
-<withTheme(Toolbar)>
-  <ToolbarBackAction
+<withTheme(Appbar.Header)>
+  <Appbar.BackAction
+    accessibilityLabel="Back"
     onPress={[Function]}
   />
-  <withTheme(ToolbarContent)
+  <withTheme(Appbar.Content)
     title="Deck Details"
   />
-  <ToolbarAction
+  <Appbar.Action
     icon="question-answer"
     onPress={[Function]}
     size={24}
   />
-  <ToolbarAction
+  <Appbar.Action
     icon="edit"
     onPress={[Function]}
     size={24}
   />
-</withTheme(Toolbar)>
+</withTheme(Appbar.Header)>
 `;

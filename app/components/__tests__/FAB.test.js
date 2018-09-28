@@ -1,11 +1,13 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import FAB from '../FAB';
+import { DefaultTheme } from 'react-native-paper';
+import { FAB } from '../FAB';
 
 describe('FAB', () => {
   const setup = propOverrides => {
     const defaultProps = Object.assign({
-      handlePress: jest.fn()
+      handlePress: jest.fn(),
+      theme: DefaultTheme
     }, propOverrides)
 
     const wrapper = shallow(<FAB {...defaultProps} />);

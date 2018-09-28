@@ -15,7 +15,7 @@ describe('ScreenToolbar', () => {
     const wrapper = shallow(<ScreenToolbar {...defaultProps} />);
     const wrapperInstance = wrapper.instance();
 
-    const goBack = () => wrapper.find('ToolbarBackAction').simulate('press');
+    const goBack = () => wrapper.find('AppbarBackAction').simulate('press');
     const edit = () => wrapper.find({ icon: 'edit' }).simulate('press');
 
     return { wrapper, wrapperInstance, goBack, edit };

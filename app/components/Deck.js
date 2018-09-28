@@ -3,8 +3,6 @@ import PropTypes from 'prop-types';
 import {
   Button,
   Card,
-  CardContent,
-  CardActions,
   Title,
   Subheading,
 } from 'react-native-paper';
@@ -22,16 +20,22 @@ const Deck = props => {
   } = props;
 
   return (
-    <Card>
+    <Card style={{ marginVertical: 4}}>
       <TouchableOpacity onPress={onPress}>
-        <CardContent style={{marginHorizontal: 8}}>
+        <Card.Content>
           <Title>{capitalize(title)}</Title>
           <Subheading>{pluralize('card', flashcardsCount, true)}</Subheading>
-        </CardContent>
-        <CardActions>
-          <Button primary onPress={handleEditPress}>Edit</Button>
+        </Card.Content>
+        <Card.Actions>
+          <Button
+            primary
+            style={{paddingRight: 9}}
+            onPress={handleEditPress}
+          >
+            Edit
+          </Button>
           <Button primary onPress={handleDeletePress}>Delete</Button>
-        </CardActions>
+        </Card.Actions>
       </TouchableOpacity>
     </Card>
   );

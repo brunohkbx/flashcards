@@ -59,7 +59,7 @@ export class DeckForm extends Component {
           style={{flex: 1}}
           behavior="padding"
           enabled
-          keyboardVerticalOffset={Header.HEIGHT + 30}
+          keyboardVerticalOffset={Header.HEIGHT + 35}
         >
           <FormContent
             scrollViewRef={this.setScrollViewRef}

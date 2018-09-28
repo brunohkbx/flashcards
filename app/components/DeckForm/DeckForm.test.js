@@ -47,35 +47,13 @@ describe('DeckForm', () => {
     const wrapper = shallow(<DeckForm {...defaultProps} />);
     const wrapperInstance = wrapper.instance();
 
-    const pressOnFab = () => {
-      wrapper
-        .find('FAB')
-        .dive()
-        .simulate('press');
-    };
-
-    return {
-      wrapper,
-      wrapperInstance,
-      pressOnFab
-    };
+    return { wrapper, wrapperInstance };
   };
 
   it('renders properly', () => {
     const { wrapper } = setup();
 
     expect(wrapper).toMatchSnapshot();
-  });
-
-  test('FAB onPress calls addNewQuestion', () => {
-    const { pressOnFab, wrapperInstance } = setup();
-    jest.spyOn(wrapperInstance, 'addNewQuestion').mockImplementation(
-      () => jest.fn()
-    );
-
-    pressOnFab();
-
-    expect(wrapperInstance.addNewQuestion).toHaveBeenCalled();
   });
 
   describe('addNewQuestion', () => {

@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { View, FlatList, KeyboardAvoidingView } from 'react-native';
+import { FlatList, KeyboardAvoidingView } from 'react-native';
 import { TextInput } from 'react-native-paper';
+import Container from '../../components/Container';
 import ScreenToolbar from './ScreenToolbar';
 import Flashcard from '../../components/Flashcard';
 import { FlashcardIcon } from '../../components/Icons';
@@ -28,12 +29,14 @@ export class DeckDetail extends Component {
           value={item.question}
           multiline
           editable={false}
+          mode="outlined"
         />
         <TextInput
           label="Answer"
           value={item.answer}
           multiline
           editable={false}
+          mode="outlined"
         />
       </Flashcard>
     );
@@ -49,7 +52,7 @@ export class DeckDetail extends Component {
     const { deck } = this.props;
 
     return (
-      <View style={{ flex: 1}}>
+      <Container>
         <KeyboardAvoidingView
           style={{flex: 1}}
           behavior="padding"
@@ -66,7 +69,7 @@ export class DeckDetail extends Component {
           <NoContent/>
         }
         </KeyboardAvoidingView>
-      </View>
+      </Container>
     );
   }
 }

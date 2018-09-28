@@ -5,11 +5,11 @@ exports[`ConfirmDialog renders properly 1`] = `
   onDismiss={[MockFunction]}
   visible={false}
 >
-  <withTheme(DialogTitle) />
-  <DialogContent>
+  <withTheme(Dialog.Title) />
+  <Dialog.Content>
     <Paragraph />
-  </DialogContent>
-  <DialogActions>
+  </Dialog.Content>
+  <Dialog.Actions>
     <withTheme(Button)
       onPress={[MockFunction]}
       primary={true}
@@ -22,6 +22,6 @@ exports[`ConfirmDialog renders properly 1`] = `
     >
       Submit
     </withTheme(Button)>
-  </DialogActions>
+  </Dialog.Actions>
 </withTheme(Dialog)>
 `;

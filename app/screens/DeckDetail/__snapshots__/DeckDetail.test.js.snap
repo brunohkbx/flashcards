@@ -12,12 +12,14 @@ exports[`DeckDetail renderItem renders properly 1`] = `
   <withTheme(TextInput)
     editable={false}
     label="Question"
+    mode="outlined"
     multiline={true}
     value="What is React?"
   />
   <withTheme(TextInput)
     editable={false}
     label="Answer"
+    mode="outlined"
     multiline={true}
     value="A library for managing user interfaces"
   />
@@ -25,13 +27,7 @@ exports[`DeckDetail renderItem renders properly 1`] = `
 `;
 
 exports[`DeckDetail renders properly when deck does not have questions 1`] = `
-<Component
-  style={
-    Object {
-      "flex": 1,
-    }
-  }
->
+<Styled(Component)>
   <KeyboardAvoidingView
     behavior="padding"
     enabled={true}
@@ -44,17 +40,11 @@ exports[`DeckDetail renders properly when deck does not have questions 1`] = `
   >
     <NoContent />
   </KeyboardAvoidingView>
-</Component>
+</Styled(Component)>
 `;
 
 exports[`DeckDetail renders properly when deck has questions 1`] = `
-<Component
-  style={
-    Object {
-      "flex": 1,
-    }
-  }
->
+<Styled(Component)>
   <KeyboardAvoidingView
     behavior="padding"
     enabled={true}
@@ -87,5 +77,5 @@ exports[`DeckDetail renders properly when deck has questions 1`] = `
       windowSize={21}
     />
   </KeyboardAvoidingView>
-</Component>
+</Styled(Component)>
 `;
