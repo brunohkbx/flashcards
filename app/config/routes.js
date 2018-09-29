@@ -1,7 +1,6 @@
 import React from 'react';
 import { createStackNavigator } from 'react-navigation';
 import Main from '../screens/Main';
-import DeckSearch from '../screens/DeckSearch';
 import CreateDeck from '../screens/CreateDeck';
 import EditDeck from '../screens/EditDeck';
 import DeckDetail from '../screens/DeckDetail';
@@ -15,9 +14,6 @@ export const RootStack =  createStackNavigator(
       navigationOptions: {
         title: 'Flashcards'
       }
-    },
-    DeckSearch: {
-      screen: DeckSearch
     },
     CreateDeck: {
       screen: CreateDeck,
