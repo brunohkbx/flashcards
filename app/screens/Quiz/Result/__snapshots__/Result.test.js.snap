@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Result renders properly 1`] = `
+<Styled(Component)>
+  <Styled(Component)
+    backgroundColor="#ffffff"
+    borderRadius={50}
+    height={100}
+    width={100}
+  >
+    <AssignmentIcon
+      size={50}
+    />
+  </Styled(Component)>
+  <Headline>
+    Congratulations, you're done
+  </Headline>
+  <Subheading>
+    You've answered 
+    3
+     questions correctly out of 
+    10
+  </Subheading>
+  <withTheme(Button)
+    mode="contained"
+    onPress={[MockFunction]}
+    primary={true}
+    style={
+      Object {
+        "marginTop": 10,
+      }
+    }
+  >
+    Restart Quiz
+  </withTheme(Button)>
+</Styled(Component)>
+`;

@@ -16,9 +16,10 @@ describe('ScreenToolbar', () => {
     const wrapperInstance = wrapper.instance();
 
     const goBack = () => wrapper.find('AppbarBackAction').simulate('press');
+    const study = () => wrapper.find({ icon: 'question-answer' }).simulate('press');
     const edit = () => wrapper.find({ icon: 'edit' }).simulate('press');
 
-    return { wrapper, wrapperInstance, goBack, edit };
+    return { wrapper, wrapperInstance, goBack, study, edit };
   };
 
   it('renders properly', () => {
@@ -50,6 +51,16 @@ describe('ScreenToolbar', () => {
     expect(mockNavigationGoBack).toHaveBeenCalled();
   });
 
+  test('ToolbarAction Quiz calls navigateTo Quiz', () => {
+    const mockNavigateTo = jest.fn();
+    const { wrapperInstance, study } = setup();
+    wrapperInstance.navigateTo = mockNavigateTo;
+
+    study();
+
+    expect(mockNavigateTo).toHaveBeenCalledWith('Quiz');
+  });
+
   test('ToolbarAction Edit calls navigateTo EditDeck', () => {
     const mockNavigateTo = jest.fn();
     const { wrapperInstance, edit } = setup();
@@ -57,6 +68,6 @@ describe('ScreenToolbar', () => {
 
     edit();
 
-    expect(mockNavigateTo).toHaveBeenCalled();
+    expect(mockNavigateTo).toHaveBeenCalledWith('EditDeck');
   });
 });

@@ -1,0 +1,130 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FlashcardCollapsed displays answer when flashcard is not collapsed 1`] = `
+<withTheme(Card)>
+  <Component
+    style={
+      Object {
+        "padding": 8,
+      }
+    }
+  >
+    <withTheme(Text)
+      style={
+        Object {
+          "paddingTop": 10,
+        }
+      }
+    >
+      <Title
+        style={
+          Object {
+            "fontSize": 30,
+          }
+        }
+      >
+        1
+      </Title>
+      <Caption
+        style={
+          Object {
+            "fontSize": 18,
+          }
+        }
+      >
+         OF 
+        20
+      </Caption>
+    </withTheme(Text)>
+    <withTheme(Divider) />
+  </Component>
+  <Card.Content>
+    <Styled(Component)
+      style={
+        Object {
+          "paddingVertical": 30,
+        }
+      }
+    >
+      <Title>
+        What is React?
+      </Title>
+      <Paragraph>
+        A library for managing user interfaces
+      </Paragraph>
+    </Styled(Component)>
+  </Card.Content>
+  <withTheme(Divider) />
+  <Card.Actions>
+    <withTheme(Button)
+      onPress={[Function]}
+      primary={true}
+    >
+      Hide Answer
+    </withTheme(Button)>
+  </Card.Actions>
+</withTheme(Card)>
+`;
+
+exports[`FlashcardCollapsed renders properly 1`] = `
+<withTheme(Card)>
+  <Component
+    style={
+      Object {
+        "padding": 8,
+      }
+    }
+  >
+    <withTheme(Text)
+      style={
+        Object {
+          "paddingTop": 10,
+        }
+      }
+    >
+      <Title
+        style={
+          Object {
+            "fontSize": 30,
+          }
+        }
+      >
+        1
+      </Title>
+      <Caption
+        style={
+          Object {
+            "fontSize": 18,
+          }
+        }
+      >
+         OF 
+        20
+      </Caption>
+    </withTheme(Text)>
+    <withTheme(Divider) />
+  </Component>
+  <Card.Content>
+    <Styled(Component)
+      style={
+        Object {
+          "paddingVertical": 30,
+        }
+      }
+    >
+      <Title>
+        What is React?
+      </Title>
+    </Styled(Component)>
+  </Card.Content>
+  <withTheme(Divider) />
+  <Card.Actions>
+    <withTheme(Button)
+      onPress={[Function]}
+      primary={true}
+    >
+      Show answer
+    </withTheme(Button)>
+  </Card.Actions>
+</withTheme(Card)>
+`;

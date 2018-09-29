@@ -12,17 +12,23 @@ class Fadable extends Component {
     { visible: false }, this.props.onAnimationEnd
   );
 
+  startAnimation = () => {
+    const { opacity } = this.state;
+
+    Animated.timing(
+      opacity,
+      { toValue: 0, duration: 350, useNativeDriver: true }
+    ).start(this.onComplete);
+  }
+
   componentDidUpdate(prevProps) {
     const { fade } = this.props;
 
-    if (fade && prevProps.fade !== fade) {
-      const { opacity } = this.state;
+    if (fade && !prevProps.fade)
+      this.startAnimation();
 
-      Animated.timing(
-        opacity,
-        { toValue: 0, duration: 350, useNativeDriver: true }
-      ).start(this.onComplete);
-    }
+    else if (prevProps.fade && !fade)
+      this.setState({ visible: true, opacity:  new Animated.Value(1)});
   }
 
   render() {

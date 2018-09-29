@@ -19,7 +19,7 @@ class ScreenToolbar extends Component {
         <Appbar.Content title="Deck Details"/>
         <Appbar.Action
           icon="question-answer"
-          onPress={() => {}}
+          onPress={() => this.navigateTo('Quiz')}
         />
         <Appbar.Action
           icon="edit"
