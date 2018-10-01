@@ -1,35 +1,25 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
-import { Card } from 'react-native-paper';
-import CardAction from '../components/Card/CardAction';
+import { Card, IconButton } from 'react-native-paper';
 import RightAlignedActions from '../components/Card/RightAlignedActions';
-import { DeleteIcon } from './Icons';
-import { primaryColor } from '../config/theme';
-
-const Content = styled(Card.Content)`
-  margin-top: 8;
-  padding-bottom: 8;
-  margin-horizontal: 8;
-`;
+import { theme } from '../config/theme';
 
 const Flashcard = ({ children, onFlashcardDeleted }) => {
   return (
     <Card style={{ marginVertical: 4}}>
-      <Content>
-        {children}
-      </Content>
       {onFlashcardDeleted &&
         <RightAlignedActions>
-          <CardAction>
-            <DeleteIcon
-              size={24}
-              color={primaryColor}
-              onPress={onFlashcardDeleted}
-            />
-          </CardAction>
+          <IconButton
+            icon="close"
+            onPress={onFlashcardDeleted}
+            color={theme.colors.primary}
+            style={{ marginVertical: 0 }}
+          />
         </RightAlignedActions>
       }
+      <Card.Content style={onFlashcardDeleted ? null : { paddingTop: 16 }}>
+        {children}
+      </Card.Content>
     </Card>
   );
 };
