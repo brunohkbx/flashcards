@@ -4,16 +4,16 @@ import { View, FlatList } from 'react-native';
 import Deck from '../components/Deck';
 import ConfirmDialog from '../components/ConfirmDialog';
 import { fetchDecks, deleteDeck } from '../actions/index';
-import { Snackbar } from 'react-native-paper';
 import FAB from '../components/FAB';
 import Container from '../components/Container';
 import BottomRightContainer from '../components/BottomRightContainer';
-import { Movable, Fadable } from '../components/Animations/index';
+import { Movable, Fadable } from '../components/Animations';
+import Toaster from '../components/Toaster';
 
 export class Main extends Component {
   state = {
     dialogVisible: false,
-    snackBarVisible: false,
+    snackbarVisible: false,
     selectedDeck: {
       id: null,
       remove: false
@@ -31,8 +31,12 @@ export class Main extends Component {
       const { navigation } = this.props;
       const flashMessage = navigation.getParam('flashMessage');
 
-      if (flashMessage)
-        this.setState({ snackBarVisible: true });
+      if (flashMessage) {
+        this.setState(
+          { snackbarVisible: true },
+          () => this.toaster.showMessage(flashMessage)
+        );
+      }
     }
   }
 
@@ -54,17 +58,21 @@ export class Main extends Component {
     this.setState({ dialogVisible: false, selectedDeck });
   }
 
-  closeSnackBar = () => this.setState({ snackBarVisible: false });
+  addToasterRef = element => this.toaster = element;
+  closeSnackbar = () => this.setState({ snackbarVisible: false });
 
   handleDeckDelete = id => {
-    const { deleteDeck, navigation } = this.props;
+    const { deleteDeck } = this.props;
 
     return deleteDeck(id)
-      .then(() => this.setState({ selectedDeck: { id: null, remove: false }}))
-      .then(() => navigation.setParams(
-        { flashMessage: 'Deck has been successfully deleted' }
-      )
-    );
+      .then(() => {
+        this.setState(
+          { selectedDeck: { id: null, remove: false },
+            snackbarVisible: true
+          },
+          () => this.toaster.showMessage('Deck has been successfully deleted')
+        );
+      })
   }
 
   renderItem = ({ item }) => {
@@ -91,41 +99,38 @@ export class Main extends Component {
 
   render() {
     const { decks, navigation } = this.props;
-
-    const { dialogVisible, snackBarVisible, selectedDeck } = this.state;
-    const flashMessage = navigation.getParam('flashMessage');
+    const { dialogVisible, selectedDeck, snackbarVisible } = this.state;
 
     return (
-      <Container>
-        <FlatList
-          data={decks}
-          extraData={selectedDeck.remove}
-          renderItem={this.renderItem}
-          keyExtractor={item => item.id}
-        />
+      <View style={{flex: 1}}>
+        <Container>
+          <FlatList
+            data={decks}
+            extraData={selectedDeck.remove}
+            renderItem={this.renderItem}
+            keyExtractor={item => item.id}
+          />
 
-        <BottomRightContainer right={16} bottom={16} >
-          <Movable toValue={snackBarVisible ? -46 : 0} >
-            <FAB handlePress={() => navigation.navigate('CreateDeck')} />
-          </Movable>
-        </BottomRightContainer>
-
-        <Snackbar
-          visible={snackBarVisible}
-          onDismiss={() => this.closeSnackBar()}
-        >
-          {flashMessage}
-        </Snackbar>
-        <ConfirmDialog
-          visible={dialogVisible}
-          handleDismiss={this.closeDialog}
-          handleSubmitPress={this.submitDialog}
-          title="Delete deck?"
-          content="This deck and all it cards will be deleted. You can edit this deck if you want to change something."
-          actionSubmitText="Delete"
+          <BottomRightContainer right={16} bottom={16} >
+            <Movable toValue={snackbarVisible ? -46 : 0} >
+              <FAB handlePress={() => navigation.navigate('CreateDeck')} />
+            </Movable>
+          </BottomRightContainer>
+          <ConfirmDialog
+            visible={dialogVisible}
+            handleDismiss={this.closeDialog}
+            handleSubmitPress={this.submitDialog}
+            title="Delete deck?"
+            content="This deck and all it cards will be deleted. You can edit this deck if you want to change something."
+            actionSubmitText="Delete"
+          />
+        </Container>
+        <Toaster
+          ref={this.addToasterRef}
+          onDismissCallback={this.closeSnackbar}
         />
-      </Container>
-    );
+      </View>
+   );
   }
 }
 

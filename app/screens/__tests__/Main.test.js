@@ -91,12 +91,14 @@ describe('Main', () => {
       const { wrapper, wrapperInstance } = setup();
       const mockNavigation = { getParam: jest.fn(() => 'foo') }
       jest.spyOn(wrapperInstance, 'setState');
+      wrapperInstance.toaster = { showMessage: jest.fn() };
 
       wrapper.setProps({ navigation: mockNavigation });
 
       expect(
         wrapperInstance.setState
-      ).toHaveBeenCalledWith({ snackBarVisible: true });
+      ).toHaveBeenCalledWith({ snackbarVisible: true }, expect.any(Function));
+      expect(wrapperInstance.toaster.showMessage).toHaveBeenCalledWith('foo');
     });
 
     it('does not display the snackbar if there is not a flashMessage as navigation param', () => {
@@ -167,16 +169,16 @@ describe('Main', () => {
     });
   });
 
-  describe('closeSnackBar', () => {
+  describe('closeSnackbar', () => {
     it('sets the state correctly', () => {
       const { wrapperInstance } = setup();
       jest.spyOn(wrapperInstance, 'setState');
 
-      wrapperInstance.closeSnackBar();
+      wrapperInstance.closeSnackbar();
 
-      expect(
-        wrapperInstance.setState
-      ).toHaveBeenCalledWith({ snackBarVisible: false });
+      expect(wrapperInstance.setState).toHaveBeenCalledWith(
+        { snackbarVisible: false }
+      );
     });
   });
 
@@ -190,30 +192,23 @@ describe('Main', () => {
       expect(mockDeleteDeck).toHaveBeenCalledWith('1');
     });
 
-    it('resets selectedDeck in state', async () => {
+    it('resets selectedDeck and displays snackbar', async () => {
       const mockDeleteDeck = jest.fn(() => Promise.resolve());
       const { wrapperInstance } = setup({ deleteDeck: mockDeleteDeck });
       jest.spyOn(wrapperInstance, 'setState');
+      wrapperInstance.toaster = { showMessage: jest.fn() }
 
       await wrapperInstance.handleDeckDelete('1');
 
+      expect(wrapperInstance.setState).toHaveBeenCalledWith(
+        { selectedDeck: { id: null, remove: false },
+          snackbarVisible: true
+        },
+        expect.any(Function)
+      )
       expect(
-        wrapperInstance.setState
-      ).toHaveBeenCalledWith({ selectedDeck: { id: null, remove: false }});
-    });
-
-    it('adds a flashMessage to navigation params', () => {
-      const mockSetParams = jest.fn();
-      const mockDeleteDeck = jest.fn(() => new Promise.resolve());
-      const { wrapperInstance } = setup({ deleteDeck: mockDeleteDeck });
-      jest.spyOn(wrapperInstance, 'setState');
-      wrapperInstance.props.navigation.setParams = mockSetParams;
-
-      wrapperInstance.handleDeckDelete('1').then(() => {
-        expect(mockSetParams).toHaveBeenCalledWith(
-          {flashMessage: 'Deck has been successfully deleted'}
-        )
-      });
+        wrapperInstance.toaster.showMessage
+      ).toHaveBeenCalledWith('Deck has been successfully deleted');
     });
   });
 
@@ -263,16 +258,5 @@ describe('Main', () => {
 
       expect(wrapper).toMatchSnapshot();
     });
-  });
-
-  describe('Snackbar', () => {
-    test('onDismiss calls closeSnackBar', () => {
-      const { dismissSnackbar, wrapperInstance } = setup();
-      jest.spyOn(wrapperInstance, 'closeSnackBar');
-
-      dismissSnackbar();
-
-      expect(wrapperInstance.closeSnackBar).toHaveBeenCalled();
-    });
-  });
+  })
 });
