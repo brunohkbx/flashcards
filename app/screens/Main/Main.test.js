@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { Main } from '../Main';
+import { Main } from './Main';
 
 describe('Main', () => {
   const setup = propOverrides => {
@@ -25,7 +25,7 @@ describe('Main', () => {
         getParam: jest.fn(),
         setParams: jest.fn()
       }
-    }, propOverrides)
+    }, propOverrides);
 
     const wrapper = shallow(<Main {...defaultProps} />);
     const wrapperInstance = wrapper.instance();
@@ -34,8 +34,8 @@ describe('Main', () => {
       wrapper
         .find('ConfirmDialog')
         .dive()
-        .simulate('dismiss')
-    }
+        .simulate('dismiss');
+    };
 
     const cancelConfirmDialog = () => {
       wrapper
@@ -43,8 +43,8 @@ describe('Main', () => {
         .dive()
         .find('DialogActions')
         .childAt(0)
-        .simulate('press')
-    }
+        .simulate('press');
+    };
 
     const submitConfirmDialog = () => {
       wrapper
@@ -76,6 +76,12 @@ describe('Main', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
+  it('renders properly when there are not any decks', () => {
+    const { wrapper } = setup({ decks: [] });
+
+    expect(wrapper).toMatchSnapshot();
+  });
+
   describe('componentDidMount', () => {
     it('fetches all the decks', () => {
       const mockFetchDecks = jest.fn();
@@ -89,7 +95,7 @@ describe('Main', () => {
   describe('componentDidUpdate', () => {
     it('displays the snackbar if there is a flashMessage as navigation param', () => {
       const { wrapper, wrapperInstance } = setup();
-      const mockNavigation = { getParam: jest.fn(() => 'foo') }
+      const mockNavigation = { getParam: jest.fn(() => 'foo') };
       jest.spyOn(wrapperInstance, 'setState');
       wrapperInstance.toaster = { showMessage: jest.fn() };
 
@@ -196,7 +202,7 @@ describe('Main', () => {
       const mockDeleteDeck = jest.fn(() => Promise.resolve());
       const { wrapperInstance } = setup({ deleteDeck: mockDeleteDeck });
       jest.spyOn(wrapperInstance, 'setState');
-      wrapperInstance.toaster = { showMessage: jest.fn() }
+      wrapperInstance.toaster = { showMessage: jest.fn() };
 
       await wrapperInstance.handleDeckDelete('1');
 
@@ -205,7 +211,7 @@ describe('Main', () => {
           snackbarVisible: true
         },
         expect.any(Function)
-      )
+      );
       expect(
         wrapperInstance.toaster.showMessage
       ).toHaveBeenCalledWith('Deck has been successfully deleted');
@@ -254,9 +260,9 @@ describe('Main', () => {
     it('changes toValue when snackbar is visible', () => {
       const { wrapper } = setup();
 
-      wrapper.setState({ snackBarVisible: true })
+      wrapper.setState({ snackBarVisible: true });
 
       expect(wrapper).toMatchSnapshot();
     });
-  })
+  });
 });

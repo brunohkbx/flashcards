@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { View, FlatList } from 'react-native';
-import Deck from '../components/Deck';
-import ConfirmDialog from '../components/ConfirmDialog';
-import { fetchDecks, deleteDeck } from '../actions/index';
-import FAB from '../components/FAB';
-import Container from '../components/Container';
-import BottomRightContainer from '../components/BottomRightContainer';
-import { Movable, Fadable } from '../components/Animations';
-import Toaster from '../components/Toaster';
+import Deck from '../../components/Deck';
+import ConfirmDialog from '../../components/ConfirmDialog';
+import { fetchDecks, deleteDeck } from '../../actions/index';
+import FAB from '../../components/FAB';
+import Container from '../../components/Container';
+import BottomRightContainer from '../../components/BottomRightContainer';
+import { Movable, Fadable } from '../../components/Animations/index';
+import Toaster from '../../components/Toaster';
+import NoContent from './NoContent';
 
 export class Main extends Component {
   state = {
@@ -72,7 +73,7 @@ export class Main extends Component {
           },
           () => this.toaster.showMessage('Deck has been successfully deleted')
         );
-      })
+      });
   }
 
   renderItem = ({ item }) => {
@@ -109,6 +110,11 @@ export class Main extends Component {
             extraData={selectedDeck.remove}
             renderItem={this.renderItem}
             keyExtractor={item => item.id}
+            ListEmptyComponent={NoContent}
+            contentContainerStyle={[
+              { flexGrow: 1 },
+              decks.length ? null : { justifyContent: 'center'}
+            ]}
           />
 
           <BottomRightContainer right={16} bottom={16} >
@@ -139,6 +145,6 @@ const mapStateToProps = ({ decks }) => ({ decks: Object.values(decks) });
 const mapDispatchToProps = dispatch => ({
   fetchDecks: () => dispatch(fetchDecks()),
   deleteDeck: id => dispatch(deleteDeck(id))
-})
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(Main);
