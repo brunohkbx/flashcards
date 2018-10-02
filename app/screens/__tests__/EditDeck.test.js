@@ -71,5 +71,16 @@ describe('EditDeck', () => {
         'Main', { flashMessage: 'Deck has been successfully edited' }
       );
     });
-  })
+  });
+
+  describe('setFormRef', () => {
+    it('assigns a ref to this.form', () => {
+      const mockForm = jest.fn();
+      const { wrapperInstance } = setup();
+
+      wrapperInstance.setFormRef(mockForm);
+
+      expect(wrapperInstance.form).toEqual(mockForm);
+    });
+  });
 });

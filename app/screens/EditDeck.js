@@ -34,6 +34,8 @@ export class EditDeck extends Component {
 
   submitForm = () => this.form.submitForm();
 
+  setFormRef = element => this.form = element;
+
   render() {
     const { deck } = this.props;
 
@@ -41,7 +43,7 @@ export class EditDeck extends Component {
       <Container>
         <DeckForm
           initialValues={deck}
-          formRef={node => this.form = node}
+          formRef={this.setFormRef}
           handleSubmit={this.handleSubmit}
         />
       </Container>

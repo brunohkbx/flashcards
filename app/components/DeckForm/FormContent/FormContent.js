@@ -13,14 +13,14 @@ class FormContent extends Component {
     flashcardToRemove: null
   }
 
-  deleteDeck = index => {
+  deleteFlashcard = index => {
     const { onFlashcardDeleted } = this.props;
 
     this.setState({ flashcardToRemove: null }, () => onFlashcardDeleted(index));
   };
 
   render() {
-    const { values, handleChange } = this.props;
+    const { values, handleChange, dirty } = this.props;
     const { flashcardToRemove } = this.state;
 
     return (
@@ -30,7 +30,6 @@ class FormContent extends Component {
           label="Title"
           component={FormInput}
           onChangeText={handleChange('title')}
-          autoFocus
         />
         <Headline>Cards</Headline>
         {
@@ -39,7 +38,7 @@ class FormContent extends Component {
               key={question.id}
               fade={flashcardToRemove === index}
               onAnimationEnd={
-                () => waitFor(10).then(() => this.deleteDeck(index))
+                () => waitFor(10).then(() => this.deleteFlashcard(index))
               }
             >
               <Flashcard
@@ -52,7 +51,7 @@ class FormContent extends Component {
                   label="Question"
                   component={FormInput}
                   onChangeText={handleChange(`questions.${index}.question`)}
-                  autoFocus
+                  autoFocus={dirty && (values.questions.length - 1 === index)}
                   multiline
                   mode="outlined"
                 />
