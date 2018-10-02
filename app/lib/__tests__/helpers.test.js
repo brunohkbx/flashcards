@@ -1,6 +1,5 @@
 import { waitFor } from '../helpers';
 
-
 describe('waitFor', () => {
   it('calls setTimeout with the specified time', () => {
     jest.useFakeTimers();

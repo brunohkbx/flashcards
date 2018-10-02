@@ -1,0 +1,71 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DialogWithLoadingIndicator renders properly on android 1`] = `
+<withTheme(Portal)>
+  <withTheme(Dialog)
+    dismissable={false}
+    visible={true}
+  >
+    <Dialog.Content>
+      <Component
+        style={
+          Object {
+            "alignItems": "center",
+            "flexDirection": "row",
+          }
+        }
+      >
+        <ActivityIndicator
+          animating={true}
+          color="#999999"
+          hidesWhenStopped={true}
+          size="large"
+          style={
+            Object {
+              "marginRight": 16,
+            }
+          }
+        />
+        <Paragraph>
+          Editing.....
+        </Paragraph>
+      </Component>
+    </Dialog.Content>
+  </withTheme(Dialog)>
+</withTheme(Portal)>
+`;
+
+exports[`DialogWithLoadingIndicator renders properly on ios 1`] = `
+<withTheme(Portal)>
+  <withTheme(Dialog)
+    dismissable={false}
+    visible={true}
+  >
+    <Dialog.Content>
+      <Component
+        style={
+          Object {
+            "alignItems": "center",
+            "flexDirection": "row",
+          }
+        }
+      >
+        <ActivityIndicator
+          animating={true}
+          color="#999999"
+          hidesWhenStopped={true}
+          size={48}
+          style={
+            Object {
+              "marginRight": 16,
+            }
+          }
+        />
+        <Paragraph>
+          Editing.....
+        </Paragraph>
+      </Component>
+    </Dialog.Content>
+  </withTheme(Dialog)>
+</withTheme(Portal)>
+`;

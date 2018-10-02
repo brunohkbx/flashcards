@@ -13,5 +13,9 @@ exports[`CreateDeck renders properly 1`] = `
       }
     }
   />
+  <DialogWithLoadingIndicator
+    loadingMessage="Creating....."
+    visible={false}
+  />
 </Styled(Component)>
 `;

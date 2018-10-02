@@ -13,5 +13,9 @@ exports[`EditDeck renders properly 1`] = `
       }
     }
   />
+  <DialogWithLoadingIndicator
+    loadingMessage="Editing....."
+    visible={false}
+  />
 </Styled(Component)>
 `;

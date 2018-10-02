@@ -1,6 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { EditDeck } from '../EditDeck';
+import * as helpers from '../../lib/helpers';
 
 describe('EditDeck', () => {
   const setup = propOverrides => {
@@ -38,14 +39,29 @@ describe('EditDeck', () => {
   });
 
   describe('handleSubmit', () => {
-    it('calls createDeck', () => {
-      const mockEditDeck = jest.fn();
-      const actions = { setSubmitting: jest.fn() };
+    it('displays the progressDialog', async () => {
+      const mockEditDeck = jest.fn(() => Promise.resolve());
       const { wrapperInstance } = setup({ editDeck: mockEditDeck });
+      jest.spyOn(wrapperInstance, 'setState');
 
-      wrapperInstance.handleSubmit({}, actions);
+      await wrapperInstance.handleSubmit({}, {});
 
-      expect(mockEditDeck).toHaveBeenCalledWith({});
+      expect(
+        wrapperInstance.setState
+      ).toHaveBeenCalledWith({ progressDialogVisible: true });
+    });
+
+    it('waits for 1000 ms and then calls submitEditedDeck', async () => {
+      const mockValues = jest.fn();
+      const mockEditDeck = jest.fn(() => Promise.resolve());
+      const { wrapperInstance } = setup({ editDeck: mockEditDeck });
+      jest.spyOn(helpers, 'waitFor');
+      jest.spyOn(wrapperInstance, 'submitEditedDeck');
+
+      await wrapperInstance.handleSubmit(mockValues, {});
+
+      expect(helpers.waitFor).toHaveBeenCalledWith(1000);
+      expect(wrapperInstance.submitEditedDeck).toHaveBeenCalledWith(mockValues);
     });
   });
 
@@ -59,16 +75,42 @@ describe('EditDeck', () => {
 
       expect(mockSubmitForm).toHaveBeenCalled();
     });
+  });
 
-    it('redirects to MainScreen with a flashMessage', () => {
-      const mockNavigation = { navigate: jest.fn(), setParams: jest.fn() };
-      const actions = { setSubmitting: jest.fn() };
-      const { wrapperInstance } = setup({ navigation: mockNavigation });
+  describe('submitEditedDeck', () => {
+    it('calls editDeck with the new values', () => {
+      const mockValues = jest.fn();
+      const mockEditDeck = jest.fn(() => Promise.resolve());
+      const { wrapperInstance } = setup({ editDeck: mockEditDeck });
 
-      wrapperInstance.handleSubmit({ title: 'Jest is cool' }, actions);
+      wrapperInstance.submitEditedDeck(mockValues);
 
-      expect(mockNavigation.navigate).toHaveBeenCalledWith(
-        'Main', { flashMessage: 'Deck has been successfully edited' }
+      expect(mockEditDeck).toHaveBeenCalledWith(mockValues);
+    });
+
+    it('then hides the progressDialog', async () => {
+      const mockEditDeck = jest.fn(() => Promise.resolve());
+      const { wrapperInstance } = setup({ editDeck: mockEditDeck });
+      jest.spyOn(wrapperInstance, 'setState');
+
+      await wrapperInstance.submitEditedDeck();
+
+      expect(
+        wrapperInstance.setState
+      ).toHaveBeenCalledWith({ progressDialogVisible: false });
+    });
+
+    it('then redirects to MainScreen with a flashMessage', async () => {
+      const mockNavigate = jest.fn();
+      const mockEditDeck = jest.fn(() => Promise.resolve());
+      const { wrapperInstance } = setup({ editDeck: mockEditDeck });
+      wrapperInstance.props.navigation.navigate = mockNavigate;
+
+      await wrapperInstance.submitEditedDeck();
+
+      expect(mockNavigate).toHaveBeenCalledWith(
+        'Main',
+        { flashMessage: 'Deck has been successfully edited' }
       );
     });
   });
