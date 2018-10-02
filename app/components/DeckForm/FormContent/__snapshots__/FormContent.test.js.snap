@@ -3,7 +3,43 @@
 exports[`FormContent renders properly 1`] = `
 <ScrollView>
   <C
-    autoFocus={true}
+    component={[Function]}
+    label="Title"
+    name="title"
+  />
+  <Headline>
+    Cards
+  </Headline>
+  <Fadable
+    fade={false}
+    key="1"
+    onAnimationEnd={[Function]}
+  >
+    <Flashcard
+      onFlashcardDeleted={[Function]}
+    >
+      <C
+        component={[Function]}
+        label="Question"
+        mode="outlined"
+        multiline={true}
+        name="questions.0.question"
+      />
+      <C
+        component={[Function]}
+        label="Answer"
+        mode="outlined"
+        multiline={true}
+        name="questions.0.answer"
+      />
+    </Flashcard>
+  </Fadable>
+</ScrollView>
+`;
+
+exports[`FormContent renders properly when values are dirty 1`] = `
+<ScrollView>
+  <C
     component={[Function]}
     label="Title"
     name="title"

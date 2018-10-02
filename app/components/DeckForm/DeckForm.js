@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Formik } from 'formik';
+import { Formik, FieldArray } from 'formik';
 import * as Yup from 'yup';
 import uuid from 'uuid';
 import { View, KeyboardAvoidingView } from 'react-native';
@@ -15,7 +15,8 @@ export const FormikDeckForm = ({ handleSubmit, initialValues, formRef }) => {
     questions: Yup.array().of(
       Yup.object().shape({
         question: Yup.string().required('Required'),
-        answer: Yup.string().required('Required')
+        answer: Yup.string().required('Required'),
+        id: Yup.string().required('Required')
       })
     )
   });
@@ -27,30 +28,26 @@ export const FormikDeckForm = ({ handleSubmit, initialValues, formRef }) => {
       enableReinitialize
       validateOnBlur={false}
       ref={formRef}
-      component={DeckForm}
+      render={formikProps => (
+        <FieldArray name="questions" component={DeckForm} />
+      )}
       onSubmit={(values, actions) => handleSubmit(values, actions)}
     />
   );
 };
 
 export class DeckForm extends Component {
-  addNewQuestion = () => {
-    const { values, setFieldValue } = this.props;
-    const index = values.questions.length;
+  addNewFlashcard = () => {
+    const { push } = this.props;
 
-    setFieldValue(`questions.${index}.question`, '');
-    setFieldValue(`questions.${index}.answer`, '');
-    setFieldValue(`questions.${index}.id`, uuid());
+    push({ question: '', answer: '', id: uuid() });
   }
 
-  handleRemoveFlashcard = id => {
-    const { values, setFieldValue } = this.props;
+  handleFlashcardDeleted = index => {
+    const { remove } = this.props;
 
-    const questions = values.questions.filter(question => question.id !== id);
-    setFieldValue('questions', questions);
+    remove(index);
   }
-
-  setScrollViewRef = element => this.scrollView = element;
 
   render() {
     return (
@@ -62,13 +59,12 @@ export class DeckForm extends Component {
           keyboardVerticalOffset={Header.HEIGHT + 35}
         >
           <FormContent
-            scrollViewRef={this.setScrollViewRef}
-            onFlashcardDeleted={this.handleRemoveFlashcard}
-            {...this.props}
+            onFlashcardDeleted={this.handleFlashcardDeleted}
+            {...this.props.form}
           />
         </KeyboardAvoidingView>
         <BottomRightContainer right={16} bottom={16} >
-          <FAB handlePress={() => this.addNewQuestion()} />
+          <FAB handlePress={this.addNewFlashcard} />
         </BottomRightContainer>
       </View>
     );

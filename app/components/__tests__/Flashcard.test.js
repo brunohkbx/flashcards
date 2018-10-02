@@ -10,7 +10,9 @@ describe('Flashcard', () => {
 
     const wrapper = shallow(<Flashcard {...defaultProps} />);
 
-    const deleteFlashcard = () => wrapper.find('DeleteIcon').simulate('press');
+    const deleteFlashcard = () => {
+      wrapper.find('withTheme(IconButton)').simulate('press');
+    }
 
     return { wrapper, deleteFlashcard };
   }
@@ -21,7 +23,7 @@ describe('Flashcard', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('does not render a action when onFlashcardDeleted is null', () => {
+  it('does not render an action when onFlashcardDeleted is null', () => {
     const { wrapper } = setup({ onFlashcardDeleted: null })
 
     expect(wrapper).toMatchSnapshot();

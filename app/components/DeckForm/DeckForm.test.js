@@ -37,11 +37,10 @@ describe('FormikDeckForm', () => {
 describe('DeckForm', () => {
   const setup = propOverrides => {
     const defaultProps = Object.assign({
-      handleChange: jest.fn(() => jest.fn),
-      handleBlur: jest.fn(() => jest.fn),
-      touched: {},
-      errors: {},
-      values: {},
+      form: {
+        handleChange: jest.fn(() => jest.fn),
+        values: {},
+      }
     }, propOverrides);
 
     const wrapper = shallow(<DeckForm {...defaultProps} />);
@@ -56,64 +55,31 @@ describe('DeckForm', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  describe('addNewQuestion', () => {
+  describe('addNewFlashcard', () => {
     it('pushes a new empty question into formik values', () => {
-      const values = { questions: [] };
-      const mockSetFieldValue = jest.fn();
-      const { wrapperInstance } = setup(
-        { values,
-          setFieldValue: mockSetFieldValue
+      const mockPush = jest.fn();
+      const { wrapperInstance } = setup({ push: mockPush });
+
+      wrapperInstance.addNewFlashcard();
+
+      expect(mockPush).toHaveBeenCalledWith(
+        {
+          question: '',
+          answer: '',
+          id: expect.any(String)
         }
       );
-
-      wrapperInstance.addNewQuestion();
-
-      expect(
-        mockSetFieldValue
-      ).toHaveBeenCalledWith('questions.0.question', '');
-
-      expect(
-        mockSetFieldValue
-      ).toHaveBeenCalledWith('questions.0.answer', '');
-
-      expect(
-        mockSetFieldValue
-      ).toHaveBeenCalledWith('questions.0.id', expect.any(String));
     });
   });
 
-  describe('handleRemoveFlashcard', () => {
+  describe('handleFlashcardDeleted', () => {
     it('removes the given question from formik values', () => {
-      const values = { questions: [
-          { id: '1' },
-          { id: '2' }
-        ]
-      };
+      const mockRemove = jest.fn();
+      const { wrapperInstance } = setup({ remove: mockRemove });
 
-      const mockSetFieldValue = jest.fn();
+      wrapperInstance.handleFlashcardDeleted('1');
 
-      const { wrapperInstance } = setup(
-        { values,
-          setFieldValue: mockSetFieldValue
-        }
-      );
-
-      wrapperInstance.handleRemoveFlashcard('1');
-
-      expect(
-        mockSetFieldValue
-      ).toHaveBeenCalledWith('questions', [{ id: '2' }]);
-    });
-  });
-
-  describe('setScrollViewRef', () => {
-    it('assigns a ref to this.scrollView', () => {
-      const mockScrollView = jest.fn();
-      const { wrapperInstance } = setup();
-
-      wrapperInstance.setScrollViewRef(mockScrollView);
-
-      expect(wrapperInstance.scrollView).toEqual(mockScrollView);
+      expect(mockRemove).toHaveBeenCalledWith('1');
     });
   });
 });

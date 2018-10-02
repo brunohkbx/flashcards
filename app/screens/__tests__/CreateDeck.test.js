@@ -1,6 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { CreateDeck } from '../CreateDeck';
+import * as helpers from '../../lib/helpers';
 
 describe('CreateDeck', () => {
   const setup = propOverrides => {
@@ -37,26 +38,29 @@ describe('CreateDeck', () => {
   });
 
   describe('handleSubmit', () => {
-    it('calls createDeck', () => {
-      const mockCreateDeck = jest.fn();
-      const actions = { setSubmitting: jest.fn() };
+    it('displays the progressDialog', async () => {
+      const mockCreateDeck = jest.fn(() => Promise.resolve());
       const { wrapperInstance } = setup({ createDeck: mockCreateDeck });
+      jest.spyOn(wrapperInstance, 'setState');
 
-      wrapperInstance.handleSubmit({}, actions);
+      await wrapperInstance.handleSubmit({}, {});
 
-      expect(mockCreateDeck).toHaveBeenCalledWith({});
+      expect(
+        wrapperInstance.setState
+      ).toHaveBeenCalledWith({ progressDialogVisible: true });
     });
 
-    it('redirects to MainScreen with a flashMessage', () => {
-      const mockNavigation = { navigate: jest.fn(), setParams: jest.fn() };
-      const actions = { setSubmitting: jest.fn() };
-      const { wrapperInstance } = setup({ navigation: mockNavigation });
+    it('waits for 1000 ms and then calls submitCreatedDeck', async () => {
+      const mockValues = jest.fn();
+      const mockCreateDeck = jest.fn(() => Promise.resolve());
+      const { wrapperInstance } = setup({ createDeck: mockCreateDeck });
+      jest.spyOn(helpers, 'waitFor');
+      jest.spyOn(wrapperInstance, 'submitCreatedDeck');
 
-      wrapperInstance.handleSubmit({ title: 'Jest is cool' }, actions);
+      await wrapperInstance.handleSubmit(mockValues, {});
 
-      expect(mockNavigation.navigate).toHaveBeenCalledWith(
-        'Main', { flashMessage: 'Deck has been successfully created'}
-      );
+      expect(helpers.waitFor).toHaveBeenCalledWith(1000);
+      expect(wrapperInstance.submitCreatedDeck).toHaveBeenCalledWith(mockValues);
     });
   });
 
@@ -69,6 +73,44 @@ describe('CreateDeck', () => {
       wrapperInstance.submitForm();
 
       expect(mockSubmitForm).toHaveBeenCalled();
+    });
+  });
+
+  describe('submitCreatedDeck', () => {
+    it('calls createDeck with the new values', () => {
+      const mockValues = jest.fn();
+      const mockCreateDeck = jest.fn(() => Promise.resolve());
+      const { wrapperInstance } = setup({ createDeck: mockCreateDeck });
+
+      wrapperInstance.submitCreatedDeck(mockValues);
+
+      expect(mockCreateDeck).toHaveBeenCalledWith(mockValues);
+    });
+
+    it('then hides the progressDialog', async () => {
+      const mockCreateDeck = jest.fn(() => Promise.resolve());
+      const { wrapperInstance } = setup({ createDeck: mockCreateDeck });
+      jest.spyOn(wrapperInstance, 'setState');
+
+      await wrapperInstance.submitCreatedDeck();
+
+      expect(
+        wrapperInstance.setState
+      ).toHaveBeenCalledWith({ progressDialogVisible: false });
+    });
+
+    it('then redirects to MainScreen with a flashMessage', async () => {
+      const mockNavigate = jest.fn();
+      const mockCreateDeck = jest.fn(() => Promise.resolve());
+      const { wrapperInstance } = setup({ createDeck: mockCreateDeck });
+      wrapperInstance.props.navigation.navigate = mockNavigate;
+
+      await wrapperInstance.submitCreatedDeck();
+
+      expect(mockNavigate).toHaveBeenCalledWith(
+        'Main',
+        { flashMessage: 'Deck has been successfully created' }
+      );
     });
   });
 

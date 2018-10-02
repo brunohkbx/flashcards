@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Colors, Appbar } from 'react-native-paper';
 import Container from '../components/Container';
 import DeckForm from '../components/DeckForm';
 import { editDeck } from '../actions';
-import { Colors, Appbar } from 'react-native-paper';
+import DialogWithLoadingIndicator from '../components/DialogWithLoadingIndicator';
+import { waitFor } from '../lib/helpers';
 
 export class EditDeck extends Component {
   static navigationOptions = ({ navigation }) => {
@@ -17,32 +19,45 @@ export class EditDeck extends Component {
     };
   };
 
+  state = {
+    progressDialogVisible: false
+  }
+
   componentDidMount() {
     this.props.navigation.setParams({ submitForm: this.submitForm });
   }
 
   handleSubmit = (values, actions) => {
-    const { editDeck, navigation } = this.props;
-
-    editDeck(values);
-    actions.setSubmitting(false);
-    navigation.navigate(
-      'Main',
-      { flashMessage: 'Deck has been successfully edited' }
-    );
+    this.setState({ progressDialogVisible: true });
+    return waitFor(1000).then(() => this.submitEditedDeck(values));
   }
 
   submitForm = () => this.form.submitForm();
 
+  setFormRef = element => this.form = element;
+
+  submitEditedDeck = values => {
+    const { editDeck, navigation: { navigate } } = this.props;
+
+    return editDeck(values)
+      .then(() => this.setState({ progressDialogVisible: false }))
+      .then(() => navigate('Main', { flashMessage: 'Deck has been successfully edited' }))
+  }
+
   render() {
     const { deck } = this.props;
+    const { progressDialogVisible } = this.state;
 
     return (
       <Container>
         <DeckForm
           initialValues={deck}
-          formRef={node => this.form = node}
+          formRef={this.setFormRef}
           handleSubmit={this.handleSubmit}
+        />
+        <DialogWithLoadingIndicator
+          visible={progressDialogVisible}
+          loadingMessage="Editing....."
         />
       </Container>
     );

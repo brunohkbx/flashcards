@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Flashcard does not render a action when onFlashcardDeleted is null 1`] = `
+exports[`Flashcard does not render an action when onFlashcardDeleted is null 1`] = `
 <withTheme(Card)
   style={
     Object {
@@ -8,7 +8,13 @@ exports[`Flashcard does not render a action when onFlashcardDeleted is null 1`] 
     }
   }
 >
-  <Styled(Card.Content) />
+  <Card.Content
+    style={
+      Object {
+        "paddingTop": 16,
+      }
+    }
+  />
 </withTheme(Card)>
 `;
 
@@ -20,15 +26,20 @@ exports[`Flashcard renders properly 1`] = `
     }
   }
 >
-  <Styled(Card.Content) />
   <Styled(Card.Actions)>
-    <Styled(Component)>
-      <DeleteIcon
-        color="#6200ee"
-        onPress={[MockFunction]}
-        size={24}
-      />
-    </Styled(Component)>
+    <withTheme(IconButton)
+      color="#6200ee"
+      icon="close"
+      onPress={[MockFunction]}
+      style={
+        Object {
+          "marginVertical": 0,
+        }
+      }
+    />
   </Styled(Card.Actions)>
+  <Card.Content
+    style={null}
+  />
 </withTheme(Card)>
 `;
