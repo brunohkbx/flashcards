@@ -6,6 +6,7 @@ import { Field } from 'formik';
 import FormInput from '../FormInput/FormInput';
 import Flashcard from '../../Flashcard';
 import { Fadable } from '../../Animations';
+import { waitFor } from '../../../lib/helpers';
 
 class FormContent extends Component {
   state = {
@@ -37,7 +38,9 @@ class FormContent extends Component {
             <Fadable
               key={question.id}
               fade={flashcardToRemove === index}
-              onAnimationEnd={() => this.deleteDeck(index)}
+              onAnimationEnd={
+                () => waitFor(10).then(() => this.deleteDeck(index))
+              }
             >
               <Flashcard
                 onFlashcardDeleted={
