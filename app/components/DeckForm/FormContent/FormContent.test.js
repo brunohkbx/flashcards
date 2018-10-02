@@ -38,16 +38,18 @@ describe('FormContent', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  describe('handleFlashcardDelete', () => {
+  describe('deleteDeck', () => {
     it('sets flashcardToRemove to null and calls onFlashcardDeleted as callback', () => {
-      const { wrapperInstance } = setup();
+      const mockOnFlashcardDeleted = jest.fn();
+      const { wrapperInstance } = setup({ onFlashcardDeleted: mockOnFlashcardDeleted });
       jest.spyOn(wrapperInstance, 'setState');
 
-      wrapperInstance.handleFlashcardDelete('1');
+      wrapperInstance.deleteDeck('1');
 
       expect(wrapperInstance.setState).toHaveBeenCalledWith(
         { flashcardToRemove: null }, expect.any(Function)
       );
+      expect(mockOnFlashcardDeleted).toHaveBeenCalled();
     });
   });
 });

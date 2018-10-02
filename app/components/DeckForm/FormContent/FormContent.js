@@ -12,25 +12,18 @@ class FormContent extends Component {
     flashcardToRemove: null
   }
 
-  handleFlashcardDelete = id => {
+  deleteDeck = index => {
     const { onFlashcardDeleted } = this.props;
 
-    this.setState({ flashcardToRemove: null }, () => onFlashcardDeleted(id));
+    this.setState({ flashcardToRemove: null }, () => onFlashcardDeleted(index));
   };
 
   render() {
-    const {
-      handleChange,
-      values,
-      scrollViewRef
-    } = this.props;
-
+    const { values, handleChange } = this.props;
     const { flashcardToRemove } = this.state;
 
     return (
-      <ScrollView
-        ref={scrollViewRef}
-      >
+      <ScrollView>
         <Field
           name="title"
           label="Title"
@@ -43,12 +36,12 @@ class FormContent extends Component {
           values.questions.map((question, index) => (
             <Fadable
               key={question.id}
-              fade={flashcardToRemove === question.id}
-              onAnimationEnd={() => this.handleFlashcardDelete(question.id)}
+              fade={flashcardToRemove === index}
+              onAnimationEnd={() => this.deleteDeck(index)}
             >
               <Flashcard
                 onFlashcardDeleted={
-                  () => this.setState({ flashcardToRemove: question.id })
+                  () => this.setState({ flashcardToRemove: index })
                 }
               >
                 <Field
@@ -80,7 +73,6 @@ class FormContent extends Component {
 FormContent.propTypes = {
   handleChange: PropTypes.func.isRequired,
   values: PropTypes.object.isRequired,
-  scrollViewRef: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
   onFlashcardDeleted: PropTypes.func.isRequired
 };
 

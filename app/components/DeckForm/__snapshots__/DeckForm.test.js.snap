@@ -20,12 +20,8 @@ exports[`DeckForm renders properly 1`] = `
     }
   >
     <FormContent
-      errors={Object {}}
-      handleBlur={[MockFunction]}
       handleChange={[MockFunction]}
       onFlashcardDeleted={[Function]}
-      scrollViewRef={[Function]}
-      touched={Object {}}
       values={Object {}}
     />
   </KeyboardAvoidingView>
@@ -42,10 +38,10 @@ exports[`DeckForm renders properly 1`] = `
 
 exports[`FormikDeckForm renders properly 1`] = `
 <Formik
-  component={[Function]}
   enableReinitialize={true}
   isInitialValid={false}
   onSubmit={[Function]}
+  render={[Function]}
   validateOnBlur={false}
   validateOnChange={true}
   validationSchema={
@@ -100,6 +96,7 @@ exports[`FormikDeckForm renders properly 1`] = `
             "_exclusive": Object {},
             "_mutate": false,
             "_nodes": Array [
+              "id",
               "answer",
               "question",
             ],
@@ -115,6 +112,35 @@ exports[`FormikDeckForm renders properly 1`] = `
             },
             "fields": Object {
               "answer": StringSchema {
+                "_blacklist": RefSet {
+                  "list": Set {},
+                  "refs": Map {},
+                },
+                "_conditions": Array [],
+                "_deps": Array [],
+                "_exclusive": Object {
+                  "required": false,
+                },
+                "_mutate": false,
+                "_options": Object {
+                  "abortEarly": true,
+                  "recursive": true,
+                },
+                "_type": "string",
+                "_typeError": [Function],
+                "_whitelist": RefSet {
+                  "list": Set {},
+                  "refs": Map {},
+                },
+                "tests": Array [
+                  [Function],
+                  [Function],
+                ],
+                "transforms": Array [
+                  [Function],
+                ],
+              },
+              "id": StringSchema {
                 "_blacklist": RefSet {
                   "list": Set {},
                   "refs": Map {},
