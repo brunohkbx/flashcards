@@ -1,13 +1,27 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`FormContent renders properly 1`] = `
-<ScrollViewMock>
+<ScrollViewMock
+  contentContainerStyle={
+    Array [
+      Object {
+        "flexGrow": 1,
+      },
+    ]
+  }
+>
   <C
     component={[Function]}
     label="Title"
     name="title"
   />
-  <Headline>
+  <Headline
+    style={
+      Object {
+        "marginTop": 25,
+      }
+    }
+  >
     Cards
   </Headline>
   <Fadable
@@ -37,14 +51,56 @@ exports[`FormContent renders properly 1`] = `
 </ScrollViewMock>
 `;
 
-exports[`FormContent renders properly when values are dirty 1`] = `
-<ScrollViewMock>
+exports[`FormContent renders properly when there are not any flashcards 1`] = `
+<ScrollViewMock
+  contentContainerStyle={
+    Array [
+      Object {
+        "flexGrow": 1,
+      },
+    ]
+  }
+>
   <C
     component={[Function]}
     label="Title"
     name="title"
   />
-  <Headline>
+  <Headline
+    style={
+      Object {
+        "marginTop": 25,
+      }
+    }
+  >
+    Cards
+  </Headline>
+  <NoContent />
+</ScrollViewMock>
+`;
+
+exports[`FormContent renders properly when values are dirty 1`] = `
+<ScrollViewMock
+  contentContainerStyle={
+    Array [
+      Object {
+        "flexGrow": 1,
+      },
+    ]
+  }
+>
+  <C
+    component={[Function]}
+    label="Title"
+    name="title"
+  />
+  <Headline
+    style={
+      Object {
+        "marginTop": 25,
+      }
+    }
+  >
     Cards
   </Headline>
   <Fadable

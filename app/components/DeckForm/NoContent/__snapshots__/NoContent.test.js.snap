@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NoContent renders properly 1`] = `
+<Styled(Component)>
+  <Styled(Component)
+    backgroundColor="#ffffff"
+    borderRadius={50}
+    height={100}
+    width={100}
+  >
+    <Image
+      source={1}
+      style={
+        Object {
+          "height": 64,
+          "width": 64,
+        }
+      }
+    />
+  </Styled(Component)>
+  <Caption
+    style={
+      Object {
+        "fontSize": 18,
+      }
+    }
+  >
+    No flashcards
+  </Caption>
+</Styled(Component)>
+`;
