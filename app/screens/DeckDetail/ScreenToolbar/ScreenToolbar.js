@@ -11,7 +11,7 @@ class ScreenToolbar extends Component {
   }
 
   render() {
-    const { navigation } = this.props;
+    const { navigation, quizDisabled } = this.props;
 
     return (
       <Appbar.Header>
@@ -20,6 +20,7 @@ class ScreenToolbar extends Component {
         <Appbar.Action
           icon="question-answer"
           onPress={() => this.navigateTo('Quiz')}
+          disabled={quizDisabled}
         />
         <Appbar.Action
           icon="edit"
@@ -31,7 +32,12 @@ class ScreenToolbar extends Component {
 }
 
 ScreenToolbar.propTypes = {
-  navigation: PropTypes.object.isRequired
+  navigation: PropTypes.object.isRequired,
+  quizDisabled: PropTypes.bool
+};
+
+ScreenToolbar.defaultProps = {
+  quizDisabled: false
 };
 
 export default ScreenToolbar;

@@ -8,8 +8,15 @@ exports[`NoContent renders properly 1`] = `
     height={100}
     width={100}
   >
-    <FlashcardIcon
-      size={50}
+    <Image
+      source={1}
+      style={
+        Object {
+          "backgroundColor": "#ffffff",
+          "height": 64,
+          "width": 64,
+        }
+      }
     />
   </Styled(Component)>
   <Caption
@@ -21,5 +28,17 @@ exports[`NoContent renders properly 1`] = `
   >
     No flashcards
   </Caption>
+  <withTheme(Button)
+    mode="contained"
+    onPress={[MockFunction]}
+    primary={true}
+    style={
+      Object {
+        "marginTop": 10,
+      }
+    }
+  >
+    Edit Deck
+  </withTheme(Button)>
 </Styled(Component)>
 `;

@@ -28,6 +28,12 @@ describe('ScreenToolbar', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
+  it('renders properly when quiz action is desabled', () => {
+    const { wrapper } = setup({ quizDisabled: true });
+
+    expect(wrapper).toMatchSnapshot();
+  });
+
   describe('navigateTo', () => {
     it('navigates to the given screen and pass deckId as props', () => {
       const mockNavigate = jest.fn();
