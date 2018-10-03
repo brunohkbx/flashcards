@@ -6,6 +6,11 @@ exports[`NoContent renders properly 1`] = `
     backgroundColor="#ffffff"
     borderRadius={50}
     height={100}
+    style={
+      Object {
+        "marginBottom": 15,
+      }
+    }
     width={100}
   >
     <Image
@@ -18,14 +23,8 @@ exports[`NoContent renders properly 1`] = `
       }
     />
   </Styled(Component)>
-  <Caption
-    style={
-      Object {
-        "fontSize": 18,
-      }
-    }
-  >
+  <Styled(Caption)>
     No flashcards
-  </Caption>
+  </Styled(Caption)>
 </Styled(Component)>
 `;

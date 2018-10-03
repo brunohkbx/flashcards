@@ -8,8 +8,15 @@ exports[`Result renders properly 1`] = `
     height={100}
     width={100}
   >
-    <AssignmentIcon
-      size={50}
+    <Image
+      source={1}
+      style={
+        Object {
+          "backgroundColor": "#ffffff",
+          "height": 64,
+          "width": 64,
+        }
+      }
     />
   </Styled(Component)>
   <Headline>

@@ -1,8 +1,9 @@
 import React from 'react';
 import { Image } from 'react-native';
-import { Caption, Colors } from 'react-native-paper';
+import { Colors } from 'react-native-paper';
 import CenteredContainer from '../../../components/CenteredContainer';
 import Avatar from '../../../components/Avatar';
+import AvatarDescription from '../../../components/AvatarDescription';
 
 const NoContent = () => {
   return (
@@ -12,13 +13,14 @@ const NoContent = () => {
         height={100}
         borderRadius={50}
         backgroundColor={Colors.white}
+        style={{ marginBottom: 15 }}
       >
         <Image
           source={require('../../../assets/images/flashcard.png')}
           style={{ width: 64, height: 64 }}
         />
       </Avatar>
-      <Caption style={{ fontSize: 18}}>No flashcards</Caption>
+      <AvatarDescription>No flashcards</AvatarDescription>
     </CenteredContainer>
   );
 };

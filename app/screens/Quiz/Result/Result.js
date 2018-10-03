@@ -1,9 +1,9 @@
 import React from 'react';
+import { Image } from 'react-native';
 import PropTypes from 'prop-types';
 import { Colors, Headline, Subheading, Button } from 'react-native-paper';
 import CenteredContainer from '../../../components/CenteredContainer';
 import Avatar from '../../../components/Avatar';
-import { AssignmentIcon } from '../../../components/Icons';
 
 const Result = ({ score, totalQuestions, onRestartQuiz }) => {
   return (
@@ -14,7 +14,10 @@ const Result = ({ score, totalQuestions, onRestartQuiz }) => {
         borderRadius={50}
         backgroundColor={Colors.white}
       >
-        <AssignmentIcon size={50} />
+        <Image
+          source={require('../../../assets/images/clipboard.png')}
+          style={{ width: 64, height: 64, backgroundColor: Colors.white }}
+        />
       </Avatar>
       <Headline>Congratulations, you're done</Headline>
       <Subheading>

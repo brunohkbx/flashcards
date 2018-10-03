@@ -1,1 +1,0 @@
-export AssignmentIcon from './AssignmentIcon';
