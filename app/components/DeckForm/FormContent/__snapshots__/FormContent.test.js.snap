@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`FormContent renders properly 1`] = `
-<ScrollView>
+<ScrollViewMock>
   <C
     component={[Function]}
     label="Title"
@@ -34,11 +34,11 @@ exports[`FormContent renders properly 1`] = `
       />
     </Flashcard>
   </Fadable>
-</ScrollView>
+</ScrollViewMock>
 `;
 
 exports[`FormContent renders properly when values are dirty 1`] = `
-<ScrollView>
+<ScrollViewMock>
   <C
     component={[Function]}
     label="Title"
@@ -72,5 +72,5 @@ exports[`FormContent renders properly when values are dirty 1`] = `
       />
     </Flashcard>
   </Fadable>
-</ScrollView>
+</ScrollViewMock>
 `;
