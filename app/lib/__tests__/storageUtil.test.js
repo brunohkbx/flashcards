@@ -1,14 +1,16 @@
 import * as storageUtil from '../storageUtil';
 import { AsyncStorage } from 'react-native';
 
-describe('Storage actions', () => {
+describe('Storage deck actions', () => {
   describe('getDecks', () => {
     it('calls getItem from AsyncStorage', () => {
       jest.spyOn(AsyncStorage, 'getItem');
 
       storageUtil.getDecks();
 
-      expect(AsyncStorage.getItem).toHaveBeenCalled();
+      expect(
+        AsyncStorage.getItem
+      ).toHaveBeenCalledWith(storageUtil.DECK_STORAGE_KEY);
     });
   });
 
@@ -37,9 +39,10 @@ describe('Storage actions', () => {
 
       storageUtil.createDeck(deck);
 
-      expect(
-        AsyncStorage.mergeItem
-      ).toHaveBeenCalledWith(expect.anything(), JSON.stringify(deck));
+      expect(AsyncStorage.mergeItem).toHaveBeenCalledWith(
+        storageUtil.DECK_STORAGE_KEY,
+        JSON.stringify(deck)
+      );
     });
   });
 
@@ -104,9 +107,10 @@ describe('Storage actions', () => {
 
       await storageUtil.deleteDeck('281f030c');
 
-      expect(
-        AsyncStorage.setItem
-      ).toHaveBeenCalledWith(expect.anything(), expectedResult);
+      expect(AsyncStorage.setItem).toHaveBeenCalledWith(
+        storageUtil.DECK_STORAGE_KEY,
+        expectedResult
+      );
     });
   });
 
@@ -158,9 +162,38 @@ describe('Storage actions', () => {
 
       await storageUtil.editDeck(editedDeck);
 
-      expect(
-        AsyncStorage.setItem
-      ).toHaveBeenCalledWith(expect.anything(), JSON.stringify(editedDeck));
+      expect(AsyncStorage.setItem).toHaveBeenCalledWith(
+        storageUtil.DECK_STORAGE_KEY,
+        JSON.stringify(editedDeck)
+      );
     });
   });
 })
+
+describe('Storage settings actions', () => {
+  describe('loadSettings', () => {
+    it('calls getItem from AsyncStorage', () => {
+      jest.spyOn(AsyncStorage, 'getItem');
+
+      storageUtil.loadSettings();
+
+      expect(
+        AsyncStorage.getItem
+      ).toHaveBeenCalledWith(storageUtil.SETTINGS_STORAGE_KEY);
+    });
+  });
+
+  describe('updateSettings', () => {
+    it('calls setItem from AsyncStorage with the new settings', () => {
+      const settings = { receiveNotifications: false };
+      jest.spyOn(AsyncStorage, 'setItem');
+
+      storageUtil.updateSettings(settings);
+
+      expect(AsyncStorage.setItem).toHaveBeenCalledWith(
+        storageUtil.SETTINGS_STORAGE_KEY,
+        JSON.stringify(settings)
+      );
+    });
+  });
+});

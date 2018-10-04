@@ -1,0 +1,75 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SettingsDialog renders properly 1`] = `
+<withTheme(Portal)>
+  <withTheme(Dialog)
+    onDismiss={[MockFunction]}
+    visible={false}
+  >
+    <withTheme(Dialog.Title)>
+      Settings
+    </withTheme(Dialog.Title)>
+    <Dialog.Content>
+      <Component
+        style={
+          Object {
+            "alignItems": "center",
+            "flexDirection": "row",
+            "justifyContent": "space-between",
+          }
+        }
+      >
+        <Paragraph>
+          Notifications
+        </Paragraph>
+        <withTheme(Switch)
+          onValueChange={[Function]}
+          value={false}
+        />
+      </Component>
+    </Dialog.Content>
+  </withTheme(Dialog)>
+</withTheme(Portal)>
+`;
+
+exports[`SettingsDialog renders properly when notification permission is not granted 1`] = `
+<withTheme(Portal)>
+  <withTheme(Dialog)
+    onDismiss={[MockFunction]}
+    visible={false}
+  >
+    <withTheme(Dialog.Title)>
+      Settings
+    </withTheme(Dialog.Title)>
+    <Dialog.Content>
+      <Component
+        style={
+          Object {
+            "alignItems": "center",
+            "flexDirection": "row",
+            "justifyContent": "space-between",
+          }
+        }
+      >
+        <Paragraph>
+          Notifications
+        </Paragraph>
+        <withTheme(Switch)
+          onValueChange={[Function]}
+          value={false}
+        />
+      </Component>
+      <withTheme(HelperText)
+        style={
+          Object {
+            "paddingHorizontal": 0,
+          }
+        }
+        type="error"
+      >
+        You need to grant NOTIFICATIONS permission
+      </withTheme(HelperText)>
+    </Dialog.Content>
+  </withTheme(Dialog)>
+</withTheme(Portal)>
+`;

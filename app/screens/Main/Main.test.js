@@ -20,6 +20,7 @@ describe('Main', () => {
       createDeck: jest.fn(),
       fetchDecks: jest.fn(),
       deleteDeck: jest.fn(),
+      loadSettings: jest.fn(),
       navigation: {
         navigate: jest.fn(),
         getParam: jest.fn(),
@@ -89,6 +90,23 @@ describe('Main', () => {
       setup({ fetchDecks: mockFetchDecks });
 
       expect(mockFetchDecks).toHaveBeenCalled();
+    });
+
+    it('loads the settings', () => {
+      const mockLoadSettings = jest.fn();
+
+      setup({ loadSettings: mockLoadSettings });
+
+      expect(mockLoadSettings).toHaveBeenCalled();
+    });
+
+    it('sets openSettingsDialog as navigation params', () => {
+      const mockNavigation = { setParams: jest.fn() };
+      const { wrapperInstance } = setup({ navigation: mockNavigation });
+
+      expect(mockNavigation.setParams).toHaveBeenCalledWith(
+        { openSettingsDialog: wrapperInstance.openSettingsDialog}
+      );
     });
   });
 
@@ -172,6 +190,47 @@ describe('Main', () => {
           }
         }
       );
+    });
+  });
+
+  describe('openSettingsDialog', () => {
+    it('sets settingsDialogVisible to true', () => {
+      const { wrapperInstance } = setup();
+      jest.spyOn(wrapperInstance, 'setState');
+
+      wrapperInstance.openSettingsDialog();
+
+      expect(wrapperInstance.setState).toHaveBeenCalledWith(
+        {
+          settingsDialogVisible: true,
+        }
+      );
+    });
+  });
+
+  describe('closeSettingsDialog', () => {
+    it('sets settingsDialogVisible to false', () => {
+      const { wrapperInstance } = setup();
+      jest.spyOn(wrapperInstance, 'setState');
+
+      wrapperInstance.closeSettingsDialog();
+
+      expect(wrapperInstance.setState).toHaveBeenCalledWith(
+        {
+          settingsDialogVisible: false,
+        }
+      );
+    });
+  });
+
+  describe('addToasterRef', () => {
+    it('assigns a ref to this.toaster', () => {
+      const mockToaster = jest.fn();
+      const { wrapperInstance } = setup();
+
+      wrapperInstance.addToasterRef(mockToaster);
+
+      expect(wrapperInstance.toaster).toEqual(mockToaster);
     });
   });
 

@@ -1,7 +1,8 @@
 import { AsyncStorage } from 'react-native';
 import { pickBy, assign } from 'lodash/object';
 
-const DECK_STORAGE_KEY = 'flashcards:deck';
+export const DECK_STORAGE_KEY      = 'flashcards:deck';
+export const SETTINGS_STORAGE_KEY  = 'flashcards:settings';
 
 export const getDecks = () => {
   return AsyncStorage.getItem(DECK_STORAGE_KEY);
@@ -25,4 +26,12 @@ export const editDeck = deck => {
     .then(decks => AsyncStorage.setItem(
       DECK_STORAGE_KEY, JSON.stringify(decks)
     ));
+}
+
+export const loadSettings = () => {
+  return AsyncStorage.getItem(SETTINGS_STORAGE_KEY);
+}
+
+export const updateSettings = settings => {
+  return AsyncStorage.setItem(SETTINGS_STORAGE_KEY, JSON.stringify(settings));
 }

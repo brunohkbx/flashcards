@@ -4,6 +4,6 @@ export const waitFor = ms => {
   return new Promise(resolve => setTimeout(resolve, ms));
 };
 
-export const getOS= () => {
+export const getOS = () => {
   return Platform.OS;
 };
