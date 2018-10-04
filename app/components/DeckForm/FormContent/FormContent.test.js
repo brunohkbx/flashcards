@@ -44,6 +44,12 @@ describe('FormContent', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
+  it('renders properly when there are not any flashcards', () => {
+    const { wrapper } = setup({ values: { questions: [] }});
+
+    expect(wrapper).toMatchSnapshot();
+  });
+
   describe('deleteFlashcard', () => {
     it('sets flashcardToRemove to null and calls onFlashcardDeleted as callback', () => {
       const mockOnFlashcardDeleted = jest.fn();

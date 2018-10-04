@@ -17,7 +17,6 @@ exports[`NoContent renders properly 1`] = `
       source={1}
       style={
         Object {
-          "backgroundColor": "#ffffff",
           "height": 64,
           "width": 64,
         }
@@ -27,17 +26,5 @@ exports[`NoContent renders properly 1`] = `
   <Styled(Caption)>
     No flashcards
   </Styled(Caption)>
-  <withTheme(Button)
-    mode="contained"
-    onPress={[MockFunction]}
-    primary={true}
-    style={
-      Object {
-        "marginTop": 10,
-      }
-    }
-  >
-    Edit Deck
-  </withTheme(Button)>
 </Styled(Component)>
 `;

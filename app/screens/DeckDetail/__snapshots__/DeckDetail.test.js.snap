@@ -1,12 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`DeckDetail renderIcon renders properly 1`] = `
-<FlashcardIcon
-  color="#ffffff"
-  size={24}
-/>
-`;
-
 exports[`DeckDetail renderItem renders properly 1`] = `
 <Flashcard>
   <withTheme(TextInput)
@@ -38,7 +31,9 @@ exports[`DeckDetail renders properly when deck does not have questions 1`] = `
       }
     }
   >
-    <NoContent />
+    <NoContent
+      onEditButtonPress={[Function]}
+    />
   </KeyboardAvoidingView>
 </Styled(Component)>
 `;

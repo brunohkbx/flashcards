@@ -15,7 +15,15 @@ describe('DeckDetail', () => {
     const wrapper = shallow(<DeckDetail {...defaultProps} />);
     const wrapperInstance = wrapper.instance();
 
-    return { wrapper, wrapperInstance };
+    const pressOnEditButton = () => {
+      wrapper
+        .find('NoContent')
+        .dive()
+        .find('withTheme(Button)')
+        .simulate('press');
+    };
+
+    return { wrapper, wrapperInstance, pressOnEditButton };
   };
 
   it('renders properly when deck has questions', () => {
@@ -39,16 +47,6 @@ describe('DeckDetail', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  describe('renderIcon', () => {
-    it('renders properly', () => {
-      const { wrapperInstance } = setup();
-
-      expect(
-        wrapperInstance.renderIcon({ size: 24, color: Colors.white })
-      ).toMatchSnapshot();
-    });
-  });
-
   describe('renderItem', () => {
     it('renders properly', () => {
       const { wrapperInstance } = setup();
@@ -67,13 +65,33 @@ describe('DeckDetail', () => {
   });
 
   describe('componentDidMount', () => {
-    it('sets this.openDialog as navigation params', () => {
+    it('sets openDialog and quizDisabled as navigation params', () => {
       const mockNavigation = { setParams: jest.fn() };
       const { wrapperInstance } = setup({ navigation: mockNavigation });
 
-      expect(
-        mockNavigation.setParams
-      ).toHaveBeenCalledWith({ openDialog: wrapperInstance.openDialog});
+      expect(mockNavigation.setParams).toHaveBeenCalledWith(
+        {
+          openDialog: wrapperInstance.openDialog,
+          quizDisabled: wrapperInstance.props.deck.questions.length === 0
+        }
+      );
     });
+  });
+
+  test('EditButton of NoContent screen navigates to Edit screen', () => {
+    const mockNavigation = { navigate: jest.fn(), setParams: jest.fn() };
+    const { pressOnEditButton } = setup(
+      {
+        deck: { id: '1', questions: [] },
+        navigation: mockNavigation
+      }
+    );
+
+    pressOnEditButton();
+
+    expect(mockNavigation.navigate).toHaveBeenCalledWith(
+      'EditDeck',
+      { deckId: '1' }
+    );
   });
 });

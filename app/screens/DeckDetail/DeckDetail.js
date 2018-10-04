@@ -5,7 +5,6 @@ import { TextInput } from 'react-native-paper';
 import Container from '../../components/Container';
 import ScreenToolbar from './ScreenToolbar';
 import Flashcard from '../../components/Flashcard';
-import { FlashcardIcon } from '../../components/Icons';
 import NoContent from './NoContent';
 import { Header } from 'react-navigation';
 
@@ -15,11 +14,10 @@ export class DeckDetail extends Component {
       header: <ScreenToolbar
                 navigation={navigation}
                 onDelete={navigation.getParam('openDialog')}
+                quizDisabled={navigation.getParam('quizDisabled')}
               />
     };
   };
-
-  renderIcon = ({size, color}) => <FlashcardIcon size={size} color={color} />
 
   renderItem = ({ item }) => {
     return (
@@ -43,13 +41,18 @@ export class DeckDetail extends Component {
   }
 
   componentDidMount() {
-    const { navigation } = this.props;
+    const { deck, navigation } = this.props;
 
-    navigation.setParams({ openDialog: this.openDialog });
+    navigation.setParams(
+      {
+        openDialog: this.openDialog,
+        quizDisabled: deck.questions.length === 0
+      }
+    );
   }
 
   render() {
-    const { deck } = this.props;
+    const { deck, navigation: { navigate } } = this.props;
 
     return (
       <Container>
@@ -66,7 +69,9 @@ export class DeckDetail extends Component {
             keyExtractor={item => item.id}
           />
           :
-          <NoContent/>
+          <NoContent
+            onEditButtonPress={() => navigate('EditDeck', { deckId: deck.id })}
+          />
         }
         </KeyboardAvoidingView>
       </Container>

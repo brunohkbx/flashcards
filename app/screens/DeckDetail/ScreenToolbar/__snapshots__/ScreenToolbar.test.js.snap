@@ -10,6 +10,30 @@ exports[`ScreenToolbar renders properly 1`] = `
     title="Deck Details"
   />
   <Appbar.Action
+    disabled={false}
+    icon="question-answer"
+    onPress={[Function]}
+    size={24}
+  />
+  <Appbar.Action
+    icon="edit"
+    onPress={[Function]}
+    size={24}
+  />
+</withTheme(Appbar.Header)>
+`;
+
+exports[`ScreenToolbar renders properly when quiz action is desabled 1`] = `
+<withTheme(Appbar.Header)>
+  <Appbar.BackAction
+    accessibilityLabel="Back"
+    onPress={[Function]}
+  />
+  <withTheme(Appbar.Content)
+    title="Deck Details"
+  />
+  <Appbar.Action
+    disabled={true}
     icon="question-answer"
     onPress={[Function]}
     size={24}
