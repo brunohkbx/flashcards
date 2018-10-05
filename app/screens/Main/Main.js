@@ -16,6 +16,10 @@ import {
   deleteDeck,
   loadSettings
 } from '../../actions/index';
+import {
+  scheduleLocalNotification,
+  clearLocalNotification
+} from '../../lib/notifications';
 
 export class Main extends Component {
   static navigationOptions = ({ navigation }) => {
@@ -60,6 +64,13 @@ export class Main extends Component {
           () => this.toaster.showMessage(flashMessage)
         );
       }
+    }
+
+    const { settings } = this.props;
+    if (settings !== prevProps.settings) {
+      settings.receiveNotifications ?
+        scheduleLocalNotification() :
+        clearLocalNotification()
     }
   }
 
@@ -174,7 +185,12 @@ export class Main extends Component {
   }
 }
 
-const mapStateToProps = ({ decks }) => ({ decks: Object.values(decks) });
+const mapStateToProps = ({ decks, settings }) => (
+  {
+    decks: Object.values(decks),
+    settings
+  }
+);
 
 const mapDispatchToProps = dispatch => ({
   fetchDecks:     () =>       dispatch(fetchDecks()),

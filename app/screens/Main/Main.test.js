@@ -1,6 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { Main } from './Main';
+import * as notificationUtil from '../../lib/notifications';
 
 describe('Main', () => {
   const setup = propOverrides => {
@@ -25,6 +26,9 @@ describe('Main', () => {
         navigate: jest.fn(),
         getParam: jest.fn(),
         setParams: jest.fn()
+      },
+      settings: {
+        receiveNotifications: false
       }
     }, propOverrides);
 
@@ -133,6 +137,26 @@ describe('Main', () => {
       wrapper.setProps({ navigation: mockNavigation });
 
       expect(wrapperInstance.setState).not.toHaveBeenCalled();
+    });
+
+    describe('notifications', () => {
+      it('calls scheduleLocalNotification when receiveNotifications transacts from false to true', () => {
+        const { wrapper } = setup({ settings: { receiveNotifications: false }});
+        jest.spyOn(notificationUtil, 'scheduleLocalNotification');
+
+        wrapper.setProps({ settings: { receiveNotifications: true }});
+
+        expect(notificationUtil.scheduleLocalNotification).toHaveBeenCalled();
+      });
+
+      it('calls clearLocalNotification when receiveNotifications transacts from true to false', () => {
+        const { wrapper } = setup({ settings: { receiveNotifications: true }});
+        jest.spyOn(notificationUtil, 'clearLocalNotification');
+
+        wrapper.setProps({ settings: { receiveNotifications: false }});
+
+        expect(notificationUtil.clearLocalNotification).toHaveBeenCalled();
+      });
     });
   });
 

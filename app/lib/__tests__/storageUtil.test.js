@@ -197,3 +197,42 @@ describe('Storage settings actions', () => {
     });
   });
 });
+
+describe('Storage notifications actions', () => {
+  describe('isScheduledNotification', () => {
+    it('calls getItem from AsyncStorage', () => {
+      jest.spyOn(AsyncStorage, 'getItem');
+
+      storageUtil.isScheduledNotification();
+
+      expect(
+        AsyncStorage.getItem
+      ).toHaveBeenCalledWith(storageUtil.NOTIFICATIONS_KEY);
+    });
+  });
+
+  describe('scheduleNotification', () => {
+    it('calls setItem from AsyncStorage with true', () => {
+      jest.spyOn(AsyncStorage, 'setItem');
+
+      storageUtil.scheduleNotification();
+
+      expect(AsyncStorage.setItem).toHaveBeenCalledWith(
+        storageUtil.NOTIFICATIONS_KEY,
+        JSON.stringify(true)
+      );
+    });
+  });
+
+  describe('unscheduleNotification', () => {
+    it('calls removeItem from AsyncStorage', () => {
+      jest.spyOn(AsyncStorage, 'removeItem');
+
+      storageUtil.unscheduleNotification();
+
+      expect(AsyncStorage.removeItem).toHaveBeenCalledWith(
+        storageUtil.NOTIFICATIONS_KEY,
+      );
+    });
+  });
+});

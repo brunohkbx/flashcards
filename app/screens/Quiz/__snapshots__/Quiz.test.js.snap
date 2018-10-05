@@ -4,6 +4,7 @@ exports[`Quiz renders properly when the quiz has ended 1`] = `
 <Styled(Component)>
   <Result
     onRestartQuiz={[Function]}
+    receiveNotifications={false}
     score={1}
     totalQuestions={1}
   />

@@ -13,6 +13,9 @@ describe('Quiz', () => {
             answer: 'A library for managing user interfaces'
           }
         ]
+      },
+      settings: {
+        receiveNotifications: false
       }
     }, propOverrides);
 
@@ -37,6 +40,14 @@ describe('Quiz', () => {
   });
 
   describe('scorePositive', () => {
+    it('returns undefined when component is fading', () => {
+      const { wrapperInstance } = setup();
+
+      wrapperInstance.setState({ fade: true});
+
+      expect(wrapperInstance.scorePositive()).toBeUndefined();
+    });
+
     it('increments the number of correct answer and fade the element', () => {
       const { wrapper, wrapperInstance } = setup();
       const prevState = wrapper.state();
@@ -44,12 +55,20 @@ describe('Quiz', () => {
       wrapperInstance.scorePositive();
 
       expect(wrapper.state()).toMatchObject(
-        { correct: prevState.correct + 1, fade: true}
+        { correct: prevState.correct + 1, fade: true }
       );
     });
   });
 
   describe('scoreNegative', () => {
+    it('returns undefined when component is fading', () => {
+      const { wrapperInstance } = setup();
+
+      wrapperInstance.setState({ fade: true});
+
+      expect(wrapperInstance.scoreNegative()).toBeUndefined();
+    });
+
     it('increments the number of incorrect answer and fade the element', () => {
       const { wrapper, wrapperInstance } = setup();
       const prevState = wrapper.state();
@@ -84,6 +103,25 @@ describe('Quiz', () => {
       expect(wrapper.state()).toMatchObject(
         { currentQuestion: 1, correct: 0, incorrect: 0, fade: false }
       );
+    });
+  });
+
+  describe('totalQuestions', () => {
+    it('returns the amount of questions from the deck', () => {
+      const { wrapperInstance } = setup();
+      const totalQuestions = wrapperInstance.props.deck.questions.length;
+
+      expect(wrapperInstance.totalQuestions).toEqual(totalQuestions);
+    });
+  });
+
+  describe('isFinished', () => {
+    it('checks if currentQuestion - 1 is equal to totalQuestions', () => {
+      const { wrapperInstance } = setup();
+      wrapperInstance.setState({ currentQuestion: 4 });
+      wrapperInstance.totalQuestions = 3;
+
+      expect(wrapperInstance.isFinished()).toBeTruthy();
     });
   });
 });
