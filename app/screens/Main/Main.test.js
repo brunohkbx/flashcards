@@ -1,6 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { Main } from './Main';
+import * as notificationUtil from '../../lib/notifications';
 
 describe('Main', () => {
   const setup = propOverrides => {
@@ -20,10 +21,14 @@ describe('Main', () => {
       createDeck: jest.fn(),
       fetchDecks: jest.fn(),
       deleteDeck: jest.fn(),
+      loadSettings: jest.fn(),
       navigation: {
         navigate: jest.fn(),
         getParam: jest.fn(),
         setParams: jest.fn()
+      },
+      settings: {
+        receiveNotifications: false
       }
     }, propOverrides);
 
@@ -90,6 +95,23 @@ describe('Main', () => {
 
       expect(mockFetchDecks).toHaveBeenCalled();
     });
+
+    it('loads the settings', () => {
+      const mockLoadSettings = jest.fn();
+
+      setup({ loadSettings: mockLoadSettings });
+
+      expect(mockLoadSettings).toHaveBeenCalled();
+    });
+
+    it('sets openSettingsDialog as navigation params', () => {
+      const mockNavigation = { setParams: jest.fn() };
+      const { wrapperInstance } = setup({ navigation: mockNavigation });
+
+      expect(mockNavigation.setParams).toHaveBeenCalledWith(
+        { openSettingsDialog: wrapperInstance.openSettingsDialog}
+      );
+    });
   });
 
   describe('componentDidUpdate', () => {
@@ -115,6 +137,26 @@ describe('Main', () => {
       wrapper.setProps({ navigation: mockNavigation });
 
       expect(wrapperInstance.setState).not.toHaveBeenCalled();
+    });
+
+    describe('notifications', () => {
+      it('calls scheduleLocalNotification when receiveNotifications transacts from false to true', () => {
+        const { wrapper } = setup({ settings: { receiveNotifications: false }});
+        jest.spyOn(notificationUtil, 'scheduleLocalNotification');
+
+        wrapper.setProps({ settings: { receiveNotifications: true }});
+
+        expect(notificationUtil.scheduleLocalNotification).toHaveBeenCalled();
+      });
+
+      it('calls clearLocalNotification when receiveNotifications transacts from true to false', () => {
+        const { wrapper } = setup({ settings: { receiveNotifications: true }});
+        jest.spyOn(notificationUtil, 'clearLocalNotification');
+
+        wrapper.setProps({ settings: { receiveNotifications: false }});
+
+        expect(notificationUtil.clearLocalNotification).toHaveBeenCalled();
+      });
     });
   });
 
@@ -172,6 +214,47 @@ describe('Main', () => {
           }
         }
       );
+    });
+  });
+
+  describe('openSettingsDialog', () => {
+    it('sets settingsDialogVisible to true', () => {
+      const { wrapperInstance } = setup();
+      jest.spyOn(wrapperInstance, 'setState');
+
+      wrapperInstance.openSettingsDialog();
+
+      expect(wrapperInstance.setState).toHaveBeenCalledWith(
+        {
+          settingsDialogVisible: true,
+        }
+      );
+    });
+  });
+
+  describe('closeSettingsDialog', () => {
+    it('sets settingsDialogVisible to false', () => {
+      const { wrapperInstance } = setup();
+      jest.spyOn(wrapperInstance, 'setState');
+
+      wrapperInstance.closeSettingsDialog();
+
+      expect(wrapperInstance.setState).toHaveBeenCalledWith(
+        {
+          settingsDialogVisible: false,
+        }
+      );
+    });
+  });
+
+  describe('addToasterRef', () => {
+    it('assigns a ref to this.toaster', () => {
+      const mockToaster = jest.fn();
+      const { wrapperInstance } = setup();
+
+      wrapperInstance.addToasterRef(mockToaster);
+
+      expect(wrapperInstance.toaster).toEqual(mockToaster);
     });
   });
 

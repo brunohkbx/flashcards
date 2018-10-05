@@ -1,19 +1,42 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { View, FlatList } from 'react-native';
+import { Appbar, Colors } from 'react-native-paper';
 import Deck from '../../components/Deck';
 import ConfirmDialog from '../../components/ConfirmDialog';
-import { fetchDecks, deleteDeck } from '../../actions/index';
 import FAB from '../../components/FAB';
 import Container from '../../components/Container';
 import BottomRightContainer from '../../components/BottomRightContainer';
 import { Movable, Fadable } from '../../components/Animations/index';
 import Toaster from '../../components/Toaster';
 import NoContent from './NoContent';
+import SettingsDialog from './SettingsDialog';
+import {
+  fetchDecks,
+  deleteDeck,
+  loadSettings
+} from '../../actions/index';
+import {
+  scheduleLocalNotification,
+  clearLocalNotification
+} from '../../lib/notifications';
 
 export class Main extends Component {
+  static navigationOptions = ({ navigation }) => {
+    return {
+      headerRight: (
+        <Appbar.Action
+          icon="settings"
+          onPress={navigation.getParam('openSettingsDialog')}
+          color={Colors.white}
+        />
+      )
+    };
+  };
+
   state = {
     dialogVisible: false,
+    settingsDialogVisible: false,
     snackbarVisible: false,
     selectedDeck: {
       id: null,
@@ -22,9 +45,12 @@ export class Main extends Component {
   }
 
   componentDidMount() {
-    const { fetchDecks } = this.props;
+    const { fetchDecks, navigation, loadSettings } = this.props;
 
     fetchDecks();
+    loadSettings();
+
+    navigation.setParams({ openSettingsDialog: this.openSettingsDialog });
   }
 
   componentDidUpdate(prevProps) {
@@ -38,6 +64,13 @@ export class Main extends Component {
           () => this.toaster.showMessage(flashMessage)
         );
       }
+    }
+
+    const { settings } = this.props;
+    if (settings !== prevProps.settings) {
+      settings.receiveNotifications ?
+        scheduleLocalNotification() :
+        clearLocalNotification()
     }
   }
 
@@ -58,6 +91,9 @@ export class Main extends Component {
 
     this.setState({ dialogVisible: false, selectedDeck });
   }
+
+  openSettingsDialog = () => this.setState({ settingsDialogVisible: true })
+  closeSettingsDialog = () => this.setState({ settingsDialogVisible: false })
 
   addToasterRef = element => this.toaster = element;
   closeSnackbar = () => this.setState({ snackbarVisible: false });
@@ -100,7 +136,12 @@ export class Main extends Component {
 
   render() {
     const { decks, navigation } = this.props;
-    const { dialogVisible, selectedDeck, snackbarVisible } = this.state;
+    const {
+      dialogVisible,
+      selectedDeck,
+      snackbarVisible,
+      settingsDialogVisible
+    } = this.state;
 
     return (
       <View style={{flex: 1}}>
@@ -130,6 +171,10 @@ export class Main extends Component {
             content="This deck and all it cards will be deleted. You can edit this deck if you want to change something."
             actionSubmitText="Delete"
           />
+          <SettingsDialog
+            visible={settingsDialogVisible}
+            onDismiss={this.closeSettingsDialog}
+          />
         </Container>
         <Toaster
           ref={this.addToasterRef}
@@ -140,11 +185,17 @@ export class Main extends Component {
   }
 }
 
-const mapStateToProps = ({ decks }) => ({ decks: Object.values(decks) });
+const mapStateToProps = ({ decks, settings }) => (
+  {
+    decks: Object.values(decks),
+    settings
+  }
+);
 
 const mapDispatchToProps = dispatch => ({
-  fetchDecks: () => dispatch(fetchDecks()),
-  deleteDeck: id => dispatch(deleteDeck(id))
+  fetchDecks:     () =>       dispatch(fetchDecks()),
+  deleteDeck:     id =>       dispatch(deleteDeck(id)),
+  loadSettings:   () =>       dispatch(loadSettings())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Main);

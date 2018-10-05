@@ -67,6 +67,10 @@ exports[`Main Movable changes toValue when snackbar is visible 1`] = `
       title="Delete deck?"
       visible={false}
     />
+    <Connect(SettingsDialog)
+      onDismiss={[Function]}
+      visible={false}
+    />
   </Styled(Component)>
   <Toaster
     onDismissCallback={[Function]}
@@ -171,6 +175,10 @@ exports[`Main renders properly 1`] = `
       title="Delete deck?"
       visible={false}
     />
+    <Connect(SettingsDialog)
+      onDismiss={[Function]}
+      visible={false}
+    />
   </Styled(Component)>
   <Toaster
     onDismissCallback={[Function]}
@@ -232,6 +240,10 @@ exports[`Main renders properly when there are not any decks 1`] = `
       handleDismiss={[Function]}
       handleSubmitPress={[Function]}
       title="Delete deck?"
+      visible={false}
+    />
+    <Connect(SettingsDialog)
+      onDismiss={[Function]}
       visible={false}
     />
   </Styled(Component)>

@@ -5,9 +5,8 @@ import { View, ScrollView } from 'react-native';
 import { Button, DefaultTheme } from 'react-native-paper';
 import Container from '../../components/Container';
 import FlashcardCollapsed from '../../components/FlashcardCollapsed';
-import { Fadable } from '../../components/Animations/index';
+import { Fadable } from '../../components/Animations';
 import Result from './Result';
-
 
 const ButtonContainer = styled(View)`
   flex: 1;
@@ -26,10 +25,16 @@ export class Quiz extends Component {
   }
 
   scorePositive = () => this.setState(prevState => {
+    if (this.state.fade)
+      return;
+
     return { correct: prevState.correct + 1, fade: true };
   })
 
   scoreNegative = () => this.setState(prevState => {
+    if (this.state.fade)
+      return;
+
     return { incorrect: prevState.incorrect + 1, fade: true };
   })
 
@@ -41,20 +46,26 @@ export class Quiz extends Component {
     { currentQuestion: 1, correct: 0, incorrect: 0, fade: false }
   )
 
+  totalQuestions = (() => { return this.props.deck.questions.length; })()
+
+  isFinished = () => {
+    const { currentQuestion } = this.state;
+
+    return (currentQuestion - 1) === this.totalQuestions;
+  }
+
   render() {
-    const { deck } = this.props;
+    const { deck, settings } = this.props;
     const { currentQuestion, fade, correct } = this.state;
-    const totalQuestions = deck.questions.length;
-    const finished = (currentQuestion - 1) === totalQuestions;
 
     return (
       <Container>
-        {!finished &&
+        {!this.isFinished() &&
           <ScrollView contentContainerStyle={{flexGrow: 1}}>
             <Fadable fade={fade} onAnimationEnd={this.renderNextFlashcard}>
               <FlashcardCollapsed
                 currentQuestion={currentQuestion}
-                totalQuestions={totalQuestions}
+                totalQuestions={this.totalQuestions}
                 flashcard={deck.questions[currentQuestion - 1]}
               />
             </Fadable>
@@ -78,11 +89,12 @@ export class Quiz extends Component {
             </ButtonContainer>
           </ScrollView>
         }
-        {finished &&
+        {this.isFinished() &&
           <Result
             score={correct}
-            totalQuestions={totalQuestions}
+            totalQuestions={this.totalQuestions}
             onRestartQuiz={this.handleRestartQuiz}
+            receiveNotifications={settings.receiveNotifications}
           />
         }
       </Container>
@@ -90,11 +102,12 @@ export class Quiz extends Component {
   }
 }
 
-const mapStateToProps = ({ decks }, { navigation }) => {
+const mapStateToProps = ({ decks, settings }, { navigation }) => {
   const { deckId } = navigation.state.params;
 
   return {
-    deck: decks[deckId]
+    deck: decks[deckId],
+    settings
   };
 };
 
