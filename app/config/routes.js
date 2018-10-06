@@ -1,10 +1,10 @@
 import { createStackNavigator } from 'react-navigation';
+import { Colors, DefaultTheme } from 'react-native-paper';
 import Main from '../screens/Main';
 import CreateDeck from '../screens/CreateDeck';
 import EditDeck from '../screens/EditDeck';
 import DeckDetail from '../screens/DeckDetail';
 import Quiz from '../screens/Quiz/Quiz';
-import { primaryColor, white } from './theme';
 
 export const RootStack =  createStackNavigator(
   {
@@ -40,9 +40,9 @@ export const RootStack =  createStackNavigator(
     initialRouteName: 'Main',
     navigationOptions: {
       headerStyle: {
-        backgroundColor: primaryColor,
+        backgroundColor: DefaultTheme.colors.primary,
       },
-      headerTintColor: white
+      headerTintColor: Colors.white
     }
   }
 );
