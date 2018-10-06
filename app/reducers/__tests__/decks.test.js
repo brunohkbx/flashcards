@@ -14,7 +14,7 @@ describe('decks reducer', () => {
         questions: [],
         title: 'React'
       }
-    }
+    };
 
     const decks = {
       '1': {
@@ -27,20 +27,20 @@ describe('decks reducer', () => {
         questions: [],
         title: 'Redux'
       }
-    }
+    };
 
     return {
       deck,
       decks
-    }
-  }
+    };
+  };
 
   it('handles CREATE_DECK', () => {
     const { deck } = setup();
 
     expect(
       reducer({}, { type: CREATE_DECK, deck })
-    ).toEqual(deck)
+    ).toEqual(deck);
   });
 
   it('handles FETCH_DECKS', () => {
@@ -48,7 +48,7 @@ describe('decks reducer', () => {
 
     expect(
       reducer({}, { type: FETCH_DECKS, decks })
-    ).toEqual(decks)
+    ).toEqual(decks);
   });
 
   it('handles DELETE_DECK', () => {
@@ -62,7 +62,7 @@ describe('decks reducer', () => {
         questions: [],
         title: 'Redux'
       }
-    })
+    });
   });
 
   it('handles EDIT_DECK', () => {
@@ -72,7 +72,7 @@ describe('decks reducer', () => {
         title: 'React 16',
         id: '1'
       }
-    }
+    };
 
     expect(
       reducer(deck, { type: EDIT_DECK, deck: newDeck })
@@ -81,12 +81,12 @@ describe('decks reducer', () => {
         id: '1',
         title: 'React 16'
       }
-    })
+    });
   });
 
   it('handles default state', () => {
     expect(
       reducer(undefined, { type: undefined })
-    ).toEqual({})
+    ).toEqual({});
   });
-})
+});

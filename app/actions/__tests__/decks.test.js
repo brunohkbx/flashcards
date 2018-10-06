@@ -17,8 +17,8 @@ describe('decks actions', () => {
 
     return {
       store
-    }
-  }
+    };
+  };
 
   describe('createDeck', () => {
     it('stores the deck in the storage and dispatches CREATE_DECK', async () => {
@@ -71,4 +71,4 @@ describe('decks actions', () => {
       });
     });
   });
-})
+});

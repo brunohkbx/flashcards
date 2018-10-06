@@ -2,12 +2,12 @@ import * as notificationUtil from '../notifications';
 import { Notifications } from 'expo';
 import * as storageUtil from '../storageUtil';
 
-jest.mock('expo', ()=>({
+jest.mock('expo', () => ({
   Notifications: {
     cancelAllScheduledNotificationsAsync: jest.fn(),
     scheduleLocalNotificationAsync: jest.fn()
   }
-}))
+}));
 
 describe('notifications', () => {
   describe('clearLocalNotification', () => {
@@ -22,7 +22,9 @@ describe('notifications', () => {
     it('calls cancelAllScheduledNotificationsAsync', async () => {
       await notificationUtil.clearLocalNotification();
 
-      expect(Notifications.cancelAllScheduledNotificationsAsync).toHaveBeenCalled();
+      expect(
+        Notifications.cancelAllScheduledNotificationsAsync
+      ).toHaveBeenCalled();
     });
   });
 

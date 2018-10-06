@@ -17,7 +17,7 @@ describe('FlashcardCollapsed', () => {
     const wrapperInstance = wrapper.instance();
 
     return { wrapper, wrapperInstance };
-  }
+  };
 
   it('renders properly', () => {
     const { wrapper } = setup();

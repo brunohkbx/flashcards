@@ -20,10 +20,10 @@ export const FAB = ({ primary, handlePress, theme }) => {
 FAB.propTypes = {
   primary: PropTypes.bool,
   handlePress: PropTypes.func.isRequired
-}
+};
 
 FAB.defaultProps = {
   primary: false
-}
+};
 
 export default withTheme(FAB);

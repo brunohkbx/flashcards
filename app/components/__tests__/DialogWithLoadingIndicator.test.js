@@ -8,12 +8,12 @@ describe('DialogWithLoadingIndicator', () => {
     const defaultProps = Object.assign({
       visible: true,
       loadingMessage: 'Editing.....'
-    }, propOverrides)
+    }, propOverrides);
 
     const wrapper = shallow(<DialogWithLoadingIndicator {...defaultProps} />);
 
-    return { wrapper }
-  }
+    return { wrapper };
+  };
 
   it('renders properly on android', () => {
     const { wrapper } =  setup();

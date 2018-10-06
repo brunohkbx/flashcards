@@ -7,7 +7,6 @@ import Avatar from '../../../components/Avatar';
 import { clearLocalNotification, scheduleLocalNotification } from '../../../lib/notifications';
 
 class Result extends Component {
-
   scheduleNotification = () => {
     return clearLocalNotification().then(scheduleLocalNotification);
   }

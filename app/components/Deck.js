@@ -47,10 +47,10 @@ Deck.propTypes = {
   handleEditPress: PropTypes.func.isRequired,
   handleDeletePress: PropTypes.func.isRequired,
   onPress: PropTypes.func.isRequired
-}
+};
 
 Deck.defaultProps = {
   flashcardsCount: 0
-}
+};
 
 export default Deck;

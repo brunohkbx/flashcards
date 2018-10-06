@@ -22,7 +22,7 @@ export const createDeck = ({ title, questions, id }) => dispatch => {
       type: CREATE_DECK,
       deck
     }));
-}
+};
 
 export const fetchDecks = () => dispatch => {
   return StorageUtil
@@ -30,8 +30,8 @@ export const fetchDecks = () => dispatch => {
     .then(decks => dispatch({
       type: FETCH_DECKS,
       decks: JSON.parse(decks)
-    }))
-}
+    }));
+};
 
 export const deleteDeck = id => dispatch => {
   return StorageUtil
@@ -40,7 +40,7 @@ export const deleteDeck = id => dispatch => {
       type: DELETE_DECK,
       id
     }));
-}
+};
 
 export const editDeck = data => dispatch => {
   const deck = { [data.id]: data };
@@ -50,5 +50,5 @@ export const editDeck = data => dispatch => {
     .then(() => dispatch({
       type: EDIT_DECK,
       deck
-    }))
-}
+    }));
+};
