@@ -4,6 +4,8 @@ Below you'll find information about performing common tasks. The most recent ver
 
 ## Table of Contents
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/db0ec79b4b484186a99a12e6ba89ad2b)](https://app.codacy.com/app/bruno.f.castro12/flashcards?utm_source=github.com&utm_medium=referral&utm_content=brunohkbx/flashcards&utm_campaign=Badge_Grade_Dashboard)
+
 * [Updating to New Releases](#updating-to-new-releases)
 * [Available Scripts](#available-scripts)
   * [npm start](#npm-start)
