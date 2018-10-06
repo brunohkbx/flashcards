@@ -35,6 +35,7 @@ class FormContent extends Component {
           label="Title"
           component={FormInput}
           onChangeText={handleChange('title')}
+          autoFocus
         />
         <Headline style={{ marginTop: 25 }}>Cards</Headline>
         {

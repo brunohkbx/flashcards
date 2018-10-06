@@ -11,6 +11,7 @@ exports[`FormContent renders properly 1`] = `
   }
 >
   <C
+    autoFocus={true}
     component={[Function]}
     label="Title"
     name="title"
@@ -62,6 +63,7 @@ exports[`FormContent renders properly when there are not any flashcards 1`] = `
   }
 >
   <C
+    autoFocus={true}
     component={[Function]}
     label="Title"
     name="title"
@@ -90,6 +92,7 @@ exports[`FormContent renders properly when values are dirty 1`] = `
   }
 >
   <C
+    autoFocus={true}
     component={[Function]}
     label="Title"
     name="title"
