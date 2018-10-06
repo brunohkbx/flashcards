@@ -64,7 +64,7 @@ export class DeckForm extends Component {
           />
         </KeyboardAvoidingView>
         <BottomRightContainer right={16} bottom={16} >
-          <FAB handlePress={this.addNewFlashcard} />
+          <FAB icon="credit-card" handlePress={this.addNewFlashcard} />
         </BottomRightContainer>
       </View>
     );

@@ -6,6 +6,7 @@ import { FAB } from '../FAB';
 describe('FAB', () => {
   const setup = propOverrides => {
     const defaultProps = Object.assign({
+      icon: 'add',
       handlePress: jest.fn(),
       theme: DefaultTheme
     }, propOverrides);
