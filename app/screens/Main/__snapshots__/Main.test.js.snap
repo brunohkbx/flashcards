@@ -55,6 +55,7 @@ exports[`Main Movable changes toValue when snackbar is visible 1`] = `
       >
         <withTheme(FAB)
           handlePress={[Function]}
+          icon="add"
         />
       </withTheme(Movable)>
     </Styled(Component)>
@@ -163,6 +164,7 @@ exports[`Main renders properly 1`] = `
       >
         <withTheme(FAB)
           handlePress={[Function]}
+          icon="add"
         />
       </withTheme(Movable)>
     </Styled(Component)>
@@ -230,6 +232,7 @@ exports[`Main renders properly when there are not any decks 1`] = `
       >
         <withTheme(FAB)
           handlePress={[Function]}
+          icon="add"
         />
       </withTheme(Movable)>
     </Styled(Component)>

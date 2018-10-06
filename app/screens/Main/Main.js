@@ -160,7 +160,10 @@ export class Main extends Component {
 
           <BottomRightContainer right={16} bottom={16} >
             <Movable toValue={snackbarVisible ? -46 : 0} >
-              <FAB handlePress={() => navigation.navigate('CreateDeck')} />
+              <FAB
+                icon="add"
+                handlePress={() => navigation.navigate('CreateDeck')}
+              />
             </Movable>
           </BottomRightContainer>
           <ConfirmDialog
