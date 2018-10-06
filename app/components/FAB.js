@@ -15,7 +15,7 @@ export const FAB = ({ primary, handlePress, theme }) => {
       style={{margin: 10}}
     />
   );
-}
+};
 
 FAB.propTypes = {
   primary: PropTypes.bool,

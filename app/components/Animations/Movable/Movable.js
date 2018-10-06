@@ -38,7 +38,7 @@ export class Movable extends Component {
   }
 
   render() {
-    const { children, style } = this.props;
+    const { children } = this.props;
     const { translateY } = this.state;
 
     return (

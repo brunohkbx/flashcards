@@ -39,7 +39,7 @@ const Deck = props => {
       </TouchableOpacity>
     </Card>
   );
-}
+};
 
 Deck.propTypes = {
   title: PropTypes.string.isRequired,

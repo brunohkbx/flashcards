@@ -57,8 +57,8 @@ describe('Main', () => {
         .dive()
         .find('DialogActions')
         .childAt(1)
-        .simulate('press')
-    }
+        .simulate('press');
+    };
 
     const dismissSnackbar = () => {
       wrapper.find('withTheme(Snackbar)').simulate('dismiss');

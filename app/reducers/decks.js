@@ -20,6 +20,6 @@ const decks = (state = {}, action) => {
     default:
       return state;
   }
-}
+};
 
 export default decks;
