@@ -14,14 +14,14 @@ export const createDeck = ({ title, questions, id }) => dispatch => {
       questions,
       id
     }
-  }
+  };
 
   return StorageUtil
     .createDeck(deck)
     .then(() => dispatch({
       type: CREATE_DECK,
       deck
-    }))
+    }));
 }
 
 export const fetchDecks = () => dispatch => {

@@ -1,6 +1,5 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { Colors } from 'react-native-paper';
 import { DeckDetail } from './DeckDetail';
 
 describe('DeckDetail', () => {

@@ -78,7 +78,7 @@ class FormContent extends Component {
       </ScrollView>
     );
   }
-};
+}
 
 FormContent.propTypes = {
   handleChange: PropTypes.func.isRequired,
