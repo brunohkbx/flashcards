@@ -27,11 +27,7 @@ const Deck = props => {
           <Subheading>{pluralize('card', flashcardsCount, true)}</Subheading>
         </Card.Content>
         <Card.Actions>
-          <Button
-            primary
-            style={{paddingRight: 9}}
-            onPress={handleEditPress}
-          >
+          <Button primary onPress={handleEditPress}>
             Edit
           </Button>
           <Button primary onPress={handleDeletePress}>Delete</Button>

@@ -20,11 +20,6 @@ exports[`Deck renders properly 1`] = `
       <withTheme(Button)
         onPress={[MockFunction]}
         primary={true}
-        style={
-          Object {
-            "paddingRight": 9,
-          }
-        }
       >
         Edit
       </withTheme(Button)>
