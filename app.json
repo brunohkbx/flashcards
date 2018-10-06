@@ -1,5 +1,13 @@
 {
   "expo": {
-    "sdkVersion": "30.0.0"
+    "name": "myFlashcards",
+    "description": "A mobile flashcard app that lets you create different categories of flashcards called decks, add flashcards to those decks, then take quizzes on those decks.",
+    "slug": "my-flashcards",
+    "privacy": "public",
+    "sdkVersion": "30.0.0",
+    "platforms": ["ios", "android"],
+    "githubUrl": "https://github.com/brunohkbx/flashcards",
+    "version": "1.0.0",
+    "icon": "./app/assets/images/flashcard.png"
   }
 }

@@ -15,7 +15,7 @@ describe('Deck', () => {
       handleEditPress: jest.fn(),
       handleDeletePress: jest.fn(),
       onPress: jest.fn()
-    }, propOverrides)
+    }, propOverrides);
 
     const wrapper = shallow(<Deck {...defaultProps} />);
 
@@ -24,22 +24,22 @@ describe('Deck', () => {
         .find('CardActions')
         .childAt(0)
         .simulate('press');
-    }
+    };
 
     const deleteDeck = () => {
       wrapper
         .find('CardActions')
         .childAt(1)
         .simulate('press');
-    }
+    };
 
     return {
       defaultProps,
       wrapper,
       editDeck,
       deleteDeck
-    }
-  }
+    };
+  };
 
   it('renders properly', () => {
     const { wrapper } =  setup();
@@ -56,7 +56,11 @@ describe('Deck', () => {
   it('pluralizes the deck description based on flashcardsCount', () => {
     const { defaultProps, wrapper } =  setup();
 
-    expect(pluralize).toHaveBeenCalledWith('card', defaultProps.flashcardsCount, true);
+    expect(pluralize).toHaveBeenCalledWith(
+      'card',
+      defaultProps.flashcardsCount,
+      true
+    );
   });
 
   test('edit onPress calls handleEditPress', () => {

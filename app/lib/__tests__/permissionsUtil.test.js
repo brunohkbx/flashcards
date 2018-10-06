@@ -1,13 +1,13 @@
 import { obtainNotificationPermission }  from '../permissionsUtil';
 import { Permissions } from 'expo';
 
-jest.mock('expo', ()=>({
+jest.mock('expo', () => ({
   Permissions: {
     getAsync: jest.fn(),
     askAsync: jest.fn(),
     NOTIFICATIONS: jest.fn()
   }
-}))
+}));
 
 describe('obtainNotificationPermission', () => {
   it('calls getAsync', async () => {
@@ -31,5 +31,5 @@ describe('obtainNotificationPermission', () => {
         Permissions.askAsync
       ).toHaveBeenCalledWith(Permissions.NOTIFICATIONS);
     });
-  })
+  });
 });

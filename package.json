@@ -37,7 +37,7 @@
     "react": "16.3.1",
     "react-dom": "^16.4.1",
     "react-native": "https://github.com/expo/react-native/archive/sdk-30.0.0.tar.gz",
-    "react-native-paper": "^2.0.1",
+    "react-native-paper": "^2.1.1",
     "react-native-scripts": "2.0.1",
     "react-navigation": "^2.12.1",
     "react-redux": "^5.0.7",

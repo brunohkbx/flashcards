@@ -11,7 +11,7 @@ describe('CreateDeck', () => {
         navigate: jest.fn()
       },
       createDeck: jest.fn()
-    }, propOverrides)
+    }, propOverrides);
 
     const wrapper = shallow(<CreateDeck {...defaultProps} />);
     const wrapperInstance = wrapper.instance();
@@ -19,8 +19,8 @@ describe('CreateDeck', () => {
     return {
       wrapper,
       wrapperInstance
-    }
-  }
+    };
+  };
 
   it('renders properly', () => {
     const { wrapper } = setup();
@@ -29,7 +29,7 @@ describe('CreateDeck', () => {
   });
 
   it('assigns submitForm to navigations params when component did mount', () => {
-    const mockNavigation = { setParams: jest.fn() }
+    const mockNavigation = { setParams: jest.fn() };
     const { wrapperInstance } = setup({ navigation: mockNavigation });
 
     expect(
@@ -60,7 +60,9 @@ describe('CreateDeck', () => {
       await wrapperInstance.handleSubmit(mockValues, {});
 
       expect(helpers.waitFor).toHaveBeenCalledWith(1000);
-      expect(wrapperInstance.submitCreatedDeck).toHaveBeenCalledWith(mockValues);
+      expect(
+        wrapperInstance.submitCreatedDeck
+      ).toHaveBeenCalledWith(mockValues);
     });
   });
 

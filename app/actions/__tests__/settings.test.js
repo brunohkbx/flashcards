@@ -10,8 +10,8 @@ describe('settings actions', () => {
     const mockStore = configureMockStore(middlewares);
     const store = mockStore({ settings: {} });
 
-    return { store }
-  }
+    return { store };
+  };
 
   describe('loadSettings', () => {
     it('loads all the settings in the storage and dispatches LOAD_SETTINGS', async () => {
@@ -40,4 +40,4 @@ describe('settings actions', () => {
       });
     });
   });
-})
+});

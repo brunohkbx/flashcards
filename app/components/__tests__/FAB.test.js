@@ -8,20 +8,20 @@ describe('FAB', () => {
     const defaultProps = Object.assign({
       handlePress: jest.fn(),
       theme: DefaultTheme
-    }, propOverrides)
+    }, propOverrides);
 
     const wrapper = shallow(<FAB {...defaultProps} />);
 
     const press = () => {
       wrapper.simulate('press');
-    }
+    };
 
     return {
       defaultProps,
       wrapper,
       press
-    }
-  }
+    };
+  };
 
   it('changes background-color to primary when primary is true', () => {
     const { wrapper } = setup({ primary: true });

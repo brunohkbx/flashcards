@@ -6,7 +6,7 @@ import * as helpers from '../../lib/helpers';
 describe('Toaster', () => {
   const setup = propOverrides => {
     const defaultProps = Object.assign({
-    }, propOverrides)
+    }, propOverrides);
 
     const wrapper = shallow(<Toaster {...defaultProps} />);
     const wrapperInstance = wrapper.instance();
@@ -15,7 +15,7 @@ describe('Toaster', () => {
       wrapper.find('withTheme(Snackbar)').simulate('dismiss');
     };
 
-    return { wrapper, wrapperInstance, dismissSnackbar }
+    return { wrapper, wrapperInstance, dismissSnackbar };
   };
 
   it('renders properly', () => {
@@ -62,7 +62,7 @@ describe('Toaster', () => {
         expect(wrapperInstance.processQueue).toHaveBeenCalled();
       });
     });
-  })
+  });
 
   describe('processQueue', () => {
     describe('When queue has length greather than 0', () => {
@@ -78,7 +78,7 @@ describe('Toaster', () => {
             message: 'foo',
             visible: true
           }
-        )
+        );
       });
     });
   });
@@ -92,9 +92,9 @@ describe('Toaster', () => {
       wrapperInstance.processQueueAfterAnimation().then(() => {
         expect(helpers.waitFor).toHaveBeenCalledWith(
           wrapperInstance.HIDE_ANIMATION_DURATION
-        )
+        );
         expect(wrapperInstance.processQueue).toHaveBeenCalled();
-      })
+      });
     });
   });
 
@@ -108,7 +108,7 @@ describe('Toaster', () => {
       expect(wrapperInstance.setState).toHaveBeenCalledWith(
         { visible: false},
         wrapperInstance.props.onDismissCallback
-      )
+      );
     });
   });
 });

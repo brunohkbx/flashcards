@@ -72,8 +72,8 @@ describe('Main', () => {
       cancelConfirmDialog,
       submitConfirmDialog,
       dismissSnackbar
-    }
-  }
+    };
+  };
 
   it('renders properly', () => {
     const { wrapper } = setup();
@@ -330,7 +330,7 @@ describe('Main', () => {
         .find('Deck')
         .dive()
         .find('TouchableOpacity')
-        .simulate('press')
+        .simulate('press');
 
       expect(mockNavigate).toHaveBeenCalledWith(
         'DeckDetail',

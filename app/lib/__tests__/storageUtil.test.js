@@ -87,7 +87,7 @@ describe('Storage deck actions', () => {
           ],
           id: '81f3d3fb'
         }
-      })
+      });
 
       return { decks, expectedResult };
     };
@@ -168,7 +168,7 @@ describe('Storage deck actions', () => {
       );
     });
   });
-})
+});
 
 describe('Storage settings actions', () => {
   describe('loadSettings', () => {

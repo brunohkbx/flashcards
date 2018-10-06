@@ -12,7 +12,7 @@ describe('EditDeck', () => {
       },
       editDeck: jest.fn(),
       deck: { id: '606a1255', questions: [], title: 'React' }
-    }, propOverrides)
+    }, propOverrides);
 
     const wrapper = shallow(<EditDeck {...defaultProps} />);
     const wrapperInstance = wrapper.instance();
@@ -20,8 +20,8 @@ describe('EditDeck', () => {
     return {
       wrapper,
       wrapperInstance
-    }
-  }
+    };
+  };
 
   it('renders properly', () => {
     const { wrapper } = setup();
@@ -30,7 +30,7 @@ describe('EditDeck', () => {
   });
 
   it('assigns submitForm to navigations params when component did mount', () => {
-    const mockNavigation = { setParams: jest.fn() }
+    const mockNavigation = { setParams: jest.fn() };
     const { wrapperInstance } = setup({ navigation: mockNavigation });
 
     expect(

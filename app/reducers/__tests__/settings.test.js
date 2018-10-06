@@ -7,7 +7,7 @@ describe('settings reducer', () => {
 
     expect(
       reducer({}, { type: LOAD_SETTINGS, settings })
-    ).toEqual(settings)
+    ).toEqual(settings);
   });
 
   it('handles UPDATE_SETTINGS', () => {
@@ -16,12 +16,12 @@ describe('settings reducer', () => {
 
     expect(
       reducer(oldSettings, { type: UPDATE_SETTINGS, settings: newSettings })
-    ).toEqual(newSettings)
+    ).toEqual(newSettings);
   });
 
   it('handles default state', () => {
     expect(
       reducer(undefined, { type: undefined })
-    ).toEqual({ receiveNotifications: false })
+    ).toEqual({ receiveNotifications: false });
   });
-})
+});
