@@ -2,6 +2,7 @@
 
 exports[`Toaster renders properly 1`] = `
 <withTheme(Snackbar)
+  duration={1500}
   onDismiss={[Function]}
   visible={false}
 />

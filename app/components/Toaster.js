@@ -52,6 +52,7 @@ class Toaster extends Component {
     return (
       <Snackbar
         visible={visible}
+        duration={1500}
         onDismiss={this.handleDismiss}
       >
         {message}
